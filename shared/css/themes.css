@@ -12,6 +12,7 @@ html {
     background: #FEF8ED !important;
     background-color: #FEF8ED !important;
     color: #000000 !important;
+    min-height: 100vh !important; /* Ensure full viewport height */
     /* Chrome-specific rendering optimizations */
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale !important;
@@ -21,6 +22,7 @@ body {
     background: #FEF8ED !important;
     background-color: #FEF8ED !important;
     color: #000000 !important;
+    min-height: 100vh !important; /* Ensure full viewport height */
     /* Chrome rendering optimizations */
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale !important;
@@ -40,6 +42,7 @@ html.terminal-view-loading,
 body.terminal-view-loading {
     background: #000000 !important;
     color: #00ff41 !important;
+    min-height: 100vh !important; /* Ensure full viewport height in terminal mode */
     /* Chrome-specific terminal theme loading */
     -webkit-font-smoothing: antialiased !important;
 }
@@ -55,6 +58,7 @@ body.terminal-view-loading * {
     background: #000000 !important;
     background-color: #000000 !important;
     color: #00ff41 !important;
+    min-height: 100vh !important; /* Ensure full viewport height in forced terminal mode */
     /* Chrome hardware acceleration */
     transform: translateZ(0) !important;
     backface-visibility: hidden !important;
@@ -72,6 +76,7 @@ body.terminal-view-loading * {
 /* Prevent any white backgrounds during transition */
 body:not(.clean-view):not(.clean-view-loading) {
     background: #000000 !important;
+    min-height: 100vh !important; /* Ensure full viewport height in dark mode */
 }
 
 /* Ultra-fast theme transitions to minimize flash duration */
@@ -138,6 +143,7 @@ body.clean-view {
     background: var(--clean-bg) !important;
     background-color: var(--clean-bg) !important;
     color: var(--clean-fg) !important;
+    min-height: 100vh !important; /* Ensure full viewport height */
     height: auto !important; /* Allow content to expand beyond viewport */
     margin: 0 !important;
     padding: 0 !important;
@@ -152,6 +158,7 @@ html.clean-view.clean-view {
     background-image: none !important;
     background-attachment: fixed !important;
     background-size: cover !important;
+    min-height: 100vh !important; /* Ensure full viewport height */
     height: auto !important; /* Allow content to expand beyond viewport */
     width: 100% !important;
     margin: 0 !important;
@@ -167,6 +174,7 @@ html.clean-view.clean-view body.clean-view {
     background-image: none !important;
     background-attachment: fixed !important;
     background-size: cover !important;
+    min-height: 100vh !important; /* Ensure full viewport height */
     height: auto !important; /* Allow content to expand */
     max-height: none !important; /* Remove any max-height constraints */
     width: 100% !important;

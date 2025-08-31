@@ -291,9 +291,10 @@ async function loadOrdersData() {
     try {
         // Check if we're on a page that needs orders data (homepage/index pages)
         const currentPath = window.location.pathname;
-        const needsOrdersData = currentPath.includes('index.html') || 
+        const needsOrdersData = (currentPath.includes('index.html') || 
                                currentPath.endsWith('/') ||
-                               (!currentPath.includes('/orders/') && !currentPath.includes('nw_order_'));
+                               (!currentPath.includes('/orders/') && !currentPath.includes('nw_order_'))) &&
+                               !currentPath.includes('scientology-dictionary');
         
         console.log('Current path:', currentPath, 'Needs orders data:', needsOrdersData);
         

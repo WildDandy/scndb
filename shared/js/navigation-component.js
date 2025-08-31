@@ -50,6 +50,12 @@ class NavigationComponent {
 
     getLogoPath() {
         // Logo always redirects to the root index.html regardless of page location
+        // For GitHub Pages deployment, use absolute path to scndb root
+        if (window.location.hostname === 'wilddandy.github.io') {
+            return '/scndb/';
+        }
+        
+        // For local development, use relative paths
         if (this.pageContext === 'root') {
             return './';
         }
