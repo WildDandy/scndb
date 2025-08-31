@@ -9,8 +9,7 @@
 
 class NavigationComponent {
     constructor(options = {}) {
-        console.log('🚀 NavigationComponent constructor called');
-        console.log('🌐 Current pathname:', window.location.pathname);
+        // NavigationComponent constructor
         
         this.pageContext = this.detectPageContext();
         this.pathDepth = this.calculatePathDepth();
@@ -19,9 +18,7 @@ class NavigationComponent {
         this.customNavLinks = options.navLinks || null;
         this.currentPage = options.currentPage || this.getCurrentPage();
         
-        console.log('📍 Detected page context:', this.pageContext);
-        console.log('📏 Path depth:', this.pathDepth);
-        console.log('🔗 Custom nav links:', this.customNavLinks);
+        // Page context and navigation setup complete
     }
 
     detectPageContext() {
@@ -98,7 +95,7 @@ class NavigationComponent {
             glossary: basePath + 'glossary.html'
         };
         
-        console.log('🗺️ Generated menu paths:', paths);
+        // Menu paths generated
         return paths;
     }
 
@@ -144,20 +141,32 @@ class NavigationComponent {
     }
 
     getCurrentThemeMode() {
-        // Use the same logic as theme-manager.js
+        // Use the same logic as theme-manager.js for consistency
         try {
             const savedMode = localStorage.getItem('viewMode');
             
-            // If no saved mode, check system preference for dark mode
+            // If no saved mode, check system preference and save it
             if (!savedMode) {
                 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
                 const defaultMode = prefersDark ? 'terminal' : 'clean';
+                
+                // Save the detected system preference to localStorage for consistency
+                try {
+                    localStorage.setItem('viewMode', defaultMode);
+                    console.log('Navigation: Saved system preference to localStorage:', defaultMode);
+                } catch (saveError) {
+                    console.warn('Navigation: Could not save system preference to localStorage:', saveError);
+                }
+                
+                console.log('Navigation: No saved theme found, using system preference:', defaultMode);
                 return defaultMode;
             }
             
+            console.log('Navigation: Retrieved saved theme:', savedMode);
             return savedMode;
         } catch (error) {
-            return 'clean';
+            console.warn('Navigation: Could not read theme from localStorage:', error);
+            return 'clean'; // Safe default to light mode
         }
     }
 
@@ -221,7 +230,7 @@ class NavigationComponent {
                         <li><span class="current-page mobile-nav-link">${link.label}</span></li>`;
                     } else {
                         navigationHTML += `
-                        <li><a href="${link.href}" class="mobile-nav-link" onclick="console.log('🔗 ${link.label} link clicked:', '${link.href}'); return true;">${link.label}</a></li>`;
+                        <li><a href="${link.href}" class="mobile-nav-link">${link.label}</a></li>`;
                     }
                 });
                 
@@ -233,9 +242,9 @@ class NavigationComponent {
                     
                     <!-- Main navigation - page specific links -->
                     <ul class="nav-menu">
-                        <li>${currentPage === 'home' ? `<span class="current-page mobile-nav-link">${menuTitle}</span>` : `<a href="${menuPaths.home}" class="mobile-nav-link" onclick="console.log('🏠 Home link clicked:', '${menuPaths.home}'); return true;">${menuTitle}</a>`}</li>
-                        <li>${currentPage === 'search' ? `<span class="current-page mobile-nav-link">SEARCH</span>` : `<a href="${menuPaths.search}" class="mobile-nav-link" onclick="console.log('🔍 Search link clicked:', '${menuPaths.search}'); return true;">SEARCH</a>`}</li>
-                        <li>${currentPage === 'glossary' ? `<span class="current-page mobile-nav-link">GLOSSARY</span>` : `<a href="${menuPaths.glossary}" class="mobile-nav-link" onclick="console.log('📚 Glossary link clicked:', '${menuPaths.glossary}'); return true;">GLOSSARY</a>`}</li>
+                        <li>${currentPage === 'home' ? `<span class="current-page mobile-nav-link">${menuTitle}</span>` : `<a href="${menuPaths.home}" class="mobile-nav-link">${menuTitle}</a>`}</li>
+                <li>${currentPage === 'search' ? `<span class="current-page mobile-nav-link">SEARCH</span>` : `<a href="${menuPaths.search}" class="mobile-nav-link">SEARCH</a>`}</li>
+                <li>${currentPage === 'glossary' ? `<span class="current-page mobile-nav-link">GLOSSARY</span>` : `<a href="${menuPaths.glossary}" class="mobile-nav-link">GLOSSARY</a>`}</li>
                     </ul>`;
             }
         }
@@ -283,47 +292,34 @@ class NavigationComponent {
 │ >_  │
 └─────┘`;
             toggleBtn.innerHTML = asciiArt;
-            console.log(`Navigation: Updated toggle display for theme: ${theme}, showing: ${toggleText}`);
+            // Toggle display updated for theme
         }
     }
 
     render() {
-        console.log('🎨 Rendering navigation component...');
-        console.log('🔍 Current theme mode:', this.getCurrentThemeMode());
-        console.log('🔍 Body classes before render:', document.body.className);
+        // Rendering navigation component
         
         // Apply body class based on context
         document.body.classList.add(this.pageContext + '-page');
-        console.log('📝 Added body class:', this.pageContext + '-page');
+        // Added page-specific body class
         
         // Find existing header or create container
         let headerContainer = document.querySelector('header.master-header, header.header-full-width');
-        console.log('🔍 Existing header found:', !!headerContainer);
-        console.log('🔍 Body has clean-view class:', document.body.classList.contains('clean-view'));
+        // Checking for existing header
         
         if (headerContainer) {
             // Replace existing header
             headerContainer.outerHTML = this.generateNavigationHTML();
-            console.log('🔄 Replaced existing header');
+            // Replaced existing header
         } else {
             // Insert at beginning of body
             document.body.insertAdjacentHTML('afterbegin', this.generateNavigationHTML());
-            console.log('➕ Inserted new header');
+            // Inserted new header
         }
         
         // Verify header was inserted
         const newHeader = document.querySelector('header.master-header, header.header-full-width');
-        console.log('✅ Header after insertion:', !!newHeader);
-        if (newHeader) {
-            console.log('📏 Header dimensions:', {
-                offsetHeight: newHeader.offsetHeight,
-                clientHeight: newHeader.clientHeight,
-                scrollHeight: newHeader.scrollHeight,
-                display: getComputedStyle(newHeader).display,
-                visibility: getComputedStyle(newHeader).visibility,
-                opacity: getComputedStyle(newHeader).opacity
-            });
-        }
+        // Header insertion complete
         
         // Initialize mobile menu functionality
         this.initializeMobileMenu();
@@ -335,27 +331,26 @@ class NavigationComponent {
         window.addEventListener('themeChanged', (event) => {
             // Use the theme from the event instead of reading from localStorage to avoid race conditions
             const newTheme = event.detail?.theme || this.getCurrentThemeMode();
-            console.log('Navigation: Received themeChanged event, updating display for:', newTheme);
             this.updateToggleDisplayForTheme(newTheme);
         });
         
         // Initialize theme toggle functionality
         this.initializeThemeToggle();
         
-        console.log('✅ Navigation component render complete');
+        // Navigation component render complete
     }
     
     initializeThemeToggle() {
         // Theme toggle is now handled exclusively by theme-manager.js
         // This prevents conflicts and ensures consistent behavior
-        console.log('Navigation: Theme toggle initialization delegated to theme-manager.js');
+        // Theme toggle initialization delegated to theme-manager.js
         
         // Re-initialize theme manager after navigation renders to bind listeners to new element
         if (window.initializeThemeManager) {
-            console.log('Navigation: Re-initializing theme manager after render...');
+            // Re-initializing theme manager after render
             window.initializeThemeManager();
         } else {
-            console.warn('Navigation: theme-manager.js initializeThemeManager function not available');
+            // theme-manager.js initializeThemeManager function not available
         }
         
         // Just update the display if the button exists and theme manager is available
@@ -367,35 +362,21 @@ class NavigationComponent {
     }
 
     initializeMobileMenu() {
-        console.log('🔧 Initializing mobile menu...');
         const mobileToggle = document.querySelector('.mobile-menu-toggle');
         const navMenu = document.querySelector('.nav-menu');
-        
-        console.log('📱 Mobile toggle found:', !!mobileToggle);
-        console.log('📋 Nav menu found:', !!navMenu);
 
         if (mobileToggle && navMenu) {
-            console.log('✅ Both elements found, adding event listeners');
             
             // Toggle mobile menu
             mobileToggle.addEventListener('click', (e) => {
-                console.log('🔘 Mobile toggle clicked!');
-                console.log('📊 Current nav-open state:', document.body.classList.contains('nav-open'));
-                
                 document.body.classList.toggle('nav-open');
                 mobileToggle.classList.toggle('active');
-                
-                console.log('📊 New nav-open state:', document.body.classList.contains('nav-open'));
             });
 
             // Close menu when clicking the close button (::before pseudo-element)
             navMenu.addEventListener('click', (e) => {
-                console.log('🎯 Nav menu clicked');
-                console.log('🔗 Click target:', e.target.tagName, e.target.className);
-                
                 // Don't interfere with navigation links
                 if (e.target.tagName === 'A' && e.target.classList.contains('mobile-nav-link')) {
-                    console.log('🚀 Navigation link clicked - allowing default behavior');
                     return; // Let the link navigate normally
                 }
                 
@@ -403,11 +384,8 @@ class NavigationComponent {
                 const rect = navMenu.getBoundingClientRect();
                 const clickY = e.clientY - rect.top;
                 
-                console.log('📏 Click Y position:', clickY, 'px from top');
-                
                 // If click is in the top 60px (close button area)
                 if (clickY <= 60) {
-                    console.log('❌ Close button area clicked - closing menu');
                     document.body.classList.remove('nav-open');
                     mobileToggle.classList.remove('active');
                 }
@@ -416,14 +394,8 @@ class NavigationComponent {
             // Close menu when clicking backdrop
             document.addEventListener('click', (e) => {
                 if (document.body.classList.contains('nav-open')) {
-                    console.log('🎯 Document clicked while menu open');
-                    console.log('📍 Click target:', e.target);
-                    console.log('🔍 Click inside menu:', navMenu.contains(e.target));
-                    console.log('🔍 Click on toggle:', mobileToggle.contains(e.target));
-                    
                     // Check if click is outside the menu and toggle button
                     if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
-                        console.log('🌐 Backdrop clicked - closing menu');
                         document.body.classList.remove('nav-open');
                         mobileToggle.classList.remove('active');
                     }
@@ -433,13 +405,10 @@ class NavigationComponent {
             // Close menu when pressing Escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
-                    console.log('⌨️ Escape key pressed - closing menu');
                     document.body.classList.remove('nav-open');
                     mobileToggle.classList.remove('active');
                 }
             });
-        } else {
-            console.log('❌ Mobile menu initialization failed - missing elements');
         }
     }
 }

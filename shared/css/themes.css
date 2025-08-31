@@ -1,4 +1,80 @@
 /* ========================================
+   ADD TO TOP OF themes.css - Enhanced FOUC Prevention
+   ======================================== */
+
+/* CRITICAL: Ultra-fast theme loading states */
+html.clean-view-loading,
+html.clean-view-loading * {
+    background: #FEF8ED !important;
+    background-color: #FEF8ED !important;
+    color: #000000 !important;
+    transition: none !important; /* Disable transitions during load */
+}
+
+html.terminal-view-loading,
+html.terminal-view-loading * {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #00ff41 !important;
+    transition: none !important; /* Disable transitions during load */
+}
+
+/* Prevent any white backgrounds during navigation */
+html, body {
+    /* Default to light theme to prevent dark flash */
+    background: #FEF8ED;
+    background-color: #FEF8ED;
+    color: #000000;
+    /* Ultra-fast transitions to minimize flash duration */
+    transition: background-color 0.05s ease, color 0.05s ease !important;
+}
+
+/* Override for terminal loading */
+html.terminal-view-loading {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #00ff41 !important;
+}
+
+html.terminal-view-loading body {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #00ff41 !important;
+}
+
+/* Navigation-specific fixes to prevent flash during page transitions */
+.nav-menu a,
+.nav-menu a:hover,
+.mobile-nav-link,
+.mobile-nav-link:hover {
+    transition: background-color 0.05s ease, color 0.05s ease !important;
+}
+
+/* Ensure loading states persist until theme-manager takes over */
+html.clean-view-loading body.clean-view-loading {
+    background: #FEF8ED !important;
+    background-color: #FEF8ED !important;
+    color: #000000 !important;
+}
+
+html.terminal-view-loading body.terminal-view-loading {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #00ff41 !important;
+}
+
+/* Prevent flashing during theme switches */
+.switching-theme,
+.switching-theme * {
+    transition: none !important;
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    animation: none !important;
+    -webkit-animation: none !important;
+}
+
+/* ========================================
    UNIFIED THEMES CSS - ENHANCED PERSISTENCE
    Theme switching with FOUC prevention
    ======================================== */
@@ -818,7 +894,7 @@ body.clean-view #matrix-canvas {
 }
 
 /* ========================================
-   THEME PERSISTENCE DEBUG
+   THEME PERSISTENCE
    ======================================== */
 
 /* Visual indicator for theme state (development only) */

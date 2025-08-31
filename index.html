@@ -43,17 +43,72 @@
 
     <!-- CRITICAL: Apply theme immediately before stylesheets load -->
     <script>
-        // Inline theme application to prevent FOUC
+        // CRITICAL: Apply theme immediately before stylesheets load
+        // This script should be identical across ALL pages to prevent flickering
         (function() {
-            const savedMode = localStorage.getItem('viewMode') || 'clean';
-            console.log('Immediate theme application:', savedMode);
-
-            if (savedMode === 'clean') {
-                document.documentElement.classList.add('clean-view-loading');
-                document.documentElement.style.background = '#ffffff';
-            } else {
-                document.documentElement.style.background = '#000000';
+            // Unified theme detection logic - matches theme-manager.js exactly
+            function getInitialTheme() {
+                try {
+                    const savedMode = localStorage.getItem('viewMode');
+                    
+                    // If no saved mode, check system preference for dark mode
+                    if (!savedMode) {
+                        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                        const defaultMode = prefersDark ? 'terminal' : 'clean';
+                        console.log('FOUC: No saved theme. System prefers:', prefersDark ? 'dark' : 'light', 'Using:', defaultMode);
+                        return defaultMode;
+                    }
+                    
+                    console.log('FOUC: Retrieved saved theme:', savedMode);
+                    return savedMode;
+                } catch (error) {
+                    console.warn('FOUC: Could not read theme from localStorage:', error);
+                    return 'clean'; // Safe default
+                }
             }
+        
+            const mode = getInitialTheme();
+            console.log('FOUC: Immediate theme application:', mode);
+        
+            // Apply loading class and immediate styles to prevent flash
+            if (mode === 'clean') {
+                document.documentElement.classList.add('clean-view-loading');
+                document.documentElement.style.background = '#FEF8ED';
+                document.documentElement.style.backgroundColor = '#FEF8ED';
+                document.documentElement.style.color = '#000000';
+                
+                // Ensure body gets same treatment when it exists
+                if (document.body) {
+                    document.body.style.background = '#FEF8ED';
+                    document.body.style.backgroundColor = '#FEF8ED';
+                    document.body.style.color = '#000000';
+                }
+            } else {
+                document.documentElement.classList.add('terminal-view-loading');
+                document.documentElement.style.background = '#000000';
+                document.documentElement.style.backgroundColor = '#000000';
+                document.documentElement.style.color = '#00ff41';
+                
+                // Ensure body gets same treatment when it exists
+                if (document.body) {
+                    document.body.style.background = '#000000';
+                    document.body.style.backgroundColor = '#000000';
+                    document.body.style.color = '#00ff41';
+                }
+            }
+        
+            // Also apply when body becomes available
+            document.addEventListener('DOMContentLoaded', function() {
+                if (mode === 'clean') {
+                    document.body.style.background = '#FEF8ED';
+                    document.body.style.backgroundColor = '#FEF8ED';
+                    document.body.style.color = '#000000';
+                } else {
+                    document.body.style.background = '#000000';
+                    document.body.style.backgroundColor = '#000000';
+                    document.body.style.color = '#00ff41';
+                }
+            });
         })();
     </script>
 
@@ -269,37 +324,7 @@
     <script src="shared/js/navigation-component.js"></script>
     <script src="shared/js/app.js" defer></script>
 
-    <!-- Debug script to test Matrix rain -->
-    <script>
-        // Debug function to manually test Matrix rain
-        window.testMatrixRain = function() {
-            console.log('=== MATRIX RAIN DEBUG ===');
-            console.log('Body classes:', document.body.className);
-            console.log('Has terminal-mode:', document.body.classList.contains('terminal-mode'));
-            console.log('Has clean-view:', document.body.classList.contains('clean-view'));
 
-            const canvas = document.getElementById('matrix-canvas');
-            console.log('Canvas exists:', !!canvas);
-
-            if (canvas) {
-                console.log('Canvas styles:', canvas.style.cssText);
-                console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
-            } else {
-                console.log('Canvas not found - trying to create manually...');
-                if (typeof createMatrixRain === 'function') {
-                    createMatrixRain();
-                } else {
-                    console.log('createMatrixRain function not available');
-                }
-            }
-        };
-
-        // Auto-run debug after page loads
-        setTimeout(() => {
-            console.log('Page loaded - running Matrix rain test...');
-            window.testMatrixRain();
-        }, 2000);
-    </script>
     
     <!-- Page-specific JavaScript -->
     <script>

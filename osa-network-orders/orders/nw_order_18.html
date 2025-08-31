@@ -12,7 +12,7 @@ MENTAL HEALTH</title>
         // Inline theme application to prevent FOUC
         (function() {
             const savedMode = localStorage.getItem('viewMode') || 'clean';
-            console.log('Immediate theme application:', savedMode);
+            // Immediate theme application
 
             if (savedMode === 'clean') {
                 document.documentElement.classList.add('clean-view-loading');

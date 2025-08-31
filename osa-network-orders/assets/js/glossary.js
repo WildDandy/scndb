@@ -17,7 +17,7 @@ class GlossaryController {
     async init() {
         // Wait for data to load
         await this.waitForDataLoad();
-        console.log('Data loaded, total items:', glossaryData.data.length);
+        // Data loaded successfully
 
         // Setup event listeners
         this.setupEventListeners();
@@ -151,7 +151,7 @@ class GlossaryController {
         const itemsToDisplay = data || (this.currentFilter || this.currentLetter ? glossaryData.filteredData : glossaryData.data);
         this.glossaryList.innerHTML = '';
 
-        console.log('Displaying items:', itemsToDisplay.length, 'Current filter:', this.currentFilter, 'Current letter:', this.currentLetter);
+        // Displaying filtered items
 
         if (!itemsToDisplay || itemsToDisplay.length === 0) {
             this.glossaryList.innerHTML = '<div class="no-results">No matching terms found.</div>';

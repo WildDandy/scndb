@@ -10,7 +10,7 @@
 function setViewMode(mode) {
     try { 
         localStorage.setItem('viewMode', mode);
-        console.log(`Theme saved: ${mode}`);
+        // Theme saved
     } catch (error) {
         console.warn('Could not save theme to localStorage:', error);
     }
@@ -20,26 +20,35 @@ function getSavedViewMode() {
     try {
         const savedMode = localStorage.getItem('viewMode');
         
-        // If no saved mode, default to clean (light) mode
+        // If no saved mode, check system preference and save it
         if (!savedMode) {
             const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             const defaultMode = prefersDark ? 'terminal' : 'clean';
-            console.log(`No saved theme found. System prefers: ${prefersDark ? 'dark' : 'light'}, defaulting to: ${defaultMode}`);
+            
+            // Save the detected system preference to localStorage for consistency
+            try {
+                localStorage.setItem('viewMode', defaultMode);
+                console.log('Theme Manager: Saved system preference to localStorage:', defaultMode);
+            } catch (saveError) {
+                console.warn('Theme Manager: Could not save system preference to localStorage:', saveError);
+            }
+            
+            console.log('Theme Manager: No saved theme found, using system preference:', defaultMode);
             return defaultMode;
         }
         
-        console.log(`Retrieved saved theme: ${savedMode}`);
+        console.log('Theme Manager: Retrieved saved theme:', savedMode);
         return savedMode;
     } catch (error) {
-        console.warn('Could not read theme from localStorage:', error);
-        return 'clean'; // Default to light mode
+        console.warn('Theme Manager: Could not read theme from localStorage:', error);
+        return 'clean'; // Safe default to light mode
     }
 }
 
 function applyViewMode(mode) {
     const toggleBtn = document.getElementById('btn-view-toggle');
 
-    console.log(`Applying theme: ${mode} (Chrome-enhanced)`);
+    // Applying theme
 
     // Update toggle button data-mode attribute
     if (toggleBtn) {
@@ -70,7 +79,7 @@ function applyViewMode(mode) {
 
     } else {
         // Terminal mode: Avoid transforms on <html>/<body> to preserve fixed positioning
-        console.log('Switching to terminal mode - prevent white flash without GPU transforms');
+        // Switching to terminal mode
 
         // Apply dark background IMMEDIATELY
         document.documentElement.style.background = '#000000';
@@ -103,7 +112,7 @@ function applyViewMode(mode) {
             document.body.style.background = '';
             document.body.style.backgroundColor = '';
             document.body.style.color = '';
-            console.log('Inline styles cleaned up, CSS handling themes now');
+            // Inline styles cleaned up
         }, 125);
 
         // Enable matrix rain after theme is stable
@@ -119,7 +128,7 @@ function applyViewMode(mode) {
 }
 
 function updatePageTitle(theme) {
-    // Optional: Add theme indicator to page title for debugging
+    // Add theme indicator to page title
     const currentTitle = document.title;
     const cleanTitle = currentTitle.replace(/ \[(CLEAN|TERMINAL)\]$/, '');
     
@@ -142,12 +151,12 @@ function updateToggleDisplay(mode) {
         toggleBtn.style.display = 'inline-block';
         toggleBtn.style.visibility = 'visible';
         toggleBtn.style.opacity = '1';
-        console.log(`Theme Manager: Updated toggle display to show ${toggleText}`);
+        // Updated toggle display
     }
 }
 
 function bindViewToggleHandlers() {
-    console.log('🔗 Binding theme toggle handlers...');
+    // Binding theme toggle handlers
     const toggleBtn = document.getElementById('btn-view-toggle');
     
     if (!toggleBtn) {
@@ -156,41 +165,31 @@ function bindViewToggleHandlers() {
         return;
     }
     
-    console.log('✅ Toggle button found:', toggleBtn);
-    console.log('📊 Button properties:', {
-        id: toggleBtn.id,
-        classes: toggleBtn.className,
-        style: toggleBtn.getAttribute('style'),
-        visible: toggleBtn.offsetWidth > 0 && toggleBtn.offsetHeight > 0,
-        pointerEvents: getComputedStyle(toggleBtn).pointerEvents,
-        zIndex: getComputedStyle(toggleBtn).zIndex,
-        position: getComputedStyle(toggleBtn).position
-    });
+    // Toggle button found
     
     if (toggleBtn && !toggleBtn._themeManagerBound) {
-        console.log('Theme Manager: Binding Chrome-compatible toggle handlers');
+        // Binding Chrome-compatible toggle handlers
         
         // Enhanced handler with debounce/lock to avoid double toggles
         const handleToggleClick = function(e) {
-            console.log('🎯 Toggle clicked!', e.type, e);
+            // Toggle clicked
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation(); // Prevent other handlers on the same element
 
             // Debounce/lock: avoid multiple rapid toggles (e.g., click + mousedown)
             if (toggleBtn._themeToggleLock) {
-                console.log('⏳ Toggle locked, ignoring duplicate event:', e.type);
-                return;
+                return; // Toggle locked, ignoring duplicate event
             }
             toggleBtn._themeToggleLock = true;
             setTimeout(() => { toggleBtn._themeToggleLock = false; }, 250);
             
-            console.log('Theme Manager: Toggle clicked (Enhanced handler)');
+            // Toggle clicked (Enhanced handler)
             
             const currentMode = toggleBtn.getAttribute('data-mode') || getSavedViewMode();
             const newMode = currentMode === 'clean' ? 'terminal' : 'clean';
             
-            console.log(`🎨 Theme Manager: Switching from ${currentMode} to ${newMode}`);
+            // Switching theme mode
             
             // Add switching class to prevent transitions during theme change
             document.body.classList.add('switching-theme');
@@ -208,12 +207,12 @@ function bindViewToggleHandlers() {
                 document.documentElement.classList.remove('switching-theme');
             }, 150); // Extended timeout for Chrome
             
-            console.log('✅ Theme toggle complete:', newMode);
+            // Theme toggle complete
         };
         
         // Remove any existing listeners first
         if (toggleBtn._handleToggleClick) {
-            console.log('🔄 Removing existing listeners...');
+            // Removing existing listeners
             toggleBtn.removeEventListener('click', toggleBtn._handleToggleClick, true);
             toggleBtn.removeEventListener('mousedown', toggleBtn._handleToggleClick, true);
             toggleBtn.removeEventListener('touchstart', toggleBtn._handleToggleClick, true);
@@ -236,23 +235,22 @@ function bindViewToggleHandlers() {
         toggleBtn.style.backfaceVisibility = 'hidden';
         toggleBtn.style.transform = 'translateZ(0)';
         
-        console.log('✅ Theme Manager: Enhanced toggle handler bound successfully');
-        console.log('🎯 Test manually: document.getElementById("btn-view-toggle").click()');
+        // Enhanced toggle handler bound successfully
     } else if (toggleBtn && toggleBtn._themeManagerBound) {
-        console.log('⚠️ Toggle already bound, skipping duplicate binding');
+        // Toggle already bound, skipping duplicate binding
     }
 }
 
 function applySavedViewMode() {
     const savedMode = getSavedViewMode();
-    console.log(`Applying saved theme on page load: ${savedMode}`);
+    // Applying saved theme on page load
     applyViewMode(savedMode);
 }
 
 // Apply theme immediately on script load (before DOM ready)
 function applyThemeImmediately() {
     const savedMode = getSavedViewMode();
-    console.log(`Pre-load theme application: ${savedMode}`);
+    // Pre-load theme application
     
     // Add styles to prevent flash for both themes
     const style = document.createElement('style');
@@ -308,15 +306,15 @@ let matrixCanvas = null;
 
 function createMatrixRain() {
     if (document.body.classList.contains('clean-view')) {
-        console.log('Matrix rain disabled - in clean view mode');
+        // Matrix rain disabled - in clean view mode
         return;
     }
     if (matrixCanvas) {
-        console.log('Matrix rain already exists');
+        // Matrix rain already exists
         return;
     }
 
-    console.log('Creating Matrix rain canvas...');
+    // Creating Matrix rain canvas
     const canvas = document.createElement('canvas');
     canvas.id = 'matrix-canvas';
     canvas.style.position = 'fixed';
@@ -328,10 +326,10 @@ function createMatrixRain() {
     canvas.style.zIndex = '1';
     canvas.style.opacity = '0.15';
     document.body.appendChild(canvas);
-    console.log('Matrix canvas added to body:', canvas.id);
+    // Matrix canvas added to body
 
     const ctx = canvas.getContext('2d');
-    console.log('Canvas context created:', !!ctx);
+    // Canvas context created
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -385,12 +383,12 @@ function disableMatrixRain() {
 }
 
 function enableMatrixRain() {
-    console.log('enableMatrixRain called, body classes:', document.body.className);
+    // enableMatrixRain called
     if (!document.body.classList.contains('clean-view')) {
-        console.log('Enabling Matrix rain for terminal mode');
+        // Enabling Matrix rain for terminal mode
         createMatrixRain();
     } else {
-        console.log('Not enabling Matrix rain - in clean view mode');
+        // Not enabling Matrix rain - in clean view mode
     }
 }
 
@@ -403,7 +401,7 @@ applyThemeImmediately();
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Theme Manager: DOM loaded, initializing...');
+    // Theme Manager: DOM loaded, initializing
     
     // Remove loading classes to allow transitions
     setTimeout(() => {
@@ -421,12 +419,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Bind toggle handlers
     bindViewToggleHandlers();
     
-    console.log('Theme Manager: Initialization complete');
+    // Theme Manager: Initialization complete
 });
 
 // Listen for theme change events from other scripts
 window.addEventListener('themeChanged', function(event) {
-    console.log('Theme change event received:', event.detail.theme);
+    // Theme change event received
 });
 
 /* ========================================
@@ -435,7 +433,7 @@ window.addEventListener('themeChanged', function(event) {
 
 // Initialize theme manager function for re-initialization after DOM changes
 function initializeThemeManager() {
-    console.log('🎨 Re-initializing theme manager...');
+    // Re-initializing theme manager
     bindViewToggleHandlers();
     updateToggleDisplay(getSavedViewMode());
 }

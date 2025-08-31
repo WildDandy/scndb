@@ -33,7 +33,7 @@ class OrdersIndex {
 
     async _loadOrdersData() {
         try {
-            console.log('Loading orders data...');
+            // Loading orders data
 
             // For local development, we'll use embedded data to avoid CORS issues
             // In production, this would load from external JSON files
@@ -43,12 +43,12 @@ class OrdersIndex {
 
             // Wait for embedded data to be available
             if (typeof window.embeddedOrderData !== 'undefined') {
-                console.log('Using embedded order data...');
+                // Using embedded order data
 
                 // Process embedded data
                 Object.keys(window.embeddedOrderData).forEach(sectionKey => {
                     const sectionOrders = window.embeddedOrderData[sectionKey];
-                    console.log(`Loaded ${sectionOrders.length} orders from ${sectionKey}`);
+                    // Loaded orders from section
 
                     // Store section data for card display
                     this.sectionData[sectionKey] = sectionOrders;
@@ -77,7 +77,7 @@ class OrdersIndex {
                 for (const section of sections) {
                     try {
                         const sectionOrders = await this._loadJSONFile(section.file);
-                        console.log(`Loaded ${sectionOrders.length} orders from ${section.key}`);
+                        // Loaded orders from section
 
                         // Store section data for card display
                         this.sectionData[section.key] = sectionOrders;
@@ -98,7 +98,7 @@ class OrdersIndex {
             }
 
             this.orders = allOrders;
-            console.log(`Total loaded ${this.orders.length} orders from all sections`);
+            // Total orders loaded from all sections
 
             // Index the data for faster searching
             this._buildIndex();
@@ -154,7 +154,7 @@ class OrdersIndex {
 
     // Build search index for faster queries
     _buildIndex() {
-        console.log('Building search index...');
+        // Building search index
         this.indexedData = this.orders.map((order, index) => {
             const searchableText = this._createSearchableText(order);
             const orderNumber = this._extractOrderNumber(order);
@@ -173,7 +173,7 @@ class OrdersIndex {
                 year: null // These orders don't have dates, so we'll set to null
             };
         });
-        console.log('Search index built successfully');
+        // Search index built successfully
     }
 
     // Create searchable text from all relevant fields
@@ -198,7 +198,7 @@ class OrdersIndex {
 
     // Display cards on the page for each section
     _displayCardsOnPage() {
-        console.log('Displaying cards on page...');
+        // Displaying cards on page
 
         // Display cards for each section
         this._displaySectionCards('general', 'general');
@@ -216,7 +216,7 @@ class OrdersIndex {
             return;
         }
 
-        console.log(`Displaying ${orders.length} cards for ${sectionKey} section`);
+        // Displaying cards for section
 
         // Find the grid container for this section
         const sectionElement = document.getElementById(sectionId);
@@ -304,10 +304,10 @@ class OrdersIndex {
 
     // Initialize orders loading
     async initialize() {
-        console.log('Initializing orders index...');
+        // Initializing orders index
         try {
             await this.loadOrders();
-            console.log('Orders loaded successfully');
+            // Orders loaded successfully
         } catch (error) {
             console.error('Failed to initialize orders:', error);
         }
@@ -322,7 +322,7 @@ class OrdersIndex {
 
     // Generate plural variations for a word
     _getPluralVariations(word) {
-        console.log(`Generating plural variations for: "${word}"`);
+        // Generating plural variations
         const variations = new Set([word]);
 
         // Basic pluralization rules
@@ -374,7 +374,7 @@ class OrdersIndex {
         }
 
         const result = Array.from(variations);
-        console.log(`Generated variations for "${word}":`, result);
+        // Generated variations for word
         return result;
     }
 
@@ -383,32 +383,28 @@ class OrdersIndex {
         await this.loadOrders();
 
         let results = [...this.indexedData];
-        console.log('Initial results count:', results.length);
-        console.log('Search query:', query);
-        console.log('Filters object:', JSON.stringify(filters, null, 2));
-        console.log('Filters.section type:', typeof filters.section, 'value:', filters.section);
-        console.log('Filters.range type:', typeof filters.range, 'value:', filters.range);
+        // Processing search with filters
 
         // Apply text search
         if (query && query.trim()) {
             const searchTerms = query.toLowerCase().trim().split(/\s+/);
-            console.log('Search terms:', searchTerms);
+            // Processing search terms
 
             results = results.filter(item => {
                 return searchTerms.every(term => {
                     // Check if the original term matches
                     if (item.searchableText.includes(term)) {
-                        console.log(`Found exact match for "${term}" in item ${item.orderNumber}`);
+                        // Found exact match
                         return true;
                     }
 
                     // Check plural variations
                     const variations = this._getPluralVariations(term);
-                    console.log(`Checking variations for "${term}":`, variations);
+                    // Checking variations for term
 
                     const foundVariation = variations.find(variation => {
                         if (variation !== term && item.searchableText.includes(variation)) {
-                            console.log(`Found variation match: "${variation}" for term "${term}" in item ${item.orderNumber}`);
+                            // Found variation match
                             return true;
                         }
                         return false;
@@ -417,19 +413,19 @@ class OrdersIndex {
                     return foundVariation !== undefined;
                 });
             });
-            console.log('After text search:', results.length, 'results');
+            // After text search
         }
 
         // Apply section filter
         if (filters.section && filters.section !== 'all') {
-            console.log('Applying section filter:', filters.section);
+            // Applying section filter
             results = results.filter(item => item.section === filters.section);
-            console.log('After section filter:', results.length, 'results');
+            // After section filter
         }
 
         // Apply order range filter
         if (filters.range) {
-            console.log('Applying range filter:', filters.range);
+            // Applying range filter
             results = results.filter(item => {
                 const orderNum = item.orderNumber;
                 switch (filters.range) {
@@ -439,7 +435,7 @@ class OrdersIndex {
                     default: return true;
                 }
             });
-            console.log('After range filter:', results.length, 'results');
+            // After range filter
         }
 
         // Apply date range filter
@@ -482,7 +478,7 @@ window.ordersIndex = new OrdersIndex();
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing orders...');
+    // DOM loaded, initializing orders
     window.ordersIndex.initialize();
 });
 

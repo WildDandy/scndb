@@ -960,10 +960,4 @@ window.embeddedOrderData.social = [
   }
 ];
 
-console.log('Embedded order data loaded successfully:', {
-  general: window.embeddedOrderData.general?.length || 0,
-  intelligence: window.embeddedOrderData.intelligence?.length || 0,
-  pr: window.embeddedOrderData.pr?.length || 0,
-  legal: window.embeddedOrderData.legal?.length || 0,
-  social: window.embeddedOrderData.social?.length || 0
-});
+// Embedded order data loaded successfully

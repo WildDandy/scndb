@@ -36,7 +36,7 @@ let elements = {};
 
 // Initialize the glossary
 function initGlossary() {
-    console.log('Initializing Scientology Glossary...');
+    // Initializing Scientology Glossary
 
     // Cache DOM elements
     cacheElements();
@@ -76,11 +76,11 @@ function bindEvents() {
     // Light/Dark toggle button - DISABLED TO PREVENT CONFLICTS
     // Theme toggle is now handled exclusively by theme-manager.js
     // This prevents conflicts and ensures consistent Chrome compatibility
-    console.log('Scientology Data: Theme toggle delegated to theme-manager.js');
+    // Theme toggle delegated to theme-manager.js
     
     // Optional: Verify theme manager is available
     if (window.bindViewToggleHandlers) {
-        console.log('Scientology Data: Theme manager detected, toggle will be handled properly');
+        // Theme manager detected
     } else {
         console.warn('Scientology Data: Theme manager not yet loaded, toggle may not work until theme-manager.js loads');
     }
@@ -94,7 +94,7 @@ function bindEvents() {
     // Keyboard navigation
     document.addEventListener('keydown', handleKeyboardNav);
 
-    console.log('Event listeners bound');
+    // Event listeners bound
 }
 
 // Load glossary data from Google Sheets
@@ -107,7 +107,7 @@ async function loadGlossaryData() {
         // Try to load from cache first
         const cachedData = getCachedData();
         if (cachedData) {
-            console.log('Using cached data');
+            // Using cached data
             processGlossaryData(cachedData);
             return;
         }
@@ -137,7 +137,7 @@ async function fetchFromGoogleSheets() {
 
     for (let attempt = 1; attempt <= CONFIG.MAX_RETRIES; attempt++) {
         try {
-            console.log(`Fetching data from Google Sheets (attempt ${attempt})...`);
+            // Fetching data from Google Sheets
 
             const response = await fetch(url, {
                 method: 'GET',
@@ -168,7 +168,7 @@ async function fetchFromGoogleSheets() {
                 }))
                 .filter(item => item.t && item.d); // Filter out items with empty term or definition
 
-            console.log(`Loaded ${glossary.length} glossary terms from Google Sheets`);
+            // Loaded glossary terms from Google Sheets
             return glossary;
 
         } catch (error) {
@@ -201,7 +201,7 @@ function processGlossaryData(data) {
     // Update entry count
     updateEntryCount(data.length, data.length);
 
-    console.log(`Processed ${data.length} glossary terms`);
+    // Processed glossary terms
 }
 
 // Render glossary items
@@ -227,7 +227,7 @@ function renderGlossary() {
         });
     }, 100);
 
-    console.log(`Rendered ${sortedData.length} glossary items`);
+    // Rendered glossary items
 
     // Update entry count after rendering
     updateEntryCount(sortedData.length, glossaryData.length);
@@ -277,7 +277,7 @@ function initAlphabetNav() {
         button.addEventListener('click', () => handleLetterFilter(button.dataset.letter));
     });
 
-    console.log('Alphabet navigation initialized');
+    // Alphabet navigation initialized
 }
 
 // Get letter counts for navigation
@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initGlossary();
 });
 
-// Expose functions globally for debugging and external access
+// Expose functions globally for external access
 window.glossaryData = glossaryData;
 window.filteredData = filteredData;
 window.loadGlossaryData = loadGlossaryData;

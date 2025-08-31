@@ -91,13 +91,13 @@ class SearchResults {
 
     async performSearch(query = null, additionalFilters = {}) {
         const searchQuery = query || document.getElementById('searchQuery')?.value || '';
-        console.log('performSearch called with:', { query, searchQuery, additionalFilters });
+        // Performing search with parameters
         this.currentQuery = searchQuery;
 
         // Preserve existing filters if no additionalFilters provided
         if (Object.keys(additionalFilters).length === 0) {
             // No additional filters provided, keep current filters
-            console.log('No additional filters provided, keeping current filters:', this.currentFilters);
+            // Keeping current filters
         } else {
             // Build filters with provided additionalFilters
             this.currentFilters = {
@@ -107,7 +107,7 @@ class SearchResults {
             };
         }
 
-        console.log('Final search parameters:', { searchQuery, currentFilters: this.currentFilters });
+        // Final search parameters set
 
         try {
             // Show loading state
@@ -115,7 +115,7 @@ class SearchResults {
 
             // Perform search
             const results = await window.ordersIndex.search(searchQuery, this.currentFilters);
-            console.log('Search returned', results.length, 'results');
+            // Search completed
 
             // Store results and reset pagination
             this.currentResults = results;
@@ -363,31 +363,31 @@ class SearchResults {
 
     handleFilterClick(filterEl) {
         // Handle filter clicks - apply filters on top of existing search
-        console.log('Filter clicked:', filterEl);
+        // Filter clicked
 
         // Get current search query from input field
         const searchInput = document.getElementById('searchQuery');
         const searchQuery = searchInput ? searchInput.value.trim() : '';
-        console.log('Current search query:', searchQuery);
+        // Processing current search query
 
         // Update filters based on clicked element
         if (filterEl.hasAttribute('data-filter-all')) {
-            console.log('Clearing all filters');
+            // Clearing all filters
             this.currentFilters.section = 'all';
             this.currentFilters.range = '';
         } else if (filterEl.hasAttribute('data-filter-section')) {
             const section = filterEl.getAttribute('data-filter-section');
-            console.log('Applying section filter:', section);
+            // Applying section filter
             this.currentFilters.section = section;
             this.currentFilters.range = '';
         } else if (filterEl.hasAttribute('data-filter-range')) {
             const range = filterEl.getAttribute('data-filter-range');
-            console.log('Applying range filter:', range);
+            // Applying range filter
             this.currentFilters.range = range;
             this.currentFilters.section = 'all';
         }
 
-        console.log('New filters:', this.currentFilters);
+        // New filters applied
 
         // Perform search with current query + new filters
         this.performSearch(searchQuery);

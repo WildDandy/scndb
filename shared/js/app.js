@@ -24,7 +24,7 @@ let mobileMenuInitialized = false;
 
 function initMobileMenu() {
     if (mobileMenuInitialized) {
-        console.log('Mobile menu already initialized, skipping');
+        // Mobile menu already initialized, skipping
         return;
     }
 
@@ -33,7 +33,7 @@ function initMobileMenu() {
     const body = document.body;
 
     if (!mobileToggle || !navMenu) {
-        console.log('Mobile menu elements not found');
+        // Mobile menu elements not found
         return;
     }
 
@@ -110,7 +110,7 @@ function initMobileMenu() {
     });
 
     mobileMenuInitialized = true;
-    console.log('Mobile menu initialized successfully');
+    // Mobile menu initialized successfully
 }
 
 // ========================================
@@ -118,22 +118,20 @@ function initMobileMenu() {
 // ========================================
 
 function toggleSection(sectionId, forceOpen = false) {
-    console.log('toggleSection called with:', sectionId, 'forceOpen:', forceOpen);
     const content = document.getElementById(sectionId);
-    console.log('Content element found:', content);
     if (!content) {
-        console.log('Content element not found for ID:', sectionId);
+        // Content element not found
         return;
     }
 
     const wasActive = content.classList.contains('active');
-    console.log('Section was active before toggle:', wasActive);
+    // Section state before toggle
 
     // Capture header before we mutate classes
     const header = content.previousElementSibling;
 
     // Close all sections first
-    console.log('Closing all sections...');
+    // Closing all sections
     document.querySelectorAll('.section-content').forEach(section => {
         section.classList.remove('active');
     });
@@ -147,20 +145,18 @@ function toggleSection(sectionId, forceOpen = false) {
     });
 
     const shouldOpen = forceOpen || !wasActive;
-    console.log('Should open after closing others:', shouldOpen);
+    // Should open after closing others
 
     if (shouldOpen) {
-        console.log('Opening section:', sectionId);
+        // Opening section
         content.classList.add('active');
         if (header && header.classList.contains('section-header')) {
             header.classList.add('open');
             header.setAttribute('aria-expanded', 'true');
             const title = header.querySelector('.section-title, .section-title_toggle');
-            console.log('Title element:', title);
             if (title && title.textContent) {
-                console.log('Updating title from:', title.textContent);
                 title.textContent = title.textContent.replace(/^[\s]*[▾▸]/, '▾');
-                console.log('Updated title to:', title.textContent);
+                // Updated title
             }
         }
 
@@ -202,7 +198,7 @@ function viewOrder(orderNumber) {
         window.location.href = `orders/nw_order_${value}.html`;
         return;
     }
-    alert(`Order ${orderNumber} not found.`);
+    // Order not found
 }
 
 // ========================================
@@ -296,10 +292,10 @@ async function loadOrdersData() {
                                (!currentPath.includes('/orders/') && !currentPath.includes('nw_order_'))) &&
                                !currentPath.includes('scientology-dictionary');
         
-        console.log('Current path:', currentPath, 'Needs orders data:', needsOrdersData);
+        // Current path and data requirements
         
         if (!needsOrdersData) {
-            console.log('Skipping orders data loading for individual order page');
+            // Skipping orders data loading for individual order page
             return;
         }
 
@@ -313,7 +309,7 @@ async function loadOrdersData() {
         osaSocialReformOrdersData = await socialReformResponse.json();
         osaNetworkOrdersData = await networkResponse.json();
 
-        console.log('Orders data loaded successfully');
+        // Orders data loaded successfully
     } catch (error) {
         console.error('Error loading orders data:', error);
     }
@@ -324,7 +320,7 @@ async function loadOrdersData() {
 // ========================================
 
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('DOM Content Loaded - Starting initialization');
+    // DOM Content Loaded - Starting initialization
     
     // Load data first
     await loadOrdersData();
@@ -356,7 +352,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         try {
             const inFileTree = !!event.target.closest('.file-tree li');
             const navOpen = document.body.classList.contains('nav-open');
-            console.log('[Click]', { target: event.target, inFileTree, navOpen });
+            // Click event processed
         } catch (_) {}
 
         // Allow mobile navigation links to work, but skip other nav-menu clicks
@@ -370,7 +366,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             const contentId = header.nextElementSibling.id;
             if (contentId) {
                 event.preventDefault();
-                console.log('Section header clicked, toggling:', contentId);
+                // Section header clicked, toggling
                 toggleSection(contentId);
                 return;
             }
@@ -401,20 +397,20 @@ document.addEventListener('DOMContentLoaded', async function() {
             try {
                 const pe = getComputedStyle(fileTreeItem).pointerEvents;
                 const zi = getComputedStyle(fileTreeItem).zIndex;
-                console.log('[Sidebar] file-tree item clicked:', fileTreeItem, 'data-section:', fileTreeItem?.dataset?.section, 'pointer-events:', pe, 'z-index:', zi);
+                // Sidebar file-tree item clicked
             } catch (_) {}
 
             // If this LI has an inline scrollToSection handler, let it run without interference
             const inlineOnclick = (fileTreeItem.getAttribute('onclick') || '');
             if (inlineOnclick.includes('scrollToSection')) {
-                console.log('[Sidebar] Inline scrollToSection present; skipping delegated toggleSection handling.');
+                // Inline scrollToSection present; skipping delegated toggleSection handling
                 return;
             }
 
             const secId = fileTreeItem.dataset.section;
             if (secId) {
                 event.preventDefault();
-                console.log('[Sidebar] Delegated toggleSection firing for section:', secId);
+                // Delegated toggleSection firing for section
                 toggleSection(secId);
                 return;
             }
@@ -476,9 +472,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 // Load OSA Intelligence Orders from external JSON file
 async function loadOSAIntelligenceOrders() {
     try {
-        const response = await fetch('../assets/data/osa-intelligence-orders.json');
+        const response = await fetch('../shared/js/data/osa-intelligence-orders.json');
         const data = await response.json();
-        console.log('Successfully loaded', data.length, 'Intelligence orders from external file');
+        // Successfully loaded Intelligence orders from external file
         return data;
     } catch (error) {
         console.error('Error loading OSA Intelligence Orders:', error);
@@ -489,12 +485,12 @@ async function loadOSAIntelligenceOrders() {
 // OSA Public Relations Orders data (loaded externally to avoid CORS issues)
 async function loadOSAPublicRelationsOrders() {
     try {
-        const response = await fetch('../assets/data/osa-public-relations-orders.json');
+        const response = await fetch('../shared/js/data/osa-public-relations-orders.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('Loaded OSA Public Relations Orders:', data.length, 'orders');
+        // Loaded OSA Public Relations Orders
         return data;
     } catch (error) {
         console.error('Error loading OSA Public Relations Orders:', error);
@@ -505,12 +501,12 @@ async function loadOSAPublicRelationsOrders() {
 // OSA Legal Orders data (loaded externally to avoid CORS issues)
 async function loadOSALegalOrders() {
     try {
-        const response = await fetch('../assets/data/osa-legal-orders.json');
+        const response = await fetch('../shared/js/data/osa-legal-orders.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('Loaded OSA Legal Orders:', data.length, 'orders');
+        // Loaded OSA Legal Orders
         return data;
     } catch (error) {
         console.error('Error loading OSA Legal Orders:', error);

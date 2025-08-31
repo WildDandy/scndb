@@ -15,7 +15,7 @@ class GlossaryData {
             await this.loadEmbeddedData();
             this.filteredData = [...this.data];
             this.isLoaded = true;
-            console.log(`Loaded ${this.data.length} glossary entries`);
+            // Loaded glossary entries
         } catch (error) {
             console.error('Error loading glossary data:', error);
             this.data = [];
@@ -29,7 +29,7 @@ class GlossaryData {
             // Use embedded data directly to avoid CORS issues
             if (typeof window.glossaryData !== 'undefined') {
                 this.data = window.glossaryData;
-                console.log('Embedded data loaded successfully:', this.data.length, 'items');
+                // Embedded data loaded successfully
             } else {
                 throw new Error('Embedded data not available');
             }
