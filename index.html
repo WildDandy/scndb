@@ -3,7 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCIENTOLOGY DATABASE - TERMINAL ACCESS</title>
+    <title>Scientology Database - Leaked Documents & OSA Orders | SCNDB</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Access leaked Scientology documents, OSA orders, and internal communications. Comprehensive database of Church of Scientology operations, intelligence orders, and confidential materials.">
+    <meta name="keywords" content="scientology, OSA, leaked documents, church of scientology, intelligence orders, confidential, database, operations">
+    <meta name="author" content="SCNDB">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://scndb.org/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Scientology Database - Leaked Documents & OSA Orders">
+    <meta property="og:description" content="Access leaked Scientology documents, OSA orders, and internal communications. Comprehensive database of Church of Scientology operations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://scndb.org/">
+    <meta property="og:site_name" content="SCNDB">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scientology Database - Leaked Documents & OSA Orders">
+    <meta name="twitter:description" content="Access leaked Scientology documents, OSA orders, and internal communications.">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Scientology Database",
+      "alternateName": "SCNDB",
+      "url": "https://scndb.org/",
+      "description": "Comprehensive database of leaked Scientology documents, OSA orders, and internal communications",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://scndb.org/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
 
     <!-- CRITICAL: Apply theme immediately before stylesheets load -->
     <script>
@@ -87,11 +123,11 @@
             </div>
             <div class="info-item">
                 <span>LAST UPDATE:</span>
-                <span>2006.09.01</span>
+                <span>2025.08</span>
             </div>
             <div class="info-item">
                 <span>MIRROR SITES:</span>
-                <span class="status">47 ACTIVE</span>
+                <span class="status">05 ACTIVE</span>
             </div>
         </div>
 
@@ -223,7 +259,7 @@
     <!-- Unified Footer -->
     <footer class="footer">
         <div class="container">
-            <p>DATABASE VERSION 3.7.2 | LAST COMPILE: 2006.12.09 | MIRROR SITES: 47 ACTIVE</p>
+            <p>DATABASE VERSION 3.7.2 | LAST COMPILE: 2006.12.09 | MIRROR SITES: 05 ACTIVE</p>
             <p>DISTRIBUTED UNDER FREEDOM OF INFORMATION PROTOCOLS</p>
         </div>
     </footer>
@@ -283,11 +319,22 @@
                 'fair-game': '#'
             };
 
+            // Section name mappings for popup display
+            const sectionNames = {
+                'ot-levels': 'OT Level Materials',
+                'legal-docs': 'Legal Documents',
+                'intelligence': 'Intelligence Reports',
+                'sea-org': 'Sea Organization',
+                'hubbard-comm': 'Hubbard Communications',
+                'fair-game': 'Fair Game Documentation'
+            };
+
             const targetUrl = urlMap[section];
             if (targetUrl && targetUrl !== '#') {
                 window.location.href = targetUrl;
             } else {
-                alert('Accessing ' + section.toUpperCase().replace('-', ' ') + ' section...\n\nConnection encrypted. Proceed with caution.');
+                const sectionName = sectionNames[section] || section.toUpperCase().replace('-', ' ');
+                alert(sectionName + '\n\nCOMING SOON');
             }
         }
 
