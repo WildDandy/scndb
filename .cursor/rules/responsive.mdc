@@ -1,8 +1,0 @@
----
-name: Responsive Rules
----
-
-- Follow responsive.css only.
-- Do not add custom breakpoints.
-- Sidebar collapses below content ≤768px.
-- Mobile menu is hamburger, slide-in.
