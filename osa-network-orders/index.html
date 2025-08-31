@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSA Network Orders - Leaked Documents</title>
+
+    <!-- CRITICAL: Apply theme immediately before stylesheets load -->
+    <script>
+        // Inline theme application to prevent FOUC
+        (function() {
+            const savedMode = localStorage.getItem('viewMode');
+
+            // Determine the mode - default to clean if no preference
+            const mode = savedMode || 'clean';
+
+            console.log('Immediate theme application:', mode);
+
+            // Apply theme immediately with inline styles
+            if (mode === 'clean') {
+                document.documentElement.classList.add('clean-view-loading');
+                document.documentElement.style.background = '#FEF8ED';
+                document.documentElement.style.color = '#000000';
+            } else {
+                document.documentElement.classList.add('terminal-view-loading');
+                document.documentElement.style.background = '#000000';
+                document.documentElement.style.color = '#00ff41';
+            }
+        })();
+    </script>
+
+    <!-- Unified CSS System -->
+    <link rel="stylesheet" href="../shared/css/base.css" />
+    <link rel="stylesheet" href="../shared/css/layout.css" />
+    <link rel="stylesheet" href="../shared/css/components.css" />
+    <link rel="stylesheet" href="../shared/css/effects.css" />
+    <link rel="stylesheet" href="../shared/css/responsive.css" />
+    <link rel="stylesheet" href="../shared/css/themes.css" />
+
+    <!-- Light mode banner fixes - highest priority -->
+    <style>
+        /* Force black backgrounds for banners in clean mode */
+        body.clean-view .classified-banner,
+        body.clean-view .warning-tape,
+        body.clean-view .warning-tape-confidential {
+            background: #000000 !important;
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
+        /* Force black text for all elements in clean mode */
+        body.clean-view,
+        body.clean-view * {
+            color: #000000 !important;
+            -webkit-text-fill-color: #000000 !important;
+        }
+
+        /* Ensure banners keep white text */
+        body.clean-view .classified-banner,
+        body.clean-view .warning-tape,
+        body.clean-view .warning-tape-confidential {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+    </style>
+    
+    <!-- Manual Navigation Configuration -->
+    <script>
+        // Define manual navigation links for this page
+        window.navigationConfig = {
+            navLinks: [
+                { key: 'home', label: 'HOME NW', href: './index.html' },
+                { key: 'search', label: 'SEARCH', href: './search_results.html' },
+                { key: 'glossary', label: 'GLOSSARY', href: './glossary.html' }
+            ],
+            currentPage: 'home'
+        };
+        
+        // Initialize navigation with manual configuration
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                window.initializeNavigation(window.navigationConfig);
+            });
+        } else {
+            window.initializeNavigation(window.navigationConfig);
+        }
+    </script>
+</head>
+<body>
+    <!-- Scan line effect -->
+    <div class="scan-line"></div>
+
+    <!-- Navigation will be dynamically injected by navigation-component.js -->
+    <header class="master-header header-full-width">
+        <!-- Navigation component will be injected here -->
+    </header>
+
+    <!-- HERO COMPONENT -->
+    <section class="hero">
+        <div class="container">
+            <div class="classified-banner">⚠️ LEAKED INTERNAL DOCUMENTS ⚠️</div>
+            <h1 class="search-main-title">OSA Network Orders</h1>
+            <div class="hero-subtitle">
+                <span class="typewriter">Office of Special Affairs operational guidelines for Scientology's Sea Organization</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warning tape component -->
+    <div class="warning-tape-confidential">
+        CONFIDENTIAL MATERIAL - INTERNAL USE ONLY - DO NOT DISTRIBUTE
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="container">
+        <div class="main-content">
+            <!-- SIDEBAR COMPONENT -->
+            <aside class="sidebar">
+                <h3>Document Sections</h3>
+                <ul class="file-tree">
+                    <li data-section="overview" onclick="scrollToSection('overview', this)">Document Overview</li>
+                    <li data-section="general" onclick="scrollToSection('general', this)">OSA General (1-41)</li>
+                    <li data-section="intelligence" onclick="scrollToSection('intelligence', this)">Intelligence (42-74)</li>
+                    <li data-section="pr" onclick="scrollToSection('pr', this)">Public Relations (75-102)</li>
+                    <li data-section="legal" onclick="scrollToSection('legal', this)">Legal (103-136)</li>
+                    <li data-section="social" onclick="scrollToSection('social', this)">Social Reform (137-149)</li>
+                </ul>
+                
+                <h3 class="quick-stats-title">Quick Stats</h3>
+                <div class="sidebar-quick-stats">
+                    <div>Total Orders: <span class="text-accent">149</span></div>
+                    <div>Pages: <span class="text-accent">500+</span></div>
+                    <div>Date Range: <span class="text-accent">1975-2006</span></div>
+                    <div>Status: <span class="text-accent">LEAKED</span></div>
+                </div>
+            </aside>
+
+            <!-- CONTENT AREA -->
+            <main class="content-area">
+                <div class="document-header">
+                    <div class="doc-title">Leaked OSA Network Orders</div>
+                    <div class="doc-meta">149 Orders | Sea Organization | 1975-2006</div>
+                </div>
+
+                <div class="document-content">
+                    <!-- EXPANDABLE SECTION COMPONENT -->
+                    <div class="section-block">
+                        <div class="section-header" tabindex="0" role="button" aria-expanded="false">
+                            <div class="section-title_toggle">▸ Document Overview</div>
+                        </div>
+                        <div class="section-content" id="overview">
+                            <p>The "Leaked OSA Network Orders.pdf" outlines the operational guidelines for the Office of Special Affairs (OSA) within the Sea Organization, a religious order in Scientology. These orders are essentially a manual for engaging in what is described as a "war" against perceived enemies of Scientology, with the ultimate goal of "ESTABLISHING THE INDISPENSABILITY OF SCIENTOLOGY".</p>
+                            
+                            <div class="callout">
+                                <strong class="text-accent">PRIMARY PURPOSE:</strong> "ESTABLISHING THE INDISPENSABILITY OF SCIENTOLOGY" - positioning the organization as essential to society's survival, believing "No other movement can handle psychosomatics, drugs, education, crime, insanity and a long list of social ills."
+                            </div>
+
+                            <h4 class="heading-accent">The Perceived Enemy</h4>
+                            <p>The orders extensively detail Scientology's "enemies," primarily identified as:</p>
+                            
+                            <div class="bullet-accent">
+                                <strong>• Psychiatry and Mental Health Organizations:</strong> The World Federation of Mental Health (WFMH) and National Association of Mental Health (NAMH) are portrayed as "madmen" responsible for "murder, torture, and brain damage of tens of thousands of people."
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OSA GENERAL SECTION -->
+                    <div class="section-block">
+                        <div class="section-header" tabindex="0" role="button" aria-expanded="false">
+                            <div class="section-title_toggle">▸ OSA General Orders (1-41)</div>
+                        </div>
+                        <div class="section-content" id="general">
+                            <p>This section establishes the overall framework, emphasizing an offensive rather than defensive public relations approach.</p>
+                            
+                            <!-- CARD GRID COMPONENT -->
+                            <div class="order-grid">
+                                <!-- Cards will be dynamically populated from osa_general_orders_1-41.json -->
+                                <div class="loading-message">Loading OSA General Orders...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INTELLIGENCE SECTION -->
+                    <div class="section-block">
+                        <div class="section-header" tabindex="0" role="button" aria-expanded="false">
+                            <div class="section-title_toggle">▸ Intelligence Operations (42-74)</div>
+                        </div>
+                        <div class="section-content" id="intelligence">
+                            <p>Defines intelligence as "evaluated secret information and necessary actions to handle the general situation." Primary roles are "PREDICTION and SUPPORT" for planning and policy-making.</p>
+                            
+                            <div class="order-grid">
+                                <!-- Cards will be dynamically populated from osa_intelligence_orders_42-74.json -->
+                                <div class="loading-message">Loading OSA Intelligence Orders...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PUBLIC RELATIONS SECTION -->
+                    <div class="section-block">
+                        <div class="section-header" tabindex="0" role="button" aria-expanded="false">
+                            <div class="section-title_toggle">▸ Public Relations (75-102)</div>
+                        </div>
+                        <div class="section-content" id="pr">
+                            <p>Public Relations operations focus on managing Scientology's image and relationship with the media, government, and public. This section outlines strategies for handling press coverage, public statements, and media manipulation techniques.</p>
+
+                            <div class="order-grid">
+                                <!-- Cards will be dynamically populated from osa_public_relations_orders_75-102.json -->
+                                <div class="loading-message">Loading OSA Public Relations Orders...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LEGAL SECTION -->
+                    <div class="section-block">
+                        <div class="section-header" tabindex="0" role="button" aria-expanded="false">
+                            <div class="section-title_toggle">▸ Legal Operations (103-136)</div>
+                        </div>
+                        <div class="section-content" id="legal">
+                            <p>Legal operations cover Scientology's approach to lawsuits, court proceedings, and legal strategies. This section details how to handle litigation, gather legal intelligence, and use the court system as a weapon.</p>
+
+                            <div class="order-grid">
+                                <!-- Cards will be dynamically populated from osa_legal_orders_103-136.json -->
+                                <div class="loading-message">Loading OSA Legal Orders...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SOCIAL REFORM SECTION -->
+                    <div class="section-block">
+                        <div class="section-header" tabindex="0" role="button" aria-expanded="false">
+                            <div class="section-title_toggle">▸ Social Reform (137-149)</div>
+                        </div>
+                        <div class="section-content" id="social">
+                            <p>Social Reform operations involve Scientology's efforts to influence and reform society according to its principles. This section covers community programs, political activism, and social engineering initiatives.</p>
+
+                            <div class="order-grid">
+                                <!-- Cards will be dynamically populated from osa_social_reform_orders_137-149.json -->
+                                <div class="loading-message">Loading OSA Social Reform Orders...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STATS BAR COMPONENT -->
+                <div class="stats-bar">
+                    <div class="stat-item">Total Orders: <span class="stat-value">149</span></div>
+                    <div class="stat-item">Sections: <span class="stat-value">6</span></div>
+                    <div class="stat-item">Time Span: <span class="stat-value">31 years</span></div>
+                    <div class="stat-item">Status: <span class="stat-value">CLASSIFIED</span></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- FOOTER COMPONENT -->
+    <footer class="footer">
+        <div class="container">
+            <p>These documents are presented for research and educational purposes.<br>
+            Original source: Leaked internal Scientology documents.</p>
+        </div>
+    </footer>
+
+    <!-- Section navigation script -->
+    <script>
+         function scrollToSection(sectionId, clickedElement) {
+             console.log('[Sidebar] scrollToSection called:', sectionId, clickedElement);
+ 
+             // Use the unified toggleSection logic (opens panel, updates header, smooth scrolls)
+             if (typeof toggleSection === 'function') {
+                 // Force open so repeated clicks won’t close the section
+                 toggleSection(sectionId, true);
+             } else {
+                 // Fallback if shared app.js hasn't loaded yet
+                 const content = document.getElementById(sectionId);
+                 if (content) {
+                     content.classList.add('active');
+                 }
+             }
+ 
+             // Update active state in the sidebar
+             document.querySelectorAll('.file-tree li').forEach(li => {
+                 li.classList.remove('active');
+             });
+             if (clickedElement) {
+                 clickedElement.classList.add('active');
+             }
+         }
+ 
+         // Add active state to overview by default
+         document.addEventListener('DOMContentLoaded', function() {
+             const overviewLink = document.querySelector('[data-section="overview"]');
+             if (overviewLink) {
+                 overviewLink.classList.add('active');
+             }
+         });
+     </script>
+
+    <!-- Banner fix script - runs after everything else -->
+    <script>
+        // Force banner backgrounds in clean mode
+        function fixBannerStyles() {
+            const classifiedBanner = document.querySelector('.classified-banner');
+            const warningTape = document.querySelector('.warning-tape-confidential');
+
+            if (document.body.classList.contains('clean-view')) {
+                if (classifiedBanner) {
+                    classifiedBanner.style.backgroundColor = '#000000';
+                    classifiedBanner.style.color = '#ffffff';
+                    classifiedBanner.style.background = '#000000';
+                }
+
+                if (warningTape) {
+                    warningTape.style.backgroundColor = '#000000';
+                    warningTape.style.color = '#ffffff';
+                    warningTape.style.background = '#000000';
+                }
+            }
+        }
+
+        // Run immediately and after DOM load
+        fixBannerStyles();
+        document.addEventListener('DOMContentLoaded', fixBannerStyles);
+
+        // Also run when theme changes
+        window.addEventListener('themeChanged', function(event) {
+            setTimeout(fixBannerStyles, 100);
+        });
+    </script>
+
+    <!-- Unified JavaScript from shared folder -->
+    <script src="../shared/js/theme-manager.js"></script>
+    <script src="../shared/js/navigation-component.js"></script>
+    <script src="./assets/js/embedded-order-data.js"></script>
+    <script src="./assets/js/orders-index.js"></script>
+    <script src="../shared/js/app.js" defer></script>
+</body>
+</html>

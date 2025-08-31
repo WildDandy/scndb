@@ -1,0 +1,109 @@
+# Sidebar Layout Implementation Prompt
+
+## When to Use Sidebar Layout
+Use this layout for pages that need filtering, navigation, or additional controls:
+- Search results pages
+- Index pages with filters
+- Pages with navigation menus
+- Content that benefits from categorization
+
+## Implementation Guidelines
+
+### HTML Structure
+```html
+<div class="container">
+    <div class="main-content"> <!-- Two-column layout -->
+        <aside class="sidebar">
+            <!-- Sidebar content -->
+            <div class="filter-group-section">
+                <h3 class="filter-section-heading">Filter Results</h3>
+                <ul class="filter-options-list">
+                    <li class="filter-option-item">Filter Item</li>
+                </ul>
+            </div>
+        </aside>
+        <main class="content-area">
+            <h1 class="search-main-title">PAGE TITLE</h1>
+            <!-- Main content here -->
+        </main>
+    </div>
+</div>
+```
+
+### Sidebar Typography Hierarchy
+- **Main Sidebar Title**: `.filter-section-heading` (first section) - `--fs-body-large` + bold
+- **Section Titles**: `.filter-section-heading` - `--fs-body-small` + bold
+- **Filter Items**: `.filter-option-item` - `--fs-body-small`
+- **Compact Spacing**: Filter items use `0.25rem` padding for tight layout
+
+### Layout Variants
+
+#### Standard Sidebar (Default)
+```html
+<div class="main-content"> <!-- Standard width -->
+```
+
+#### Wide Sidebar (Optional)
+```html
+<div class="main-content wide"> <!-- Wider sidebar -->
+```
+
+### CSS Classes for Sidebar Content
+```css
+/* Sidebar sections */
+.filter-group-section {
+    margin-bottom: var(--space-xl); /* Section spacing */
+}
+
+/* Main sidebar titles */
+.filter-group-section:first-child .filter-section-heading {
+    font-size: var(--fs-body-large);
+    font-weight: bold;
+    margin-bottom: var(--space-md);
+}
+
+/* Section titles */
+.filter-section-heading {
+    font-size: var(--fs-body-small);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Filter items */
+.filter-option-item {
+    font-size: var(--fs-body-small);
+    padding: 0.25rem 0; /* Compact spacing */
+}
+```
+
+## Documentation Reference
+For complete specifications, see:
+- `.documentation/sidebar_component_guide.md` - Complete sidebar system guide
+- `.documentation/complete-unified-system.md` - Typography and spacing system
+- `.documentation/style-guide-documentation.md` - Complete design system reference
+- `style-guide.html` - Interactive style guide with live examples
+- `shared/templates/` - Available layout templates and examples
+
+## Examples in Codebase
+- `osa-network-orders/search_results2.html` - Modern search results with filters
+- `osa-network-orders/search_results.html` - Legacy search results layout
+- `osa-network-orders/index.html` - Index page with sidebar navigation
+
+## Templates Reference
+Before implementing, check available templates in `shared/templates/`:
+- `master-layout.html` - Base layout template
+- `example-implementation.html` - Implementation examples
+- `grid-examples.html` - Grid layout patterns
+
+## Best Practices
+1. **Always check the style guide first**: Review `style-guide.html` for current design tokens
+2. **Reference templates**: Use `shared/templates/` for proven layout patterns
+3. Use semantic HTML (`<aside>`, `<main>`, `<section>`)
+4. Follow the typography hierarchy for visual consistency
+5. Use proper spacing variables (`--space-xl`, `--space-md`)
+6. Implement responsive behavior for mobile devices
+7. Test filter functionality and accessibility
+8. Ensure theme compatibility (clean/terminal modes)
+9. Keep filter items compact with `0.25rem` padding
+10. Use `--fs-body-large` for main titles, `--fs-body-small` for sections

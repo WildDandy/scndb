@@ -1,0 +1,75 @@
+---
+name: Path Rules (Enhanced)
+---
+
+## Navigation Path Rules
+
+### Logo Navigation (Always to Root)
+- Root pages (`/`): `href="./"`
+- Mini-site pages (`/folder/`): `href="../"`  
+- Deep pages (`/folder/orders/`): `href="../../"`
+
+### Menu Button Navigation (Mini-sites Only)
+
+#### Within Mini-Site (`/folder/page.html`)
+```html
+<a href="./">HOME NW</a>
+<a href="./search_results.html">SEARCH</a> 
+<a href="./glossary.html">GLOSSARY</a>
+```
+
+#### From Deep Pages (`/folder/orders/order.html`)
+```html
+<a href="../">HOME NW</a>
+<a href="../search_results.html">SEARCH</a>
+<a href="../glossary.html">GLOSSARY</a>
+```
+
+## Asset Path Rules
+
+### Shared Resources by Depth
+- Root pages: `shared/css/base.css`
+- Mini-site pages: `../shared/css/base.css`  
+- Deep pages: `../../shared/css/base.css`
+
+### Scripts Follow Same Logic
+- Root: `shared/js/app.js`
+- Mini-site: `../shared/js/app.js`
+- Deep: `../../shared/js/app.js`
+
+## Page Context Detection
+```javascript
+// Determine navigation context
+function getNavigationContext() {
+    const segments = window.location.pathname.split('/').filter(s => s);
+    if (segments.length === 0 || segments[segments.length - 1] === 'index.html') {
+        return segments.length <= 1 ? 'root' : 'minisite-home';
+    }
+    return segments.length === 1 ? 'minisite-page' : 'deep-page';
+}
+```
+
+## Template Path Adjustments
+
+### Root Template Includes
+```html
+<link rel="stylesheet" href="shared/css/base.css">
+<script src="shared/js/theme-manager.js"></script>
+```
+
+### Mini-Site Template Includes  
+```html
+<link rel="stylesheet" href="../shared/css/base.css">
+<script src="../shared/js/theme-manager.js"></script>
+```
+
+### Deep Page Template Includes
+```html
+<link rel="stylesheet" href="../../shared/css/base.css">
+<script src="../../shared/js/theme-manager.js"></script>
+```
+
+## Menu Visibility Rules
+- **Root pages**: `.top-nav { display: none; }`
+- **Mini-site pages**: `.top-nav { display: flex; }`
+- **Context class**: Add `root-page` or `minisite-page` to body

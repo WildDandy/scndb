@@ -1,0 +1,1159 @@
+/* ========================================
+   UNIFIED THEMES CSS - ENHANCED PERSISTENCE
+   Theme switching with FOUC prevention
+   ======================================== */
+
+/* ========================================
+   ENHANCED FOUC PREVENTION
+   ======================================== */
+
+/* Default to light theme to prevent dark flash */
+html {
+    background: #FEF8ED !important;
+    background-color: #FEF8ED !important;
+    color: #000000 !important;
+    /* Chrome-specific rendering optimizations */
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+body {
+    background: #FEF8ED !important;
+    background-color: #FEF8ED !important;
+    color: #000000 !important;
+    /* Chrome rendering optimizations */
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    backface-visibility: hidden !important;
+}
+
+/* Override for elements that should be transparent */
+body:not(.clean-view) .matrix-effect,
+body:not(.clean-view) .matrix-rain,
+body.clean-view .matrix-effect,
+body.clean-view .matrix-rain {
+    background-color: transparent !important;
+}
+
+/* Immediate terminal theme override (when user prefers dark) */
+html.terminal-view-loading,
+body.terminal-view-loading {
+    background: #000000 !important;
+    color: #00ff41 !important;
+    /* Chrome-specific terminal theme loading */
+    -webkit-font-smoothing: antialiased !important;
+}
+
+/* Chrome-specific terminal theme loading states */
+body.terminal-view-loading * {
+    color: #00ff41 !important;
+    -webkit-text-fill-color: #00ff41 !important;
+}
+
+/* Force terminal mode styling - Chrome-specific maximum specificity */
+.force-terminal-mode {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #00ff41 !important;
+    /* Chrome hardware acceleration */
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+}
+
+.force-terminal-mode *:not(.classified-banner):not(.warning-tape):not(.warning-tape-confidential) {
+    background-color: #000000 !important;
+    color: #00ff41 !important;
+    border-color: #00ff41 !important;
+    /* Chrome text rendering */
+    -webkit-font-smoothing: antialiased !important;
+    -webkit-text-fill-color: #00ff41 !important;
+}
+
+/* Prevent any white backgrounds during transition */
+body:not(.clean-view):not(.clean-view-loading) {
+    background: #000000 !important;
+}
+
+/* Ultra-fast theme transitions to minimize flash duration */
+body,
+body *,
+html {
+    transition: background-color 0.1s ease !important;
+    -webkit-transition: background-color 0.1s ease !important;
+    /* Chrome GPU acceleration */
+    will-change: background-color !important;
+}
+
+/* Disable transitions during theme switch to prevent flicker */
+.switching-theme,
+.switching-theme * {
+    transition: none !important;
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    animation: none !important;
+    -webkit-animation: none !important;
+}
+
+/* ========================================
+   FOUC PREVENTION - LOADING STATES
+   ======================================== */
+
+/* Prevent flash of unstyled content during theme loading */
+.clean-view-loading {
+    background: var(--clean-bg) !important;
+    color: var(--dark-text-light) !important;
+}
+
+.clean-view-loading * {
+    color: var(--dark-text-light) !important;
+    border-color: var(--dark-text-light) !important;
+    background: var(--clean-bg) !important;
+}
+
+/* Force terminal mode styling to prevent white flash during transitions */
+.force-terminal-mode {
+    background: #000000 !important;
+    color: #00ff41 !important;
+}
+
+.force-terminal-mode * {
+    color: #00ff41 !important;
+    border-color: #00ff41 !important;
+    background: transparent !important;
+}
+
+/* Light theme loading state (default) */
+html:not(.terminal-view-loading) {
+    background: #FEF8ED;
+    color: #000000;
+}
+
+/* ========================================
+   CLEAN VIEW THEME OVERRIDES
+   ======================================== */
+
+/* Base clean view styles */
+body.clean-view {
+    background: var(--clean-bg) !important;
+    background-color: var(--clean-bg) !important;
+    color: var(--clean-fg) !important;
+    height: auto !important; /* Allow content to expand beyond viewport */
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    overflow-x: hidden !important;
+}
+
+/* MAXIMUM SPECIFICITY OVERRIDE - NUCLEAR OPTION */
+html.clean-view.clean-view {
+    background: var(--clean-bg) !important;
+    background-color: var(--clean-bg) !important;
+    background-image: none !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    height: auto !important; /* Allow content to expand beyond viewport */
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-color: var(--clean-border) !important;
+}
+
+/* FORCE BODY HEIGHT FIX - MAXIMUM SPECIFICITY */
+html.clean-view.clean-view body.clean-view {
+    background: var(--clean-bg) !important;
+    background-color: var(--clean-bg) !important;
+    background-image: none !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    height: auto !important; /* Allow content to expand */
+    max-height: none !important; /* Remove any max-height constraints */
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important; /* Allow natural page scrolling */
+    /* FORCE OVERRIDE ANY OTHER HEIGHT RULES */
+    box-sizing: border-box !important;
+}
+
+/* ADDITIONAL BODY HEIGHT OVERRIDE - EVEN MORE SPECIFIC */
+html.clean-view.clean-view body.clean-view.clean-view {
+    height: auto !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+}
+
+/* Target all possible background sources */
+html.clean-view::before,
+html.clean-view::after,
+body.clean-view::before,
+body.clean-view::after {
+    background: var(--clean-bg) !important;
+    background-color: var(--clean-bg) !important;
+    background-image: none !important;
+}
+
+/* Force viewport coverage */
+html.clean-view {
+    box-sizing: border-box !important;
+}
+
+html.clean-view,
+html.clean-view body {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* Responsive viewport coverage for smaller screens */
+@media (max-width: 768px) {
+    html.clean-view.clean-view {
+        height: auto !important; /* Allow content to expand */
+    }
+
+    /* MOBILE BODY HEIGHT FIX - MAXIMUM SPECIFICITY */
+    html.clean-view.clean-view body.clean-view {
+        height: auto !important; /* Allow content to expand */
+        max-height: none !important; /* Remove any max-height constraints */
+        overflow-x: hidden !important;
+        overflow-y: visible !important; /* Allow natural page scrolling */
+        box-sizing: border-box !important;
+    }
+
+    /* EXTRA SPECIFIC MOBILE OVERRIDE */
+    html.clean-view.clean-view body.clean-view.clean-view {
+        height: auto !important;
+        max-height: none !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+}
+
+/* FIXED: Only apply clean text color to specific container elements, not text elements */
+body.clean-view .master-header,
+body.clean-view .hero,
+body.clean-view .sidebar,
+body.clean-view .content-area,
+body.clean-view .document-header,
+body.clean-view .section-header,
+body.clean-view .section-content,
+body.clean-view .stats-bar,
+body.clean-view .container,
+body.clean-view .system-info,
+body.clean-view .main-menu {
+    color: var(--clean-fg) !important;
+}
+
+/* ========================================
+   BANNER STYLING - FIXED WITH MAXIMUM SPECIFICITY
+   ======================================== */
+
+/* TERMINAL MODE: Green background with black text */
+body:not(.clean-view) .classified-banner,
+body:not(.clean-view) .warning-tape,
+body:not(.clean-view) .warning-tape-confidential {
+    background: #00ff41 !important;
+    background-color: #00ff41 !important;
+    background-image: none !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+/* CLEAN MODE: Black background with white text - MAXIMUM SPECIFICITY */
+html.clean-view body.clean-view .classified-banner,
+html.clean-view body.clean-view .warning-tape,
+html.clean-view body.clean-view .warning-tape-confidential {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+    color: #F7F2E3 !important;
+    -webkit-text-fill-color: #F7F2E3 !important;
+    border: none !important;
+}
+
+/* EVEN MORE SPECIFIC - NUCLEAR OPTION */
+html.clean-view.clean-view body.clean-view.clean-view .classified-banner.classified-banner,
+html.clean-view.clean-view body.clean-view.clean-view .warning-tape.warning-tape,
+html.clean-view.clean-view body.clean-view.clean-view .warning-tape-confidential.warning-tape-confidential {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+    color: #F7F2E3 !important;
+    -webkit-text-fill-color: #F7F2E3 !important;
+    border: none !important;
+}
+
+/* Ensure all text elements in clean mode use black text (except banners) */
+body.clean-view *:not(.classified-banner):not(.warning-tape):not(.warning-tape-confidential) {
+    color: var(--clean-fg) !important;
+    -webkit-text-fill-color: var(--clean-fg) !important;
+}
+
+/* Force clean mode colors for text-accent elements */
+body.clean-view .text-accent,
+body.clean-view .text-accent * {
+    color: var(--clean-fg) !important;
+    -webkit-text-fill-color: var(--clean-fg) !important;
+}
+
+/* Clean theme backgrounds - semi-transparent with 0.3 opacity */
+body.clean-view,
+body.clean-view .master-header,
+body.clean-view .hero,
+body.clean-view .sidebar,
+body.clean-view .content-area,
+body.clean-view .document-header,
+body.clean-view .section-header,
+body.clean-view .section-content,
+body.clean-view .stats-bar,
+body.clean-view .container,
+body.clean-view .system-info,
+body.clean-view .main-menu {
+    background: rgba(254, 248, 237, 0.3) !important; /* --clean-bg with 0.3 opacity */
+    background-color: rgba(254, 248, 237, 0.3) !important;
+}
+
+/* Clean theme hover states */
+body.clean-view .order-card:hover,
+body.clean-view .file-tree li:hover,
+body.clean-view .section-header:hover,
+body.clean-view .result-item:hover {
+    background: var(--white-old-lace-hover) !important;
+    color: var(--clean-fg) !important;
+}
+
+/* FIXED: Ensure nested text stays transparent, only inherits color */
+body.clean-view .order-card:hover *,
+body.clean-view .file-tree li:hover *,
+body.clean-view .section-header:hover *,
+body.clean-view .result-item:hover * {
+    color: var(--clean-fg) !important;
+    background: transparent !important; /* Force transparent backgrounds on text */
+}
+
+/* Specific rule for section title toggle hover */
+body.clean-view .section-header:hover .section-title_toggle {
+    background: transparent !important; /* Transparent background */
+    color: var(--clean-fg) !important;
+}
+
+/* FIXED: Ensure all text elements have transparent backgrounds */
+body.clean-view p,
+body.clean-view span,
+body.clean-view div:not(.glossary-item):not(.order-card):not(.result-item):not(.search-result-item):not(.menu-section):not(.section-header):not(.sidebar):not(.content-area):not(.document-header):not(.section-content):not(.stats-bar):not(.container):not(.system-info):not(.main-menu):not(.classified-banner):not(.warning-tape):not(.warning-tape-confidential),
+body.clean-view h1,
+body.clean-view h2,
+body.clean-view h3,
+body.clean-view h4,
+body.clean-view h5,
+body.clean-view h6,
+body.clean-view strong,
+body.clean-view em,
+body.clean-view a:not(.nav-menu a):not(.alpha-letter):not(.search-btn):not(.clear-btn):not(.nav-btn):not(.clear-filters-btn):not(.clear-all-filters-btn):not(.clear-button) {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* ========================================
+   VIEW TOGGLE COMPONENT - NO ARROWS
+   ======================================== */
+
+/* Remove ALL artifacts from view toggle */
+.view-toggle {
+    display: flex;
+    align-items: center;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    /* Enhanced Chrome compatibility fixes */
+    pointer-events: auto !important;
+    position: relative !important;
+    z-index: 10 !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    backface-visibility: hidden !important;
+    transform: translateZ(0) !important;
+}
+
+/* IMPROVED CLICKABLE AREA - Make toggle much easier to press */
+#btn-view-toggle {
+    /* Increase clickable area significantly */
+    padding: 12px 16px !important; /* Add generous padding around ASCII art */
+    margin: 4px !important; /* Add margin for visual breathing room */
+    min-width: 80px !important; /* Minimum width for easier clicking */
+    min-height: 60px !important; /* Minimum height for touch targets */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    /* Enhanced Chrome compatibility for div acting as button */
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    position: relative !important;
+    z-index: 100 !important;
+    /* Chrome-specific fixes */
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    -webkit-touch-callout: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    backface-visibility: hidden !important;
+    transform: translateZ(0) !important;
+}
+
+/* ASCII art styling within the toggle */
+#btn-view-toggle .ascii-art,
+#btn-view-toggle {
+    font-family: 'Courier New', monospace !important;
+    white-space: pre !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+}
+
+/* MOBILE OPTIMIZATIONS - Larger touch targets for mobile */
+@media (max-width: 768px) {
+    #btn-view-toggle {
+        /* Even larger touch targets for mobile */
+        padding: 16px 20px !important;
+        min-width: 100px !important;
+        min-height: 80px !important;
+        margin: 6px !important;
+    }
+}
+
+/* EXTRA SMALL MOBILE DEVICES */
+@media (max-width: 480px) {
+    #btn-view-toggle {
+        /* Maximum touch-friendly size for small screens */
+        padding: 20px 24px !important;
+        min-width: 120px !important;
+        min-height: 100px !important;
+        margin: 8px !important;
+    }
+}
+
+/* Prevent Chrome from adding unwanted outlines */
+#btn-view-toggle:focus,
+#btn-view-toggle:focus-visible,
+.view-toggle button:focus,
+.view-toggle button:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+
+
+.view-toggle .terminal-toggle-icon {
+    flex-shrink: 0;
+    align-self: flex-start;
+}
+
+/* Remove any pseudo-elements that might create artifacts */
+.view-toggle::before,
+.view-toggle::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* ========================================
+   UNIFIED CARD STYLES (CONSISTENT SYSTEM)
+   Applies to card-like components
+   ======================================== */
+
+/* Light (Clean) mode cards */
+body.clean-view .order-card,
+body.clean-view .result-item,
+body.clean-view .search-result-item,
+body.clean-view .search-result-item-link {
+    background: var(--white-old-lace) !important;
+    border-color: var(--clean-border) !important;
+    color: var(--clean-fg) !important;
+}
+
+body.clean-view .menu-section {
+    background: var(--white-old-lace) !important;
+    border-color: var(--clean-border) !important;
+    color: var(--clean-fg) !important;
+}
+
+/* Light (Clean) mode card hover: same as base */
+body.clean-view .order-card:hover,
+body.clean-view .result-item:hover,
+body.clean-view .search-result-item:hover,
+body.clean-view .search-result-item-link:hover,
+body.clean-view .menu-section:hover {
+    background: var(--white-old-lace-hover) !important;
+    border-color: var(--clean-border) !important;
+    color: var(--clean-fg) !important;
+}
+
+/* FIXED: Prevent background on ALL text elements inside cards */
+body.clean-view .result-item *,
+body.clean-view .search-result-item *,
+body.clean-view .search-result-item-link *,
+body.clean-view .order-card *,
+body.clean-view .glossary-item * {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* FIXED: Also prevent background on these elements even when not hovering */
+body.clean-view .result-header,
+body.clean-view .result-content {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Ensure child elements inherit hover styles in clean mode */
+body.clean-view .menu-section:hover .section-icon,
+body.clean-view .menu-section:hover .section-title,
+body.clean-view .menu-section:hover .section-stats,
+body.clean-view .menu-section:hover .section-description {
+    background: transparent !important;
+    color: var(--clean-fg) !important;
+}
+
+/* Clean mode glossary hover: light background only */
+body.clean-view .glossary-item:hover {
+    background: var(--white-old-lace-hover) !important;
+}
+
+/* Dark (Terminal) mode cards */
+body:not(.clean-view) .order-card,
+body:not(.clean-view) .glossary-item,
+body:not(.clean-view) .result-item,
+body:not(.clean-view) .search-result-item,
+body:not(.clean-view) .search-result-item-link,
+body:not(.clean-view) .menu-section {
+    background: var(--fg-alpha-10) !important;
+    border-color: #00ff41 !important;
+    color: #00ff41 !important;
+}
+
+/* Dark (Terminal) mode card hover */
+body:not(.clean-view) .order-card:hover,
+body:not(.clean-view) .glossary-item:hover,
+body:not(.clean-view) .result-item:hover,
+body:not(.clean-view) .search-result-item:hover,
+body:not(.clean-view) .search-result-item-link:hover,
+body:not(.clean-view) .menu-section:hover {
+    background: var(--fg-alpha-14) !important; /* 14% accent */
+    border-color: #00ff41 !important;
+    color: #00ff41 !important;
+}
+
+/* FIXED: Prevent background on ALL text elements inside cards in terminal mode */
+body:not(.clean-view) .result-item *,
+body:not(.clean-view) .search-result-item *,
+body:not(.clean-view) .search-result-item-link *,
+body:not(.clean-view) .order-card *,
+body:not(.clean-view) .glossary-item *,
+body:not(.clean-view) .section-header *,
+body:not(.clean-view) .section-title_toggle {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Also prevent background on these elements even when not hovering */
+body:not(.clean-view) .result-header,
+body:not(.clean-view) .result-content {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Ensure child elements inherit hover styles in dark mode */
+body:not(.clean-view) .menu-section:hover .section-icon,
+body:not(.clean-view) .menu-section:hover .section-title,
+body:not(.clean-view) .menu-section:hover .section-stats,
+body:not(.clean-view) .menu-section:hover .section-description {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #00ff41 !important;
+}
+
+/* Ensure toggle text is clean */
+.toggle-text {
+    display: block;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+/* COMPLETELY REMOVE toggle-indicator - NO ARROWS! */
+.toggle-indicator {
+    display: none !important;
+}
+
+/* ========================================
+   TERMINAL THEME SPECIFIC
+   ======================================== */
+
+body:not(.clean-view) {
+    background: #000000;
+    color: #00ff41;
+}
+
+/* CRITICAL FIX: Ensure ALL text elements are green in terminal mode */
+body:not(.clean-view) *:not(.classified-banner):not(.warning-tape):not(.warning-tape-confidential) {
+    color: #00ff41 !important;
+    -webkit-text-fill-color: #00ff41 !important;
+}
+
+/* Override any rules that might set text to black in terminal mode */
+body:not(.clean-view) h1,
+body:not(.clean-view) h2,
+body:not(.clean-view) h3,
+body:not(.clean-view) h4,
+body:not(.clean-view) h5,
+body:not(.clean-view) h6,
+body:not(.clean-view) p,
+body:not(.clean-view) span,
+body:not(.clean-view) div,
+body:not(.clean-view) a,
+body:not(.clean-view) li,
+body:not(.clean-view) td,
+body:not(.clean-view) th,
+body:not(.clean-view) label,
+body:not(.clean-view) input,
+body:not(.clean-view) textarea,
+body:not(.clean-view) button {
+    color: #00ff41 !important;
+    -webkit-text-fill-color: #00ff41 !important;
+}
+
+/* Content areas with solid backgrounds to block matrix effect */
+body:not(.clean-view) .results-sidebar,
+body:not(.clean-view) .results-main,
+body:not(.clean-view) .search-result-item,
+body:not(.clean-view) .no-results,
+body:not(.clean-view) .loading-state,
+body:not(.clean-view) .error-state,
+body:not(.clean-view) .pagination,
+body:not(.clean-view) .filter-list,
+body:not(.clean-view) .sidebar-section,
+body:not(.clean-view) .sidebar,
+body:not(.clean-view) .content-area,
+body:not(.clean-view) .document-header,
+body:not(.clean-view) .section-header,
+body:not(.clean-view) .section-content,
+body:not(.clean-view) .stats-bar,
+body:not(.clean-view) .footer,
+/* Glossary page elements */
+body:not(.clean-view) .glossary-item,
+body:not(.clean-view) .glossary-controls,
+body:not(.clean-view) .glossary-input,
+/* Index page elements */
+body:not(.clean-view) .order-grid,
+body:not(.clean-view) .order-card,
+body:not(.clean-view) .file-tree,
+body:not(.clean-view) .sidebar-quick-stats,
+body:not(.clean-view) .document-content,
+body:not(.clean-view) .callout,
+body:not(.clean-view) .section-block,
+/* Homepage elements */
+body:not(.clean-view) .info-item,
+body:not(.clean-view) .command-line {
+    background: var(--bg-solid) !important;
+    background-color: var(--bg-solid) !important;
+    background-image: none !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* Section and layout containers - transparent to show matrix effect */
+body:not(.clean-view) .results-section,
+body:not(.clean-view) .results-header,
+body:not(.clean-view) .active-filters-display,
+/* Glossary page containers */
+body:not(.clean-view) .glossary-header,
+body:not(.clean-view) .glossary-grid,
+body:not(.clean-view) .alpha-bar,
+body:not(.clean-view) .glossary-page,
+/* Index page containers */
+body:not(.clean-view) .hero,
+body:not(.clean-view) .main-content,
+/* Homepage containers */
+body:not(.clean-view) .system-info,
+body:not(.clean-view) .main-menu {
+    background: rgba(0, 0, 0, 0.3) !important; /* --bg with 0.3 opacity */
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    z-index: 5 !important;
+}
+
+/* Terminal theme mobile menu */
+body:not(.clean-view) .nav-menu a {
+    color: #00ff41 !important;
+    border-bottom-color: #00ff41 !important;
+}
+
+body:not(.clean-view) .mobile-menu-toggle span {
+    background: #00ff41 !important;
+}
+
+/* Clean mode hamburger menu - must override terminal mode */
+body.clean-view .mobile-menu-toggle span {
+    background: var(--clean-fg) !important;
+}
+
+/* Ensure hero-subtitle is visible in terminal mode */
+body:not(.clean-view) .hero-subtitle {
+    color: #00ff41 !important;
+    -webkit-text-fill-color: #00ff41 !important;
+    opacity: 1 !important; /* Override the 0.8 opacity */
+    background: transparent !important;
+}
+
+/* Ensure hero-subtitle is visible in clean mode */
+body.clean-view .hero-subtitle {
+    color: var(--clean-fg) !important;
+    -webkit-text-fill-color: var(--clean-fg) !important;
+    opacity: 1 !important; /* Override the 0.8 opacity */
+    background: transparent !important;
+}
+
+/* Master header backgrounds for different modes */
+body.clean-view .master-header {
+    background: var(--clean-bg) !important;
+    background-color: var(--clean-bg) !important;
+    border-bottom: 1px solid var(--clean-border) !important;
+}
+
+body:not(.clean-view) .master-header {
+    background: var(--fg-alpha-10) !important;
+    background-color: var(--fg-alpha-10) !important;
+}
+
+/* Header-full-width backgrounds for different modes */
+body.clean-view .header-full-width {
+    background: var(--clean-bg) !important;
+    background-color: var(--clean-bg) !important;
+}
+
+body:not(.clean-view) .header-full-width {
+    background: rgba(0, 0, 0, 0.8) !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* ========================================
+   THEME TRANSITION EFFECTS
+   ======================================== */
+
+/* Smooth theme transitions */
+body,
+body *,
+body::before,
+body::after,
+body *::before,
+body *::after {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Disable transitions during initial load to prevent flash */
+.clean-view-loading,
+.clean-view-loading *,
+.clean-view-loading *::before,
+.clean-view-loading *::after {
+    transition: none !important;
+}
+
+/* ========================================
+   ANIMATION OVERRIDES FOR CLEAN VIEW
+   ======================================== */
+
+/* Disable most animations in clean view for professional look */
+body.clean-view *:not(.view-toggle button),
+body.clean-view *::before,
+body.clean-view *::after {
+    animation: none !important;
+    transform: none !important;
+}
+
+/* Keep essential hover transitions in clean view */
+body.clean-view .nav-menu a,
+body.clean-view .order-card,
+body.clean-view .glossary-item {
+    transition: all 0.2s ease !important;
+}
+
+/* Completely disable typewriter in clean view */
+body.clean-view .typewriter {
+    animation: none !important;
+    border-right: none !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    width: auto !important;
+}
+
+/* Disable scan line in clean view */
+body.clean-view .scan-line {
+    display: none !important;
+}
+
+/* Disable matrix canvas in clean view */
+body.clean-view #matrix-canvas {
+    display: none !important;
+}
+
+/* ========================================
+   THEME PERSISTENCE DEBUG
+   ======================================== */
+
+/* Visual indicator for theme state (development only) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 3px;
+    background: #00ff41;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Show green dot in terminal mode, hide in clean mode */
+body:not(.clean-view)::before {
+    opacity: 0.7;
+}
+
+/* ========================================
+   HOMEPAGE SPECIFIC STYLES
+   ======================================== */
+
+/* Hide hamburger menu on homepage */
+body.homepage .mobile-menu-toggle {
+    display: none !important;
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+    /* Force clean theme for printing */
+    body {
+        background: var(--clean-bg) !important;
+        color: black !important;
+    }
+
+    * {
+        background: transparent !important;
+        color: black !important;
+        border-color: black !important;
+    }
+
+    .view-toggle,
+    .mobile-menu-toggle,
+    .scan-line,
+    #matrix-canvas,
+    body::before {
+        display: none !important;
+    }
+
+    /* Remove transitions for print */
+    *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ========================================
+   FINAL BUTTON SPEC
+   Applies consistently across modes for all button-like elements
+   ======================================== */
+
+/* Mode-agnostic layout for button-like elements */
+.search-btn,
+.clear-btn,
+.nav-btn,
+.clear-filters-btn,
+.clear-all-filters-btn,
+.clear-button,
+.nav-menu a,
+.view-toggle button:not(.terminal-toggle-button),
+.alpha-letter {
+    display: inline-block !important;
+    padding: 0.6rem 1.25rem !important;
+    text-decoration: none !important;
+    line-height: 1 !important;
+    box-sizing: border-box !important;
+}
+
+/* Light (Clean) mode buttons */
+body.clean-view .search-btn,
+body.clean-view .clear-btn,
+body.clean-view .nav-btn,
+body.clean-view .clear-filters-btn,
+body.clean-view .clear-all-filters-btn,
+body.clean-view .clear-button,
+body.clean-view .nav-menu a,
+body.clean-view .view-toggle button:not(.terminal-toggle-button),
+body.clean-view .alpha-letter {
+    background: var(--white-old-lace) !important;
+    background-color: var(--white-old-lace) !important;
+    border: 1px solid var(--clean-border) !important;
+    color: var(--clean-fg) !important;
+    -webkit-text-fill-color: var(--clean-fg) !important;
+}
+
+body.clean-view .search-btn:hover,
+body.clean-view .clear-btn:hover,
+body.clean-view .nav-btn:hover,
+body.clean-view .clear-filters-btn:hover,
+body.clean-view .clear-all-filters-btn:hover,
+body.clean-view .clear-button:hover,
+body.clean-view .nav-menu a:hover,
+body.clean-view .view-toggle button:not(.terminal-toggle-button):hover,
+body.clean-view .alpha-letter:hover {
+    background: var(--white-old-lace-hover) !important;
+    background-color: var(--white-old-lace-hover) !important;
+    border-color: var(--clean-border) !important;
+    color: var(--clean-fg) !important;
+    -webkit-text-fill-color: var(--clean-fg) !important;
+}
+
+/* Ensure nested content uses dark text on hover (icons/spans) */
+body.clean-view .search-btn:hover *,
+body.clean-view .clear-btn:hover *,
+body.clean-view .nav-btn:hover *,
+body.clean-view .clear-filters-btn:hover *,
+body.clean-view .clear-all-filters-btn:hover *,
+body.clean-view .clear-button:hover *,
+body.clean-view .nav-menu a:hover *,
+body.clean-view .alpha-letter:hover * {
+    color: var(--clean-fg) !important;
+    -webkit-text-fill-color: var(--clean-fg) !important;
+}
+
+/* Dark (Terminal) mode buttons */
+body:not(.clean-view) .search-btn,
+body:not(.clean-view) .clear-btn,
+body:not(.clean-view) .nav-btn,
+body:not(.clean-view) .clear-filters-btn,
+body:not(.clean-view) .clear-all-filters-btn,
+body:not(.clean-view) .clear-button,
+body:not(.clean-view) .nav-menu a,
+body:not(.clean-view) .view-toggle button:not(.terminal-toggle-button),
+body:not(.clean-view) .alpha-letter {
+    background: var(--bg-button) !important;
+    background-color: var(--bg-button) !important;
+    border: 1px solid #00ff41 !important;
+    color: #00ff41 !important;
+    -webkit-text-fill-color: #00ff41 !important;
+}
+
+body:not(.clean-view) .search-btn:hover,
+body:not(.clean-view) .clear-btn:hover,
+body:not(.clean-view) .nav-btn:hover,
+body:not(.clean-view) .clear-filters-btn:hover,
+body:not(.clean-view) .clear-all-filters-btn:hover,
+body:not(.clean-view) .clear-button:hover,
+body:not(.clean-view) .nav-menu a:hover,
+body:not(.clean-view) .view-toggle button:not(.terminal-toggle-button):hover,
+body:not(.clean-view) .alpha-letter:hover {
+    background: var(--fg-alpha-38) !important;
+    background-color: var(--fg-alpha-38) !important;
+    border-color: #00ff41 !important;
+    color: var(--dark-text-light) !important;
+    -webkit-text-fill-color: var(--dark-text-light) !important;
+}
+
+/* Ensure nested content flips color on hover */
+body:not(.clean-view) .search-btn:hover *,
+body:not(.clean-view) .clear-btn:hover *,
+body:not(.clean-view) .nav-btn:hover *,
+body:not(.clean-view) .clear-filters-btn:hover *,
+body:not(.clean-view) .clear-all-filters-btn:hover *,
+body:not(.clean-view) .clear-button:hover *,
+body:not(.clean-view) .nav-menu a:hover *,
+body:not(.clean-view) .alpha-letter:hover * {
+    color: var(--dark-text-light) !important;
+    -webkit-text-fill-color: var(--dark-text-light) !important;
+}
+
+/* Ensure SVG icons also flip to black on dark hover */
+body:not(.clean-view) .nav-menu a:hover svg,
+body:not(.clean-view) .nav-menu a:hover svg *,
+body:not(.clean-view) .alpha-letter:hover svg,
+body:not(.clean-view) .alpha-letter:hover svg *,
+body:not(.clean-view) .clear-button:hover svg,
+body:not(.clean-view) .clear-button:hover svg *,
+body:not(.clean-view) .nav-btn:hover svg,
+body:not(.clean-view) .nav-btn:hover svg *,
+body:not(.clean-view) .clear-filters-btn:hover svg,
+body:not(.clean-view) .clear-filters-btn:hover svg *,
+body:not(.clean-view) .clear-all-filters-btn:hover svg,
+body:not(.clean-view) .clear-all-filters-btn:hover svg *,
+body:not(.clean-view) .view-toggle button:not(.terminal-toggle-button):hover svg,
+body:not(.clean-view) .view-toggle button:not(.terminal-toggle-button):hover svg * {
+    fill: var(--dark-text-light) !important;
+    stroke: var(--dark-text-light) !important;
+}
+
+/* Ensure pseudo-elements on dark-hover also render as black text/lines */
+body:not(.clean-view) .nav-menu a:hover::before,
+body:not(.clean-view) .nav-menu a:hover::after,
+body:not(.clean-view) .alpha-letter:hover::before,
+body:not(.clean-view) .alpha-letter:hover::after,
+body:not(.clean-view) .clear-button:hover::before,
+body:not(.clean-view) .clear-button:hover::after,
+body:not(.clean-view) .nav-btn:hover::before,
+body:not(.clean-view) .nav-btn:hover::after,
+body:not(.clean-view) .clear-filters-btn:hover::before,
+body:not(.clean-view) .clear-filters-btn:hover::after,
+body:not(.clean-view) .clear-all-filters-btn:hover::before,
+body:not(.clean-view) .clear-all-filters-btn:hover::after,
+body:not(.clean-view) .search-btn:hover::before,
+body:not(.clean-view) .search-btn:hover::after,
+body:not(.clean-view) .clear-btn:hover::before,
+body:not(.clean-view) .clear-btn:hover::after,
+body:not(.clean-view) .view-toggle button:not(.terminal-toggle-button):hover::before,
+body:not(.clean-view) .view-toggle button:not(.terminal-toggle-button):hover::after {
+    color: var(--dark-text-light) !important;
+    -webkit-text-fill-color: var(--dark-text-light) !important;
+    border-color: var(--dark-text-light) !important;
+    box-shadow: none !important;
+}
+
+/* ========================================
+   ACTIVE NAV LINK (CURRENT PAGE)
+   Matches hover in dark; subtle grey in light
+   ======================================== */
+
+/* Light mode: same as standard button, but white-old-lace-hover */
+body.clean-view .nav-menu .current-page,
+body.clean-view .nav-menu a.current-page,
+body.clean-view .nav-menu .current-page a {
+    background: var(--white-old-lace-hover) !important;
+    background-color: var(--white-old-lace-hover) !important;
+    border: 1px solid var(--clean-border) !important;
+    color: var(--clean-fg) !important;
+    -webkit-text-fill-color: var(--clean-fg) !important;
+    /* Ensure same sizing as other buttons */
+    display: inline-block !important;
+    padding: 0.75rem 1.5rem !important;
+    font-size: var(--fs-small) !important;
+    line-height: 1 !important;
+    box-sizing: border-box !important;
+    cursor: default !important;
+}
+
+/* Dark mode: same as dark hover state */
+body:not(.clean-view) .nav-menu .current-page,
+body:not(.clean-view) .nav-menu a.current-page,
+body:not(.clean-view) .nav-menu .current-page a {
+    background: rgba(0, 255, 65, 0.38) !important;
+    background-color: rgba(0, 255, 65, 0.38) !important;
+    border: 1px solid #00ff41 !important;
+    color: var(--dark-text-light) !important;
+    -webkit-text-fill-color: var(--dark-text-light) !important;
+    /* Ensure same sizing as other nav-menu buttons */
+    display: inline-block !important;
+    padding: 0.6rem 1.25rem !important;
+    font-size: var(--fs-small) !important;
+    line-height: 1 !important;
+    box-sizing: border-box !important;
+    cursor: default !important;
+}
+
+/* Ensure descendants/icons on active state are readable */
+body:not(.clean-view) .nav-menu .current-page *,
+body:not(.clean-view) .nav-menu a.current-page *,
+body:not(.clean-view) .nav-menu .current-page a *,
+body:not(.clean-view) .nav-menu .current-page svg,
+body:not(.clean-view) .nav-menu a.current-page svg,
+body:not(.clean-view) .nav-menu .current-page a svg,
+body:not(.clean-view) .nav-menu .current-page svg *,
+body:not(.clean-view) .nav-menu a.current-page svg *,
+body:not(.clean-view) .nav-menu .current-page a svg * {
+    color: var(--dark-text-light) !important;
+    -webkit-text-fill-color: var(--dark-text-light) !important;
+    fill: var(--dark-text-light) !important;
+    stroke: var(--dark-text-light) !important;
+}
+
+/* ========================================
+   BUTTON SIZING (MODE-AGNOSTIC)
+   Per spec: height matches search input
+   ======================================== */
+
+/* All buttons - match search input height */
+.search-btn,
+.clear-btn,
+.nav-btn,
+.clear-filters-btn,
+.clear-all-filters-btn,
+.clear-button,
+.nav-menu a,
+.view-toggle button:not(.terminal-toggle-button),
+.alpha-letter {
+    height: 2.75rem !important; /* Match search input height */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: var(--fs-small) !important; /* 0.8rem */
+    line-height: 1 !important;
+    box-sizing: border-box !important;
+}
+
+/* Standard buttons with horizontal padding */
+.search-btn,
+.clear-btn,
+.nav-btn,
+.clear-filters-btn,
+.clear-all-filters-btn,
+.nav-menu a {
+    padding: 0 1.5rem !important; /* Horizontal padding only */
+}
+
+/* Square/compact buttons */
+.clear-button,
+.alpha-letter {
+    padding: 0 0.75rem !important; /* Less horizontal padding */
+    min-width: 2.75rem !important; /* Square button minimum */
+}
+
+/* View toggle buttons (excluding terminal toggle) */
+.view-toggle button:not(.terminal-toggle-button) {
+    padding: 0 1rem !important; /* Medium padding */
+}
+
+/* ========================================
+   SCIENTOLOGY DICTIONARY PAGE - HIDE NAVIGATION
+   ======================================== */
+
+/* Hide navigation menu for Scientology Dictionary page */
+.scientology-dictionary-page .nav-menu,
+.scientology-dictionary-page .nav-menu *,
+.scientology-dictionary-page .master-header .nav-menu {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Hide hamburger menu toggle for Scientology Dictionary page */
+.scientology-dictionary-page .mobile-menu-toggle,
+.scientology-dictionary-page .mobile-menu-toggle *,
+.scientology-dictionary-page .master-header .mobile-menu-toggle {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Keep master header visible but hide navigation elements for Scientology Dictionary page */

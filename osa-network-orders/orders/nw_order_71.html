@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSA Network Order 71 - DATE COINCIDENCE</title>
+
+    <!-- CRITICAL: Apply theme immediately before stylesheets load -->
+    <script>
+        // Inline theme application to prevent FOUC
+        (function() {
+            const savedMode = localStorage.getItem('viewMode') || 'clean';
+            console.log('Immediate theme application:', savedMode);
+
+            if (savedMode === 'clean') {
+                document.documentElement.classList.add('clean-view-loading');
+                document.documentElement.style.background = 'var(--clean-bg)';
+            } else {
+                document.documentElement.style.background = '#000000';
+            }
+        })();
+    </script>
+
+    <!-- Unified CSS System -->
+    <link rel="stylesheet" href="../../shared/css/base.css" />
+    <link rel="stylesheet" href="../../shared/css/layout.css" />
+    <link rel="stylesheet" href="../../shared/css/components.css" />
+    <link rel="stylesheet" href="../../shared/css/effects.css" />
+    <link rel="stylesheet" href="../../shared/css/responsive.css" />
+    <link rel="stylesheet" href="../../shared/css/themes.css" />
+    <link rel="stylesheet" href="../../shared/css/orders.css" />
+
+    <!-- JavaScript Files -->
+    <script src="../../shared/js/theme-manager.js" defer></script>
+    <script src="../../shared/js/navigation-component.js"></script>
+    
+    <!-- Manual Navigation Configuration -->
+    <script>
+        // Define manual navigation links for this page
+        window.navigationConfig = {
+            navLinks: [
+                { key: 'home', label: 'HOME NW', href: '../index.html' },
+                { key: 'search', label: 'SEARCH', href: '../search_results.html' },
+                { key: 'glossary', label: 'GLOSSARY', href: '../glossary.html' }
+            ],
+            currentPage: 'order'
+        };
+        
+        // Initialize navigation with manual configuration
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                window.initializeNavigation(window.navigationConfig);
+            });
+        } else {
+            window.initializeNavigation(window.navigationConfig);
+        }
+    </script>
+    
+    <script src="../../shared/js/app.js" defer></script>
+</head>
+<body>
+    <!-- Navigation will be dynamically injected by navigation-component.js -->
+    <header class="master-header header-full-width">
+        <!-- Navigation component will be injected here -->
+    </header>
+
+    <section class="document-header" style="margin-top: var(--first-section-offset);">
+        <div class="container">
+            <div class="doc-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Issue Date:</div>
+                    <div>1 September 2006</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Author:</div>
+                    <div>L. RON HUBBARD</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Recipients:</div>
+                    <div>OSA NW<br>Execs<br>Invest Staff</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>Contents</h3>
+                    <ul class="sidebar-list">
+                        <li class="active">Document Text</li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>Navigation</h3>
+                    <ul class="sidebar-list">
+                        <li onclick="location.href='nw_order_72.html'">Next: NW Order 72</li>
+                        <li onclick="location.href='../index.html'">Back to Index</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main class="content-area">
+                <div class="content-header">
+                    <div class="content-title">OSA Network Order No. 71</div>
+                    <div class="content-subtitle">(Excerpted from a briefing of 27 April 1972.)</div>
+                </div>
+
+                <div class="document-content">
+                    <div class="original-header">
+                        <div class="order-num">OSA NETWORK ORDER NO. 71</div>
+                        <div class="meta-info">OSA NW<br>Execs<br>Invest Staff</div>
+                        
+                        
+                        
+                        <h1>DATE COINCIDENCE</h1>
+                        <div class="meta-info meta-author">(Excerpted from a briefing of 27 April 1972.)</div>
+                    </div>
+
+                    <div class="document-text">
+                        <p>What you do on ethics investigations is look for date coincidence, date<br>coincidence, date coincidence, date coincidence; name cross-reference, name cross-<br>reference, name cross-reference, name cross-reference, name cross-reference; date<br>coincidence, date coincidence, date coincidence. That is about all you would do when<br>you are looking over records. That is an investigation on records.</p>
+
+<p>Bessy Lou was found strangled in the swamp and date coincidence, date<br>coincidence, date coincidence, date coincidence. We find her ex-husband reported into<br>the Swaberboo Hotel two days before she was strangled in the swamp and left three<br>days afterwards. That is enough for the bulls. There's a date coincidence there.</p>
+
+<p>They can be dead-wrong because they haven't now got the name and that is an<br>intelligence action that is seldom done by the police. So if you combine intelligence<br>and other investigatory techs, you generally come up with lots of answers. Just count<br>how many times does somebody's name appear.</p>
+                    </div>
+
+                    <div class="signature">
+                        L. RON HUBBARD<br><span class="signature_role">Founder</span>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <div>
+                        <a href="nw_order_70.html" class="nav-btn">← NW Order 70</a>
+                    </div>
+                    <div>
+                        <a href="../index.html" class="nav-btn">INDEX</a>
+                    </div>
+                    <div>
+                        <a href="nw_order_72.html" class="nav-btn">NW Order 72 →</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>These documents are presented for research and educational purposes.<br>
+            Original source: Leaked internal Scientology documents.</p>
+        </div>
+    </footer>
+</body>
+</html>

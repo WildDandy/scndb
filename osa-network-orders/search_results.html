@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - OSA Network Orders</title>
+
+    <!-- CRITICAL: Apply theme immediately before stylesheets load -->
+    <script>
+        // Inline theme application to prevent FOUC
+        (function() {
+            const savedMode = localStorage.getItem('viewMode') || 'clean';
+            console.log('Immediate theme application:', savedMode);
+
+            if (savedMode === 'clean') {
+                document.documentElement.classList.add('clean-view-loading');
+                document.documentElement.style.background = 'var(--clean-bg)';
+            } else {
+                document.documentElement.style.background = '#000000';
+            }
+        })();
+    </script>
+
+    <!-- Unified CSS from shared folder -->
+    <link rel="stylesheet" href="../shared/css/base.css" />
+    <link rel="stylesheet" href="../shared/css/layout.css" />
+    <link rel="stylesheet" href="../shared/css/components.css" />
+    <link rel="stylesheet" href="../shared/css/effects.css" />
+    <link rel="stylesheet" href="../shared/css/responsive.css" />
+    <link rel="stylesheet" href="../shared/css/themes.css" />
+</head>
+<body>
+    <!-- Scan line effect -->
+    <div class="scan-line"></div>
+    
+    <!-- Navigation will be dynamically injected by navigation-component.js -->
+    <header class="master-header header-full-width">
+        <!-- Navigation component will be injected here -->
+    </header>
+
+    <!-- SEARCH HEADER COMPONENT -->
+    <section class="search-header">
+        <div class="container">
+            <div class="search-title-section">
+                <h1 class="search-main-title">SEARCH DATABASE</h1>
+                <p class="search-subtitle">Query the complete OSA Network Orders archive</p>
+            </div>
+            
+            <!-- Search form component -->
+            <form class="search-form">
+                <input type="text" class="search-input" id="searchQuery" placeholder="Enter search terms...">
+                <button type="submit" class="search-btn">SEARCH</button>
+                <button type="button" class="clear-btn" id="clearSearch" title="Clear search">CLEAR</button>
+            </form>
+            
+            <!-- Search meta info -->
+            <div class="search-meta" id="searchMeta">Searching database...</div>
+        </div>
+    </section>
+
+    <!-- SEARCH RESULTS LAYOUT -->
+    <section class="results-section">
+        <div class="container">
+            <div class="main-content"> <!-- Two-column layout -->
+                <!-- RESULTS SIDEBAR COMPONENT -->
+                <aside class="sidebar">
+                    <!-- Filter by Document Count -->
+                    <div class="filter-group-section">
+                        <h3 class="filter-section-heading">Filter Results</h3>
+                        <ul class="filter-options-list">
+                            <li class="filter-option-item" data-filter-all>
+                                All Documents <span class="filter-count" id="allCount">(0)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Filter by Section -->
+                    <div class="filter-group-section">
+                        <h3 class="filter-section-heading">By Section</h3>
+                        <ul class="filter-options-list" id="sectionFilters">
+                            <li class="filter-option-item" data-filter-section="general">
+                                OSA General <span class="filter-count" id="generalCount">(0)</span>
+                            </li>
+                            <li class="filter-option-item" data-filter-section="intelligence">
+                                Intelligence <span class="filter-count" id="intelligenceCount">(0)</span>
+                            </li>
+                            <li class="filter-option-item" data-filter-section="pr">
+                                Public Relations <span class="filter-count" id="prCount">(0)</span>
+                            </li>
+                            <li class="filter-option-item" data-filter-section="legal">
+                                Legal <span class="filter-count" id="legalCount">(0)</span>
+                            </li>
+                            <li class="filter-option-item" data-filter-section="social">
+                                Social Reform <span class="filter-count" id="socialCount">(0)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Filter by Order Range -->
+                    <div class="filter-group-section">
+                        <h3 class="filter-section-heading">Order Range</h3>
+                        <ul class="filter-options-list">
+                            <li class="filter-option-item" data-filter-range="1-50">
+                                Orders 1-50 <span class="filter-count" id="range1Count">(0)</span>
+                            </li>
+                            <li class="filter-option-item" data-filter-range="51-100">
+                                Orders 51-100 <span class="filter-count" id="range2Count">(0)</span>
+                            </li>
+                            <li class="filter-option-item" data-filter-range="101+">
+                                Orders 101+ <span class="filter-count" id="range3Count">(0)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Clear All Filters -->
+                    <div class="filter-group-section">
+                        <button type="button" class="clear-all-filters-btn" id="clearFilters">CLEAR ALL FILTERS</button>
+                    </div>
+                </aside>
+
+                <!-- RESULTS MAIN AREA -->
+                <main class="results-main">
+                    <!-- Results header -->
+                    <div class="results-header">
+                        <div class="results-count" id="resultsCount">Found 0 documents</div>
+                        <div class="sort-controls">
+                            <label>Sort by:</label>
+                            <select class="sort-select" id="sortSelect">
+                                <option value="relevance">Relevance</option>
+                                <option value="date-desc">Date (Newest)</option>
+                                <option value="date-asc">Date (Oldest)</option>
+                                <option value="order-asc">Order Number</option>
+                                <option value="classification">Classification</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Active Filters Display -->
+                    <div class="active-filters-display" id="activeFiltersDisplay" style="display: none;">
+                        <div class="filter-status">
+                            <span class="filter-label">Active filters:</span>
+                            <span class="current-filters" id="currentFilters"></span>
+                        </div>
+                    </div>
+
+                    <!-- Results container -->
+                    <div id="resultsContainer">
+                        <!-- Results will be populated by JavaScript -->
+                        <div class="no-results">
+                            <h3>No Documents Found</h3>
+                            <p>Your search query did not match any documents in the archive.</p>
+                            <p>Try modifying your search terms or removing filters.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination" id="pagination"></div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- MASTER FOOTER COMPONENT -->
+    <footer class="footer">
+        <div class="container">
+            <p>OSA Network Orders Archive | Search Results v2.1 | Document analysis for research purposes</p>
+        </div>
+    </footer>
+
+    <!-- Unified JavaScript from shared folder -->
+    <script src="../shared/js/theme-manager.js"></script>
+    <script src="../shared/js/navigation-component.js"></script>
+    
+    <!-- Manual Navigation Configuration -->
+    <script>
+        // Define manual navigation links for this page
+        window.navigationConfig = {
+            navLinks: [
+                { key: 'home', label: 'HOME NW', href: './index.html' },
+                { key: 'search', label: 'SEARCH', href: './search_results.html' },
+                { key: 'glossary', label: 'GLOSSARY', href: './glossary.html' }
+            ],
+            currentPage: 'search'
+        };
+        
+        // Initialize navigation with manual configuration
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                window.initializeNavigation(window.navigationConfig);
+            });
+        } else {
+            window.initializeNavigation(window.navigationConfig);
+        }
+    </script>
+    
+    <script src="../shared/js/app.js" defer></script>
+    <script src="assets/js/search.js" defer></script>
+    <script src="assets/js/orders-index.js" defer></script>
+    <script src="assets/js/search-results.js" defer></script>
+</body>
+</html>

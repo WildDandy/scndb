@@ -1,0 +1,123 @@
+---
+name: Cursor Prompts (Enhanced)
+---
+
+## Standard Prompts
+
+### Convert Page
+"Convert X.html using shared/templates/master-layout.html. Replace placeholder variables. Include shared CSS/JS. Content inside .document-content. Ensure nav loads via updateGlobalNav()."
+
+### Glossary Page  
+"Rebuild glossary with master-layout.html template. Replace {{PAGE_TITLE}}, {{CSS_BASE_PATH}}, {{NAVIGATION_LINKS}}. Match classes. Link logic to assets/js/search.js."
+
+### Search Results Page
+"Rebuild search results with master-layout.html template. Replace placeholder variables. Match classes. Implement filters + sort controls."
+
+### Order Page
+"Scaffold order page with master-layout.html template (../../shared/ paths). Replace placeholders. Content inside .document-content. Nav by updateGlobalNav()."
+
+## Button Formatting Prompt
+**Use this when Cursor misses button styling:**
+
+"Fix button formatting following these 3 distinct patterns from components.css:
+
+**Search/Clear Buttons (.search-btn, .clear-btn):**
+- Base: background: var(--bg), border: 1px solid #00ff41, color: #00ff41
+- Hover: background: #00ff41 !important, color: black !important  
+- Clean hover: background: black !important, color: white !important, box-shadow: none !important
+
+**Navigation Buttons (.nav-btn):**
+- Base: background: var(--bg), border: 1px solid var(--border), color: var(--fg)
+- Hover: background: rgba(0, 255, 65, 0.15), transform: scale(0.98)
+- Clean hover: background: rgba(0, 0, 0, 0.05)
+
+**Clear Button (.clear-button - glossary specific):**
+- Base: background: #000000, border: 1px solid #00ff41, color: #00ff41
+- Hover: background: #00ff41 !important, color: black !important
+- Clean base: background: #ffffff !important, border/color: #000000 !important
+- Clean hover: background: #000000 !important, color: #ffffff !important, box-shadow: none !important
+
+**CRITICAL:** Search/clear buttons use direct hex colors (#00ff41, black, white), nav buttons use CSS variables. Always include `box-shadow: none !important` for clean mode hover states."
+
+## CSS Component Prompt
+"Update CSS components following unified standards:
+
+- Use tokens from :root (base.css) - never hardcode colors
+- Button classes: .search-btn, .nav-btn, .clear-btn (always group together)  
+- Clean view overrides: body.clean-view .class-name
+- No !important unless already in system
+- No inline CSS ever
+- Follow button template from css.mdc exactly
+- Test both terminal and clean themes"
+
+## Theme Debugging Prompt  
+"Debug theme switching issues:
+
+1. Check theme-manager.js loads in <head>
+2. Verify .clean-view class toggles on body
+3. Ensure CSS variables defined in :root
+4. Clean mode: white bg, black text, no green glow
+5. Terminal mode: black bg, green text
+6. Button hover states working in both themes
+7. No FOUC (flash of unstyled content)
+
+Add box-shadow: none !important to clean mode hover states if green glow appears."
+
+## Accessibility Prompt
+"Implement accessibility requirements:
+
+- .section-header: role='button', tabindex='0', aria-controls, aria-expanded  
+- All interactive elements keyboard navigable
+- Focus indicators always visible  
+- Test with tab navigation
+- ARIA labels for screen readers
+- Target Lighthouse accessibility score ≥95"
+
+## Navigation Structure Prompt
+"Fix navigation structure following site hierarchy:
+
+**Root site (/):** No top menu buttons, only logo + card navigation
+**Mini-sites (/folder/):** Logo + 3 menu buttons (HOME NW, SEARCH, GLOSSARY)
+**Deep pages (/folder/page/):** Same menu with adjusted paths
+
+**Logo behavior:**
+- Root: links to './'
+- Mini-site: links to '../' 
+- Deep page: links to '../../'
+
+**Menu buttons (mini-sites only):**
+- HOME NW: links to './' (folder index)
+- SEARCH: links to './search_results.html'
+- GLOSSARY: links to './glossary.html'
+
+**Path adjustment by depth:**
+- Same folder: './' 
+- Up one level: '../'
+- Up two levels: '../../'
+
+Use navigation.mdc rules. Root pages hide .top-nav, mini-sites show .top-nav."
+
+## Navigation Function Prompt
+"Implement updateGlobalNav() with context detection:
+
+```javascript
+function updateGlobalNav() {
+    const pathDepth = window.location.pathname.split('/').length - 2;
+    const isRoot = pathDepth === 0;
+    
+    // Logo path
+    const logoPath = isRoot ? './' : '../'.repeat(pathDepth);
+    document.querySelector('.logo a').href = logoPath;
+    
+    // Show/hide menu
+    const topNav = document.querySelector('.top-nav');
+    if (isRoot) {
+        topNav.style.display = 'none';
+    } else {
+        topNav.style.display = 'flex';
+        // Update menu paths based on depth
+    }
+}
+```
+
+Call updateGlobalNav() on page load. Mini-site navigation stays within folder scope."

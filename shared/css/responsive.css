@@ -1,0 +1,865 @@
+/* ========================================
+   RESPONSIVE CSS - MOBILE-FIRST APPROACH
+   As per style guide: Mobile-first responsive design
+   ======================================== */
+
+/* ========================================
+   MOBILE-FIRST BASE STYLES
+   ======================================== */
+
+/* Default mobile-first styles - applied to all screen sizes */
+/* These are the base styles that work on mobile devices */
+
+/* ========================================
+   SMALL MOBILE DEVICES (320px and up)
+   ======================================== */
+@media (min-width: 320px) {
+    /* Base mobile spacing and typography */
+    :root {
+        /* Removed --header-height override - use base.css value */
+        --section-header-padding-y: 12px;
+        --space-mobile-xs: 0.25rem;
+        --space-mobile-sm: 0.75rem;
+        --space-mobile-md: 1rem;
+        --space-mobile-lg: 1.25rem;
+    }
+
+    /* Mobile-first container adjustments */
+    .container {
+        padding: 0 var(--space-mobile-sm);
+        max-width: none;
+    }
+
+    /* Mobile navigation adjustments */
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
+
+    .nav-menu {
+        display: none; /* Hidden by default on mobile */
+    }
+}
+
+/* ========================================
+   LARGER MOBILE DEVICES (375px and up)
+   ======================================== */
+@media (min-width: 375px) {
+    :root {
+        /* Removed --header-height override - use base.css value */
+        --section-header-padding-y: 14px;
+    }
+
+    .container {
+        padding: 0 var(--space-mobile-md);
+    }
+}
+
+/* ========================================
+   STANDARD MOBILE DEVICES (414px and up)
+   ======================================== */
+@media (min-width: 414px) {
+    :root {
+        /* Removed --header-height override - use base.css value */
+        --section-header-padding-y: 16px;
+    }
+}
+
+/* ========================================
+   TABLET AND SMALL DESKTOP (768px and up)
+   ======================================== */
+@media (min-width: 768px) {
+    :root {
+        /* Removed --header-height override - use base.css value */
+        --section-header-padding-y: 16px;
+    }
+
+    /* Show desktop navigation */
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+
+    .nav-menu {
+        display: flex !important;
+        position: static !important;
+        flex-direction: row !important;
+    }
+}
+
+/* ========================================
+   DESKTOP (1025px and up) - FULL LAYOUT
+   ======================================== */
+   @media (min-width: 769px) {
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+
+    .nav-menu {
+        /* Ensure desktop menu is visible */
+        position: static !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        width: auto !important;
+        max-width: none !important;
+        background: transparent !important;
+        border-left: none !important;
+        display: flex !important;
+        flex-direction: row !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        z-index: auto !important;
+        transition: none !important;
+        box-shadow: none !important;
+        overflow-y: visible !important;
+    }
+
+    .nav-menu::before {
+        display: none !important;
+    }
+
+    .nav-menu li {
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Nav button visuals handled by buttons.css */
+
+    /* Desktop: system-info horizontal layout */
+    .system-info {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .info-item {
+        flex: 1 1 200px;
+        min-width: 180px;
+    }
+}
+
+
+
+/* ========================================
+   MOBILE (768px and below) - MOBILE MENU
+   ======================================== */
+@media (max-width: 768px) {
+    
+    /* Show hamburger menu button */
+    .mobile-menu-toggle {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 24px;
+        height: 18px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 6001;
+    }
+
+    .mobile-menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--fg);
+        border-radius: 1px;
+        transition: all 0.3s ease;
+    }
+
+    body.clean-view .mobile-menu-toggle span {
+        background: var(--clean-fg);
+    }
+
+        /* Mobile menu overlay - OFF SCREEN by default */
+    .nav-menu {
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important; /* Start completely off-screen from right */
+        bottom: 0 !important;
+        width: 280px; /* Fixed width for overlay */
+        background: var(--bg);
+        border-left: 1px solid var(--border);
+
+        /* ALWAYS flex - never display:none */
+        display: flex !important;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        z-index: 6002; /* Higher than hamburger z-index (6001) */
+
+        /* Smooth slide transition */
+        transition: right 0.3s ease-out;
+        box-shadow: -8px 0 24px rgba(0, 0, 0, 0.5);
+        list-style: none;
+        overflow-y: auto;
+    }
+
+    /* Clean view menu colors */
+    body.clean-view .nav-menu {
+        background: var(--clean-bg) !important;
+        border-left-color: var(--clean-border) !important;
+    }
+
+    /* Show menu when nav-open class is applied */
+    body.nav-open .nav-menu {
+        right: 0 !important; /* Slide into view from right */
+    }
+
+    /* Hide hamburger menu behind sidebar when sidebar is open */
+    body.nav-open .mobile-menu-toggle {
+        z-index: 6000 !important; /* Lower than sidebar (6002) */
+        pointer-events: none !important; /* Prevent interaction while hidden */
+    }
+
+    /* Restore hamburger menu when sidebar is closed */
+    body:not(.nav-open) .mobile-menu-toggle {
+        z-index: 6001 !important; /* Restore original z-index */
+        pointer-events: auto !important; /* Restore interaction */
+    }
+
+    /* Make mobile navigation buttons stretch full width */
+    body.nav-open .nav-menu a,
+    body.nav-open .nav-menu .current-page {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+        padding: 15px 20px !important;
+        margin: 5px 0 !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: 1px solid transparent !important;
+        outline: none !important;
+        box-shadow: none !important;
+        transition: all 0.3s ease !important;
+        cursor: pointer !important;
+        pointer-events: auto !important;
+        text-decoration: none !important;
+        position: relative !important;
+        z-index: 10 !important;
+        background: transparent !important;
+    }
+
+    body.nav-open .nav-menu a:hover {
+        background: rgba(0, 255, 65, 0.1) !important;
+        border-bottom-color: var(--accent) !important;
+        transform: translateX(5px) !important;
+    }
+
+    /* Style current page differently */
+    body.nav-open .nav-menu .current-page,
+    body.nav-open .nav-menu a.current-page {
+        background: rgba(0, 255, 65, 0.2) !important;
+        border: none !important;
+        border-bottom: 1px solid var(--accent) !important;
+        outline: none !important;
+        box-shadow: none !important;
+        cursor: default !important;         /* Not clickable for current page */
+        pointer-events: auto !important;    /* Still allow interactions */
+    }
+
+    /* Close button at top of menu */
+    .nav-menu::before {
+        content: '✕ CLOSE';
+        display: block;
+        padding: var(--space-sm);
+        font-size: var(--fs-small);
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        color: var(--fg);
+        text-align: right;
+        font-weight: bold;
+        letter-spacing: 1px;
+        font-family: var(--font);
+        background: var(--bg);
+        flex-shrink: 0;
+        padding-top: var(--space-lg);
+        padding-bottom: var(--space-xl);
+    }
+
+    body.clean-view .nav-menu::before {
+        color: var(--clean-fg) !important;
+        border-bottom-color: var(--clean-border) !important;
+        background: var(--clean-bg) !important;
+    }
+
+    /* Menu items */
+    .nav-menu li {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: var(--space-sm) var(--space-md);
+        border: none;
+        border-bottom: 1px solid var(--border);
+        text-decoration: none;
+        font-size: var(--fs-small);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.2s ease;
+    }
+
+    .nav-menu li:last-child a {
+        border-bottom: none;
+    }
+
+    body.clean-view .nav-menu a {
+        color: var(--clean-fg) !important;
+        border-bottom-color: var(--clean-border) !important;
+        background: var(--clean-bg) !important;
+    }
+
+    .nav-menu a:hover {
+        background: var(--fg) !important;
+        color: var(--bg) !important;
+    }
+
+    body.clean-view .nav-menu a:hover {
+        background: var(--clean-fg) !important;
+        color: var(--clean-bg) !important;
+    }
+
+    /* Z-index fixes for mobile header */
+    .master-header,
+    .header-full-width {
+        z-index: 6010 !important; /* Higher than nav-menu (6002) */
+    }
+
+    .mobile-menu-toggle {
+        z-index: 6011 !important; /* Highest - needs to be clickable */
+    }
+
+    /* Backdrop when menu is open */
+    body.nav-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 4999;
+        pointer-events: auto;
+    }
+
+    /* ========================================
+       MOBILE LAYOUT ADJUSTMENTS
+       ======================================== */
+    
+    /* Single column layout */
+    .main-content,
+    .main-content.wide {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
+
+    .results-section {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .sidebar {
+        display: none !important;
+        position: relative;
+        order: 1;
+        max-height: none;
+        z-index: 10001 !important;
+    }
+
+    .results-sidebar {
+        order: 1;
+        flex: none;
+        width: 100%;
+    }
+
+    .content-area,
+    .results-main {
+        order: 0;
+        flex: none;
+        width: 100%;
+    }
+
+    /* Typography adjustments */
+    .hero h1 {
+        font-size: 2rem;
+        margin: var(--space-sm) 0;
+        padding: 0 var(--space-sm);
+    }
+
+    .search-title,
+    .glossary-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: var(--fs-body);
+        padding: 0 var(--space-sm);
+    }
+
+    /* Container spacing */
+    .container,
+    .search-header .container,
+    .glossary-header .container {
+        padding: 0 var(--space-sm);
+    }
+
+    .document-content {
+        padding: var(--space-sm);
+    }
+
+    .hero,
+    .search-header,
+    .glossary-header {
+        padding: var(--space-md) 0;
+    }
+
+    /* ========================================
+       MOBILE COMPONENT ADJUSTMENTS
+       ======================================== */
+
+    /* Hide terminal line on mobile */
+    .terminal-line {
+        display: none !important;
+    }
+
+    /* FORCE FULL WIDTH ON MOBILE */
+    .header-full-width .header-content {
+        max-width: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        padding: 0 var(--space-sm) !important;
+    }
+
+    /* Ensure consistent header height on mobile */
+    .master-header {
+        height: var(--header-height) !important;
+    }
+
+    /* CSS variables are handled in base.css - no overrides needed here */
+
+    /* Content margins will automatically use the updated variable */
+    .hero,
+    .search-header,
+    .glossary-header {
+        margin-top: var(--first-section-offset) !important; /* Use variable for consistency */
+    }
+
+    .main-content {
+        max-width: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    .hero .container {
+        max-width: var(--container-max) !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        padding: 0 var(--space-sm) !important;
+    }
+
+    /* Override the global container constraints */
+    .hero .container,
+    .main-content .container {
+        max-width: var(--container-max) !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        padding: 0 var(--space-sm) !important;
+    }
+
+    /* Search forms stack vertically */
+    .search-form {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    /* Stats bar stacks vertically */
+    .stats-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-xs);
+        text-align: center;
+    }
+
+    /* Navigation footer adjustments */
+    .navigation-footer {
+        flex-direction: column;
+        gap: var(--space-sm);
+        text-align: center;
+    }
+
+    /* Content header mobile adjustments */
+    .content-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    /* Meta item mobile adjustments - center align all text */
+    .meta-item,
+    .meta-item .meta-label,
+    .meta-item > div:last-child {
+        text-align: center !important;
+    }
+
+    /* Doc title mobile adjustments */
+    .doc-title {
+        font-size: var(--fs-title);
+        color: var(--fg);
+        margin-bottom: var(--space-xs);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: normal;
+        text-align: center;
+    }
+
+    .doc-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-md);
+        flex-direction: column;
+        font-size: var(--fs-small);
+        color: var(--fg);
+        opacity: 0.8;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: center;
+        align-content: center;
+    }
+
+    /* Order grid responsive */
+    .order-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
+
+    /* Glossary adjustments */
+    .glossary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .glossary-controls {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
+
+    /* Alpha bar wraps better */
+    .alpha-bar {
+        justify-content: center;
+        gap: 0.25rem;
+    }
+
+    /* alpha-letter mobile tweaks removed */
+
+    /* Results page mobile adjustments */
+    .results-header {
+        flex-direction: column;
+        gap: var(--space-sm);
+        align-items: flex-start;
+    }
+
+    .result-header {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .result-title-section {
+        margin-right: 0;
+    }
+
+    .result-meta {
+        text-align: left;
+        min-width: 0;
+    }
+
+    /* Homepage mobile adjustments */
+
+    .info-item {
+        padding: var(--space-xs);
+    }
+
+    .main-menu {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-sm);
+    }
+
+    .menu-section {
+        padding: var(--space-sm);
+    }
+
+    .command-line {
+        padding: var(--space-sm);
+    }
+
+    .command-prompt {
+        font-size: var(--fs-small);
+        flex-wrap: wrap;
+    }
+
+    /* Mobile warning tape */
+    .warning-tape {
+        height: auto;
+        padding: 15px 20px;
+        text-align: center;
+        font-size: var(--fs-small);
+        min-height: 30px;
+    }
+
+    /* Mobile icon adjustments */
+    .icon-item {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-xs);
+        padding: var(--space-md);
+    }
+
+    .icon-symbol {
+        font-size: var(--fs-title);
+        margin-bottom: var(--space-xs);
+    }
+
+    .symbol-grid {
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+        gap: var(--space-xs);
+    }
+
+    .symbol-item {
+        padding: var(--space-xs);
+        font-size: var(--fs-small);
+        min-width: 35px;
+    }
+
+    .ascii-icons-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .ascii-item {
+        padding: var(--space-sm);
+    }
+
+    .ascii-item .ascii-art {
+        font-size: 0.6em;
+        line-height: 0.9;
+    }
+
+    .large-ascii {
+        font-size: 0.5em;
+        line-height: 0.7;
+    }
+
+    .code-snippet {
+        padding: var(--space-sm);
+        font-size: var(--fs-tiny);
+        overflow-x: auto;
+        word-wrap: break-word;
+    }
+
+    /* Mobile ASCII art adjustments */
+    .ascii-icons,
+    .ascii-icons-grid,
+    .large-ascii-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .ascii-item {
+        padding: var(--space-sm);
+    }
+
+    .ascii-item .ascii-art {
+        font-size: 0.6em;
+        line-height: 0.9;
+    }
+
+    .ascii-item .large-ascii {
+        font-size: 0.5em;
+        line-height: 0.7;
+    }
+
+    /* View toggle adjustments */
+    .view-toggle button {
+        padding: 0.5rem var(--space-sm);
+        font-size: var(--fs-tiny);
+        min-width: 70px;
+    }
+
+    /* Additional full width enforcement for small mobile */
+    .container {
+        max-width: none !important;
+        margin: 0 !important;
+        width: 100% !important;
+        padding: 0 var(--space-sm) !important;
+    }
+
+    /* Ensure proper z-index stacking */
+    header {
+        z-index: 5002;
+    }
+
+    .main-content {
+        z-index: 50;
+    }
+
+    /* ========================================
+       MOBILE ACCESSIBILITY
+       ======================================== */
+
+    /* Larger touch targets */
+    .order-card,
+    .file-tree li,
+    .sidebar-list li,
+    .menu-section {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    .menu-section {
+        display: block; /* Override flex for menu sections */
+    }
+
+    /* Better focus indicators */
+    .mobile-menu-toggle:focus,
+    .nav-menu a:focus {
+        outline: 2px solid var(--fg);
+        outline-offset: 2px;
+    }
+
+    body.clean-view .mobile-menu-toggle:focus,
+    body.clean-view .nav-menu a:focus {
+        outline-color: var(--clean-fg);
+    }
+}
+
+/* ========================================
+   SMALL MOBILE (480px and below)
+   ======================================== */
+@media (max-width: 480px) {
+    
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .search-title, .glossary-title {
+        font-size: 1.8rem;
+    }
+
+    .container,
+    .search-header .container,
+    .glossary-header .container {
+        padding: 0 0.75rem;
+    }
+    
+    .nav-menu {
+        width: 260px; /* Slightly smaller for small mobile */
+    }
+    
+    .order-grid {
+        gap: 0.75rem;
+    }
+    
+    .document-content {
+        padding: 0.75rem;
+    }
+
+    .ascii-art {
+        margin-bottom: var(--space-xs);
+    }
+
+    .section-title {
+        font-size: var(--fs-responsive-display);
+        margin-bottom: var(--space-xs);
+    }
+
+    .section-stats,
+    .section-description {
+        font-size: var(--fs-tiny);
+    }
+
+
+}
+
+/* ========================================
+   LANDSCAPE MOBILE (768px and below)
+   ======================================== */
+@media (max-width: 768px) and (orientation: landscape) {
+    
+    .hero,
+    .search-header,
+    .glossary-header {
+        padding: var(--space-sm) 0;
+    }
+    
+    .hero h1 {
+        font-size: 1.75rem;
+        margin: var(--space-xs) 0;
+    }
+    
+    .nav-menu {
+        width: 280px; /* Fixed width for landscape overlay */
+    }
+}
+
+/* ========================================
+   WARNING TAPE CONFIDENTIAL MOBILE STYLES
+   ======================================== */
+
+/* Mobile styles for warning-tape-confidential are now handled in homepage.css */
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+    
+    .mobile-menu-toggle,
+    .nav-menu,
+    .view-toggle,
+    .scan-line,
+    .warning-tape,
+    body::before {
+        display: none !important;
+    }
+    
+    header {
+        position: static;
+    }
+    
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .results-section {
+        flex-direction: column;
+    }
+
+    .sidebar,
+    .results-sidebar {
+        display: none;
+    }
+    
+    body {
+        background: #FEF8ED !important;
+        color: black !important;
+    }
+    
+    * {
+        background: transparent !important;
+        color: black !important;
+        border-color: black !important;
+    }
+    
+    .classified-banner,
+    .warning-tape {
+        background: black !important;
+        color: #F7F2E3 !important;
+    }
+}

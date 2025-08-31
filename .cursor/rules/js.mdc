@@ -1,0 +1,8 @@
+---
+name: JavaScript Rules
+---
+
+- Do not modify function signatures in app.js or theme-manager.js.
+- Allowed functions: toggleSection(id), viewOrder(num), updateGlobalNav(), initMobileMenu(), bindViewToggleHandlers().
+- Do not duplicate event listeners.
+- Page-specific JS must live in assets/js/.

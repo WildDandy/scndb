@@ -1,0 +1,8 @@
+---
+name: Accessibility Rules
+---
+
+- .section-header must have role="button", tabindex="0", aria-controls, aria-expanded.
+- Nav, sidebar, and toggles must be keyboard navigable.
+- Focus indicators always visible.
+- Lighthouse accessibility ≥95.

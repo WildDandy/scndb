@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid Layout Examples - OSA Network</title>
+    
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+    <style>
+        /* Custom grid examples */
+        .main-content.narrow {
+            grid-template-columns: 180px 1fr;
+        }
+        
+        .main-content.extra-wide {
+            grid-template-columns: 350px 1fr;
+        }
+        
+        .main-content.custom-ratio {
+            grid-template-columns: 1fr 2fr; /* 1:2 ratio */
+        }
+        
+        .main-content.three-column {
+            grid-template-columns: 200px 1fr 200px;
+        }
+        
+        /* Demo styling */
+        .demo-section {
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+        }
+        
+        .demo-header {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: bold;
+        }
+        
+        .demo-content {
+            padding: 1rem;
+            min-height: 200px;
+        }
+        
+        .sidebar {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .content-area {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .grid-info {
+            font-family: monospace;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <h1>CSS Grid Layout Examples</h1>
+            <p>Demonstrating different column sizing options for the main-content grid</p>
+        </header>
+        
+        <!-- Default Layout -->
+        <section class="demo-section">
+            <div class="demo-header">
+                Default Layout: 250px Sidebar + 1fr Main
+            </div>
+            <div class="demo-content">
+                <div class="grid-info">grid-template-columns: var(--sidebar-width) 1fr;</div>
+                <div class="main-content">
+                    <aside class="sidebar">
+                        <h3>Sidebar (250px)</h3>
+                        <p>Fixed width sidebar using CSS variable --sidebar-width</p>
+                        <ul>
+                            <li>Navigation</li>
+                            <li>Filters</li>
+                            <li>Quick links</li>
+                        </ul>
+                    </aside>
+                    <main class="content-area">
+                        <h3>Main Content (1fr - remaining space)</h3>
+                        <p>This area takes up all remaining horizontal space after the sidebar.</p>
+                        <p>It automatically adjusts based on the container width and sidebar size.</p>
+                    </main>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Wide Layout -->
+        <section class="demo-section">
+            <div class="demo-header">
+                Wide Sidebar Layout: 300px Sidebar + 1fr Main
+            </div>
+            <div class="demo-content">
+                <div class="grid-info">grid-template-columns: 300px 1fr;</div>
+                <div class="main-content wide">
+                    <aside class="sidebar">
+                        <h3>Wide Sidebar (300px)</h3>
+                        <p>Larger fixed width for more content</p>
+                        <ul>
+                            <li>Extended navigation</li>
+                            <li>Advanced filters</li>
+                            <li>Additional tools</li>
+                            <li>More space for content</li>
+                        </ul>
+                    </aside>
+                    <main class="content-area">
+                        <h3>Main Content (1fr)</h3>
+                        <p>Main content area adapts to the wider sidebar.</p>
+                    </main>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Narrow Layout -->
+        <section class="demo-section">
+            <div class="demo-header">
+                Narrow Sidebar Layout: 180px Sidebar + 1fr Main
+            </div>
+            <div class="demo-content">
+                <div class="grid-info">grid-template-columns: 180px 1fr;</div>
+                <div class="main-content narrow">
+                    <aside class="sidebar">
+                        <h3>Narrow (180px)</h3>
+                        <p>Compact sidebar for minimal navigation</p>
+                        <ul>
+                            <li>Home</li>
+                            <li>Search</li>
+                            <li>Settings</li>
+                        </ul>
+                    </aside>
+                    <main class="content-area">
+                        <h3>Main Content (1fr)</h3>
+                        <p>More space for main content with a compact sidebar.</p>
+                    </main>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Extra Wide Layout -->
+        <section class="demo-section">
+            <div class="demo-header">
+                Extra Wide Sidebar Layout: 350px Sidebar + 1fr Main
+            </div>
+            <div class="demo-content">
+                <div class="grid-info">grid-template-columns: 350px 1fr;</div>
+                <div class="main-content extra-wide">
+                    <aside class="sidebar">
+                        <h3>Extra Wide Sidebar (350px)</h3>
+                        <p>Maximum sidebar width for complex navigation or tools</p>
+                        <ul>
+                            <li>Comprehensive navigation</li>
+                            <li>Multiple filter sections</li>
+                            <li>Tool panels</li>
+                            <li>Rich content areas</li>
+                            <li>Additional functionality</li>
+                        </ul>
+                    </aside>
+                    <main class="content-area">
+                        <h3>Main Content (1fr)</h3>
+                        <p>Content area adjusts for the extra-wide sidebar.</p>
+                    </main>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Full Width Layout -->
+        <section class="demo-section">
+            <div class="demo-header">
+                Full Width Layout: No Sidebar
+            </div>
+            <div class="demo-content">
+                <div class="grid-info">grid-template-columns: 1fr;</div>
+                <div class="main-content full-width">
+                    <main class="content-area">
+                        <h3>Full Width Content (1fr)</h3>
+                        <p>Content spans the entire width when no sidebar is needed.</p>
+                        <p>Perfect for landing pages, documentation, or content-focused layouts.</p>
+                    </main>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Custom Ratio Layout -->
+        <section class="demo-section">
+            <div class="demo-header">
+                Custom Ratio Layout: 1fr Sidebar + 2fr Main (1:2 ratio)
+            </div>
+            <div class="demo-content">
+                <div class="grid-info">grid-template-columns: 1fr 2fr;</div>
+                <div class="main-content custom-ratio">
+                    <aside class="sidebar">
+                        <h3>Flexible Sidebar (1fr)</h3>
+                        <p>Takes 1/3 of available space</p>
+                    </aside>
+                    <main class="content-area">
+                        <h3>Main Content (2fr)</h3>
+                        <p>Takes 2/3 of available space</p>
+                        <p>Both areas scale proportionally with container width.</p>
+                    </main>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Three Column Layout -->
+        <section class="demo-section">
+            <div class="demo-header">
+                Three Column Layout: 200px + 1fr + 200px
+            </div>
+            <div class="demo-content">
+                <div class="grid-info">grid-template-columns: 200px 1fr 200px;</div>
+                <div class="main-content three-column">
+                    <aside class="sidebar">
+                        <h3>Left Sidebar (200px)</h3>
+                        <p>Navigation and filters</p>
+                    </aside>
+                    <main class="content-area">
+                        <h3>Main Content (1fr)</h3>
+                        <p>Central content area with sidebars on both sides.</p>
+                    </main>
+                    <aside class="sidebar">
+                        <h3>Right Sidebar (200px)</h3>
+                        <p>Additional tools or info</p>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer style="margin-top: 2rem; padding: 2rem; text-align: center; border-top: 1px solid var(--border-color);">
+        <p>All layouts automatically adapt to mobile (single column) at 768px breakpoint</p>
+    </footer>
+</body>
+</html>

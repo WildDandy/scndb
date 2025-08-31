@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCIENTOLOGY DATABASE - STYLE GUIDE</title>
+
+    <!-- CRITICAL: Apply theme immediately before stylesheets load -->
+    <script>
+        // Inline theme application to prevent FOUC
+        (function() {
+            const savedMode = localStorage.getItem('viewMode') || 'clean';
+            console.log('Immediate theme application:', savedMode);
+
+            if (savedMode === 'clean') {
+                document.documentElement.classList.add('clean-view-loading');
+                document.documentElement.style.background = '#ffffff';
+            } else {
+                document.documentElement.style.background = '#000000';
+            }
+        })();
+    </script>
+
+    <!-- Unified CSS System -->
+    <link rel="stylesheet" href="shared/css/base.css" />
+    <link rel="stylesheet" href="shared/css/layout.css" />
+    <link rel="stylesheet" href="shared/css/components.css" />
+    <link rel="stylesheet" href="shared/css/effects.css" />
+    <link rel="stylesheet" href="shared/css/responsive.css" />
+    <link rel="stylesheet" href="shared/css/themes.css" />
+
+    <!-- Style Guide Specific Styles -->
+    <style>
+        /* Main container */
+        .style-guide {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: var(--space-lg);
+        }
+
+        /* Navigation */
+        .style-nav {
+            background: var(--bg-secondary);
+            padding: var(--space-lg) 0;
+            margin-bottom: var(--space-3xl);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        body.clean-view .style-nav {
+            background: var(--clean-bg-secondary);
+            border-color: var(--clean-border);
+        }
+
+        .nav-list {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        .nav-link {
+            color: var(--fg);
+            text-decoration: none;
+            padding: var(--space-sm) var(--space-md);
+            border: 1px solid var(--border);
+            background: var(--bg);
+            transition: all 0.3s ease;
+            font-size: var(--fs-body-small);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wide);
+        }
+
+        body.clean-view .nav-link {
+            color: var(--clean-fg);
+            border-color: var(--clean-border);
+            background: var(--clean-bg);
+        }
+
+        .nav-link:hover {
+            background: var(--fg-alpha-14);
+            transform: scale(0.98);
+        }
+
+        body.clean-view .nav-link:hover {
+            background: var(--clean-bg-secondary);
+        }
+
+        /* Section styles */
+        .style-section {
+            margin-bottom: var(--space-3xl);
+            border: 1px solid var(--border);
+            padding: var(--space-lg);
+            background: var(--bg-solid);
+        }
+
+        body.clean-view .style-section {
+            background: var(--clean-bg);
+            border-color: var(--clean-border);
+        }
+
+        .style-section h2 {
+            font-size: var(--fs-h2);
+            margin-bottom: var(--space-lg);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wide);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: var(--space-sm);
+            color: var(--fg);
+        }
+
+        body.clean-view .style-section h2 {
+            border-color: var(--clean-border);
+            color: var(--clean-fg);
+        }
+
+        .subsection-title {
+            font-size: var(--fs-h4);
+            margin: var(--space-xl) 0 var(--space-lg) 0;
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-normal);
+            color: var(--fg-dim);
+        }
+
+        body.clean-view .subsection-title {
+            color: var(--clean-fg-secondary);
+        }
+
+        /* Grid layouts */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .typography-grid {
+            display: grid;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .spacing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        /* Color swatches */
+        .color-swatch {
+            border: 1px solid var(--border);
+            padding: var(--space-md);
+            text-align: center;
+            background: var(--bg);
+            transition: all 0.3s ease;
+        }
+
+        body.clean-view .color-swatch {
+            border-color: var(--clean-border);
+            background: var(--clean-bg);
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--fg-alpha-14);
+        }
+
+        body.clean-view .color-swatch:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-sample {
+            width: 100%;
+            height: 80px;
+            margin-bottom: var(--space-sm);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font);
+            font-size: var(--fs-body-small);
+            font-weight: var(--fw-bold);
+        }
+
+        body.clean-view .color-sample {
+            border-color: var(--clean-border);
+        }
+
+        .color-name {
+            font-size: var(--fs-body-small);
+            font-weight: var(--fw-bold);
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-normal);
+            color: var(--fg);
+        }
+
+        body.clean-view .color-name {
+            color: var(--clean-fg);
+        }
+
+        .color-value {
+            font-size: var(--fs-caption);
+            opacity: 0.8;
+            font-family: var(--font);
+            color: var(--fg-dim);
+        }
+
+        body.clean-view .color-value {
+            color: var(--clean-fg-secondary);
+        }
+
+        /* Typography examples */
+        .typography-item {
+            border: 1px solid var(--border);
+            padding: var(--space-md);
+            background: var(--bg);
+            margin-bottom: var(--space-lg);
+        }
+
+        body.clean-view .typography-item {
+            border-color: var(--clean-border);
+            background: var(--clean-bg);
+        }
+
+        .typography-label {
+            font-size: var(--fs-body-small);
+            font-weight: var(--fw-bold);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-normal);
+            opacity: 0.8;
+            color: var(--fg-dim);
+        }
+
+        body.clean-view .typography-label {
+            color: var(--clean-fg-secondary);
+        }
+
+        .typography-example {
+            margin-bottom: var(--space-sm);
+            font-family: var(--font);
+            line-height: var(--line);
+            color: var(--fg);
+        }
+
+        body.clean-view .typography-example {
+            color: var(--clean-fg);
+        }
+
+        .typography-meta {
+            font-size: var(--fs-caption);
+            opacity: 0.7;
+            font-family: var(--font);
+            color: var(--fg-dim);
+        }
+
+        body.clean-view .typography-meta {
+            color: var(--clean-fg-secondary);
+        }
+
+        /* Spacing examples */
+        .spacing-item {
+            border: 1px solid var(--border);
+            padding: var(--space-md);
+            text-align: center;
+            background: var(--bg);
+        }
+
+        body.clean-view .spacing-item {
+            border-color: var(--clean-border);
+            background: var(--clean-bg);
+        }
+
+        .spacing-demo {
+            background: var(--accent);
+            margin: var(--space-sm) auto;
+            display: block;
+            width: 100%;
+        }
+
+        body.clean-view .spacing-demo {
+            background: var(--clean-accent);
+        }
+
+        .spacing-label {
+            font-size: var(--fs-body-small);
+            font-weight: var(--fw-bold);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-normal);
+            color: var(--fg);
+        }
+
+        body.clean-view .spacing-label {
+            color: var(--clean-fg);
+        }
+
+        /* Code snippets */
+        .code-snippet {
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+            font-family: var(--font);
+            font-size: var(--fs-body-small);
+            overflow-x: auto;
+        }
+
+        body.clean-view .code-snippet {
+            background: transparent;
+            border-color: var(--clean-border);
+        }
+
+        .code-snippet pre, .code-snippet p {
+            background: transparent;
+        }
+
+        .code-snippet pre {
+            color: var(--fg);
+            line-height: var(--lh-relaxed);
+        }
+
+        body.clean-view .code-snippet pre {
+            color: var(--clean-fg);
+        }
+
+        .code-snippet strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: var(--space-sm);
+        }
+
+        body.clean-view .code-snippet strong {
+            color: var(--clean-accent);
+        }
+
+        /* Component previews */
+        .component-preview {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+        }
+
+        body.clean-view .component-preview {
+            background: var(--clean-bg-secondary);
+            border-color: var(--clean-border);
+        }
+
+        /* Button examples using your actual button classes */
+        .button-examples {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* Button Demo Styles */
+         .button-state-demo {
+             margin: 2rem 0;
+             padding: 1.5rem;
+             border: 1px solid var(--border);
+             background: var(--bg);
+         }
+         
+         .clean-view .button-state-demo {
+             border: 1px solid var(--clean-border);
+             background: var(--clean-bg);
+         }
+        
+        .demo-title {
+             color: var(--fg);
+             margin-bottom: 1rem;
+             font-size: 1.2rem;
+             border-bottom: 1px solid var(--border);
+             padding-bottom: 0.5rem;
+         }
+         
+         .clean-view .demo-title {
+             color: var(--clean-fg);
+             border-bottom: 1px solid var(--clean-border);
+         }
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .button-group {
+             padding: 1rem;
+             border: 1px solid var(--fg-alpha-14);
+             background: var(--bg);
+         }
+         
+         .clean-view .button-group {
+             border: 1px solid var(--clean-border);
+             background: var(--clean-bg);
+         }
+        
+        .button-group h5 {
+             color: var(--fg);
+             margin-bottom: 0.8rem;
+             font-size: 1rem;
+             text-decoration: underline;
+         }
+         
+         .clean-view .button-group h5 {
+             color: var(--clean-fg);
+         }
+        
+        .button-group button,
+        .button-group a {
+            margin: 0.3rem 0.5rem 0.3rem 0;
+        }
+        
+        .state-description {
+             font-size: 0.85rem;
+             color: var(--fg);
+             margin-bottom: 0.8rem;
+             font-style: italic;
+         }
+         
+         .clean-view .state-description {
+             color: var(--clean-fg);
+         }
+        
+        .button-properties-demo,
+         .button-specs-demo {
+             margin: 2rem 0;
+             padding: 1.5rem;
+             border: 1px solid var(--border);
+             background: var(--bg);
+         }
+         
+         .clean-view .button-properties-demo,
+         .clean-view .button-specs-demo {
+             border: 1px solid var(--clean-border);
+             background: var(--clean-bg);
+         }
+        
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .property-item {
+             padding: 0.8rem;
+             border: 1px solid var(--fg-alpha-14);
+             background: var(--bg);
+             color: var(--fg);
+         }
+         
+         .clean-view .property-item {
+             border: 1px solid var(--clean-border);
+             background: var(--clean-bg);
+             color: var(--clean-fg);
+         }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .spec-group {
+             padding: 1.2rem;
+             border: 1px solid var(--border);
+             background: var(--bg);
+         }
+         
+         .clean-view .spec-group {
+             border: 1px solid var(--clean-border);
+             background: var(--clean-bg);
+         }
+        
+        .spec-group h5 {
+             color: var(--fg);
+             margin-bottom: 1rem;
+             font-size: 1.1rem;
+             text-decoration: underline;
+         }
+         
+         .clean-view .spec-group h5 {
+             color: var(--clean-fg);
+         }
+         
+         .spec-details p {
+             color: var(--fg);
+             margin: 0.8rem 0 0.4rem 0;
+             font-weight: bold;
+         }
+         
+         .clean-view .spec-details p {
+             color: var(--clean-fg);
+         }
+         
+         .spec-details ul {
+             margin: 0.5rem 0 1rem 1.5rem;
+             color: var(--fg);
+         }
+         
+         .clean-view .spec-details ul {
+             color: var(--clean-fg);
+         }
+        
+        .spec-details li {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Hover Demo Effects */
+         .hover-demo:hover {
+             background: var(--fg-alpha-38) !important;
+             color: var(--bg) !important;
+         }
+         
+         /* Clean mode specific hover demo */
+         .clean-view .hover-demo:hover {
+             background: var(--white-old-lace) !important;
+             color: var(--dark-text-light) !important;
+         }
+         
+         /* Current page demo styling */
+         .nav-menu.current-page {
+             background: var(--fg-alpha-38) !important;
+             color: var(--bg) !important;
+             cursor: default !important;
+         }
+         
+         .clean-view .nav-menu.current-page {
+             background: var(--white-old-lace) !important;
+             color: var(--dark-text-light) !important;
+         }
+         
+         .alpha-letter.selected {
+             background: var(--fg-alpha-38) !important;
+             color: var(--bg) !important;
+             cursor: default !important;
+         }
+         
+         .clean-view .alpha-letter.selected {
+             background: var(--white-old-lace) !important;
+             color: var(--dark-text-light) !important;
+         }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .color-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .spacing-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .button-examples {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Alpha Transparency Demo Styles */
+        .alpha-demo {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border: 1px solid var(--fg);
+            background: var(--bg);
+        }
+        
+        .alpha-demo h5 {
+            color: var(--fg);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .alpha-samples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .alpha-sample {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid var(--fg);
+            color: var(--fg);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .alpha-sample.alpha-05 { background: var(--fg-alpha-05); }
+        .alpha-sample.alpha-10 { background: var(--fg-alpha-10); }
+        .alpha-sample.alpha-14 { background: var(--fg-alpha-14); }
+        .alpha-sample.alpha-30 { background: var(--fg-alpha-30); }
+        .alpha-sample.alpha-60 { background: var(--fg-alpha-60); }
+        .alpha-sample.alpha-90 { background: var(--fg-alpha-90); }
+        
+        /* Clean mode alpha demo overrides */
+        .clean-view .alpha-demo {
+            border: 1px solid var(--clean-border);
+            background: var(--clean-bg);
+        }
+        
+        .clean-view .alpha-demo h5 {
+            color: var(--clean-fg);
+        }
+        
+        .clean-view .alpha-sample {
+            border: 1px solid var(--clean-border);
+            color: var(--clean-fg);
+        }
+        
+        .clean-view .alpha-sample.alpha-05 { background: var(--clean-fg-alpha-05); }
+        .clean-view .alpha-sample.alpha-10 { background: var(--clean-fg-alpha-10); }
+        .clean-view .alpha-sample.alpha-14 { background: var(--clean-fg-alpha-14); }
+        .clean-view .alpha-sample.alpha-30 { background: var(--clean-fg-alpha-30); }
+        .clean-view .alpha-sample.alpha-60 { background: var(--clean-fg-alpha-60); }
+        .clean-view .alpha-sample.alpha-90 { background: var(--clean-fg-alpha-90); }
+        
+        /* Alpha sample styles for color grid */
+        .alpha-sample-05 {
+            background: var(--fg-alpha-05);
+            color: var(--fg);
+        }
+        
+        .alpha-sample-14 {
+            background: var(--fg-alpha-14);
+            color: var(--fg);
+        }
+        
+        .alpha-sample-30 {
+            background: var(--fg-alpha-30);
+            color: var(--bg);
+        }
+        
+        .alpha-sample-60 {
+            background: var(--fg-alpha-60);
+            color: var(--bg);
+        }
+        
+        /* Clean mode alpha sample overrides */
+        .clean-view .alpha-sample-05 {
+            background: var(--clean-fg-alpha-05);
+            color: var(--clean-fg);
+        }
+        
+        .clean-view .alpha-sample-14 {
+            background: var(--clean-fg-alpha-14);
+            color: var(--clean-fg);
+        }
+        
+        .clean-view .alpha-sample-30 {
+            background: var(--clean-fg-alpha-30);
+            color: var(--clean-bg);
+        }
+        
+        .clean-view .alpha-sample-60 {
+            background: var(--clean-fg-alpha-60);
+            color: var(--clean-bg);
+        }
+    </style>
+</head>
+<body>
+    <div class="scan-line"></div>
+
+    <!-- Navigation will be dynamically injected by navigation-component.js -->
+    <header class="master-header header-full-width">
+        <!-- Navigation component will be injected here -->
+    </header>
+
+    <!-- Current Theme Indicator -->
+    <div class="theme-indicator" id="theme-indicator">CLEAN MODE</div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="search-main-title">DESIGN SYSTEM REFERENCE</h1>
+            <div class="classified-banner">⚠️ COMPLETE STYLE GUIDE ⚠️ CSS VARIABLES & COMPONENTS ⚠️</div>
+        </div>
+    </section>
+
+    <!-- Quick Navigation -->
+    <nav class="style-nav">
+        <ul class="nav-list">
+            <li><a href="#colors" class="nav-link">Colors</a></li>
+            <li><a href="#typography" class="nav-link">Typography</a></li>
+            <li><a href="#spacing" class="nav-link">Spacing</a></li>
+            <li><a href="#components" class="nav-link">Components</a></li>
+            <li><a href="#variables" class="nav-link">Variables</a></li>
+        </ul>
+    </nav>
+
+    <!-- Style Guide Content -->
+    <div class="style-guide">
+        <!-- Color System Section -->
+        <div class="style-section" id="colors">
+            <h2>🎨 Color System</h2>
+
+            <h3 class="subsection-title">Terminal Mode Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: var(--bg); color: var(--fg);">var(--bg)</div>
+                    <div class="color-name">Primary Background</div>
+                    <div class="color-value">#000000 • --bg</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: var(--fg); color: var(--bg);">var(--fg)</div>
+                    <div class="color-name">Primary Text</div>
+                    <div class="color-value">#00ff41 • --fg</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: var(--bg-solid); color: var(--fg);">var(--bg-solid)</div>
+                    <div class="color-name">Solid Background</div>
+                    <div class="color-value">#000d04 • --bg-solid</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: var(--bg-button); color: var(--fg);">var(--bg-button)</div>
+                    <div class="color-name">Button Background</div>
+                    <div class="color-value">#090e00 • --bg-button</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: var(--fg-alpha-10); color: var(--fg);">var(--fg-alpha-10)</div>
+                    <div class="color-name">Alpha 10%</div>
+                    <div class="color-value">rgba(0, 255, 65, 0.1) • --fg-alpha-10</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: var(--warning); color: white;">var(--warning)</div>
+                    <div class="color-name">Warning Color</div>
+                    <div class="color-value">#ff0040 • --warning</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Clean Mode Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: var(--clean-bg); color: var(--clean-fg);">var(--clean-bg)</div>
+                    <div class="color-name">Clean Background</div>
+                    <div class="color-value">#FEF8ED • --clean-bg</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: var(--clean-fg); color: var(--clean-bg);">var(--clean-fg)</div>
+                    <div class="color-name">Clean Text</div>
+                    <div class="color-value">#000000 • --clean-fg</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: var(--clean-bg-secondary); color: var(--clean-fg);">var(--clean-bg-secondary)</div>
+                    <div class="color-name">Clean Secondary BG</div>
+                    <div class="color-value">rgba(0, 0, 0, 0.05) • --clean-bg-secondary</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: var(--white-old-lace-hover); color: var(--clean-fg);">var(--white-old-lace-hover)</div>
+                    <div class="color-name">Hover Background</div>
+                    <div class="color-value">#F7F2E3 • --white-old-lace-hover</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Alpha Variations</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-sample alpha-sample-05">5%</div>
+                    <div class="color-name">Alpha 05</div>
+                    <div class="color-value">--fg-alpha-05</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample alpha-sample-14">14%</div>
+                    <div class="color-name">Alpha 14</div>
+                    <div class="color-value">--fg-alpha-14</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample alpha-sample-30">30%</div>
+                    <div class="color-name">Alpha 30</div>
+                    <div class="color-value">--fg-alpha-30</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-sample alpha-sample-60">60%</div>
+                    <div class="color-name">Alpha 60</div>
+                    <div class="color-value">--fg-alpha-60</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typography Section -->
+        <div class="style-section" id="typography">
+            <h2>📝 Typography System</h2>
+            
+            <div class="typography-grid">
+                <div class="typography-item">
+                    <div class="typography-label">H1 - Main Page Titles</div>
+                    <div class="typography-example" style="font-size: var(--fs-h1); line-height: var(--lh-normal);">SCIENTOLOGY DATABASE ARCHIVE</div>
+                    <div class="typography-meta">2.5rem (40px) • --fs-h1 • Line Height: --lh-normal</div>
+                </div>
+
+                <div class="typography-item">
+                    <div class="typography-label">H2 - Section Headers</div>
+                    <div class="typography-example" style="font-size: var(--fs-h2); line-height: var(--lh-normal);">CLASSIFIED DOCUMENTS SECTION</div>
+                    <div class="typography-meta">2rem (32px) • --fs-h2</div>
+                </div>
+
+                <div class="typography-item">
+                    <div class="typography-label">H3 - Subsection Headers</div>
+                    <div class="typography-example" style="font-size: var(--fs-h3); line-height: var(--lh-normal);">Network Operations Manual</div>
+                    <div class="typography-meta">1.5rem (24px) • --fs-h3</div>
+                </div>
+
+                <div class="typography-item">
+                    <div class="typography-label">H4 - Component Titles</div>
+                    <div class="typography-example" style="font-size: var(--fs-h4); line-height: var(--lh-normal);">Search Results</div>
+                    <div class="typography-meta">1.25rem (20px) • --fs-h4</div>
+                </div>
+
+                <div class="typography-item">
+                    <div class="typography-label">Body Text - Default</div>
+                    <div class="typography-example" style="font-size: var(--fs-body); line-height: var(--line);">This is standard body text used throughout the system for general content and descriptions. Font family is Courier New monospace.</div>
+                    <div class="typography-meta">0.9rem (14.4px) • --fs-body</div>
+                </div>
+
+                <div class="typography-item">
+                    <div class="typography-label">Body Text - Large</div>
+                    <div class="typography-example" style="font-size: var(--fs-body-large); line-height: var(--line);">This is large body text for emphasized content or detailed descriptions.</div>
+                    <div class="typography-meta">1rem (16px) • --fs-body-large</div>
+                </div>
+
+                <div class="typography-item">
+                    <div class="typography-label">Small Text</div>
+                    <div class="typography-example" style="font-size: var(--fs-body-small); line-height: var(--line);">This is small body text for captions, labels, and secondary information.</div>
+                    <div class="typography-meta">0.8rem (12.8px) • --fs-body-small</div>
+                </div>
+
+                <div class="typography-item">
+                    <div class="typography-label">Caption Text</div>
+                    <div class="typography-example" style="font-size: var(--fs-caption); line-height: var(--lh-tight);">Author: David Miscavige • Classification: TOP SECRET • Date: 2023-12-01</div>
+                    <div class="typography-meta">0.75rem (12px) • --fs-caption</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Font Weights Available</h3>
+            <div class="code-snippet">
+                <strong>Font Weight Variables:</strong>
+                <pre>--fw-light: 300      /* Light weight */
+--fw-normal: 400     /* Normal weight */
+--fw-medium: 500     /* Medium weight */
+--fw-semibold: 600   /* Semibold weight */
+--fw-bold: 700       /* Bold weight */
+--fw-extrabold: 800  /* Extra bold weight */</pre>
+            </div>
+        </div>
+
+        <!-- Spacing System Section -->
+        <div class="style-section" id="spacing">
+            <h2>📐 Spacing System</h2>
+
+            <div class="spacing-grid">
+                <div class="spacing-item">
+                    <div class="spacing-label">Extra Small</div>
+                    <div class="spacing-demo" style="height: var(--space-xs);"></div>
+                    <div class="color-value">0.5rem (8px) • --space-xs</div>
+                </div>
+
+                <div class="spacing-item">
+                    <div class="spacing-label">Small (S)</div>
+                    <div class="spacing-demo" style="height: var(--space-s);"></div>
+                    <div class="color-value">0.75rem (12px) • --space-s</div>
+                </div>
+
+                <div class="spacing-item">
+                    <div class="spacing-label">Small</div>
+                    <div class="spacing-demo" style="height: var(--space-sm);"></div>
+                    <div class="color-value">1rem (16px) • --space-sm</div>
+                </div>
+
+                <div class="spacing-item">
+                    <div class="spacing-label">Medium</div>
+                    <div class="spacing-demo" style="height: var(--space-md);"></div>
+                    <div class="color-value">1.2rem (19.2px) • --space-md</div>
+                </div>
+
+                <div class="spacing-item">
+                    <div class="spacing-label">Large</div>
+                    <div class="spacing-demo" style="height: var(--space-lg);"></div>
+                    <div class="color-value">1.5rem (24px) • --space-lg</div>
+                </div>
+
+                <div class="spacing-item">
+                    <div class="spacing-label">Extra Large</div>
+                    <div class="spacing-demo" style="height: var(--space-xl);"></div>
+                    <div class="color-value">2rem (32px) • --space-xl</div>
+                </div>
+
+                <div class="spacing-item">
+                    <div class="spacing-label">3X Large</div>
+                    <div class="spacing-demo" style="height: var(--space-3xl);"></div>
+                    <div class="color-value">4rem (64px) • --space-3xl</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Additional Spacing Tokens</h3>
+            <div class="code-snippet">
+                <strong>Micro Spacing:</strong>
+                <pre>--space-micro: 0.125rem  /* 2px - Fine details */
+--space-tiny: 0.25rem    /* 4px - Minimal spacing */
+--space-xxl: 3rem        /* 48px - Section spacing */</pre>
+            </div>
+        </div>
+
+        <!-- Components Section -->
+        <div class="style-section" id="components">
+            <h2>🧩 UI Components</h2>
+            
+            <h3 class="subsection-title">Button Styles - All States & Sizes</h3>
+            
+            <!-- Button State Demonstrations -->
+            <div class="button-state-demo">
+                <h4 class="demo-title">Standard/Default State</h4>
+                <div class="button-grid">
+                    <div class="button-group">
+                        <h5>Search & Clear Buttons</h5>
+                        <button class="search-btn">SEARCH</button>
+                        <button class="clear-btn">CLEAR</button>
+                    </div>
+                    <div class="button-group">
+                        <h5>Navigation Buttons</h5>
+                        <button class="nav-btn">HOME</button>
+                        <button class="nav-btn">INDEX</button>
+                        <a href="#" class="nav-menu">GLOSSARY</a>
+                    </div>
+                    <div class="button-group">
+                        <h5>Filter & Clear Buttons</h5>
+                        <button class="clear-filters-btn">CLEAR ALL FILTERS</button>
+                        <button class="clear-button">✕</button>
+                    </div>
+                    <div class="button-group">
+                        <h5>Alphabetical Navigation</h5>
+                        <button class="alpha-letter">A</button>
+                        <button class="alpha-letter">B</button>
+                        <button class="alpha-letter">C</button>
+                    </div>
+                    <div class="button-group">
+                        <h5>View Toggle Buttons</h5>
+                        <div class="view-toggle">
+                            <button class="terminal-toggle-button">⚡</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-state-demo">
+                <h4 class="demo-title">Hover State (Hover over buttons to see effect)</h4>
+                <div class="button-grid">
+                    <div class="button-group">
+                        <h5>Terminal Mode Hover</h5>
+                        <p class="state-description">Background: rgba(0, 255, 65, 0.38) • Text: #000000 (black)</p>
+                        <button class="search-btn hover-demo">SEARCH (Hover)</button>
+                        <button class="clear-btn hover-demo">CLEAR (Hover)</button>
+                    </div>
+                    <div class="button-group">
+                        <h5>Clean Mode Hover</h5>
+                        <p class="state-description">Background: #F7F2E3 • Text: #000000 (black)</p>
+                        <button class="nav-btn hover-demo">NAV (Hover)</button>
+                        <button class="alpha-letter hover-demo">A (Hover)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-state-demo">
+                <h4 class="demo-title">Active/Current Page State</h4>
+                <div class="button-grid">
+                    <div class="button-group">
+                        <h5>Current Navigation</h5>
+                        <p class="state-description">Same as hover state • Cursor: default (not clickable)</p>
+                        <a href="#" class="nav-menu current-page">CURRENT PAGE</a>
+                        <button class="alpha-letter selected">A (Selected)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-properties-demo">
+                <h4 class="demo-title">Common Properties (All Buttons)</h4>
+                <div class="properties-grid">
+                    <div class="property-item">
+                        <strong>Font Family:</strong> 'Courier New', Courier, monospace
+                    </div>
+                    <div class="property-item">
+                        <strong>Padding:</strong> 0.6rem 1.25rem
+                    </div>
+                    <div class="property-item">
+                        <strong>Display:</strong> inline-block
+                    </div>
+                    <div class="property-item">
+                        <strong>Box-sizing:</strong> border-box
+                    </div>
+                    <div class="property-item">
+                        <strong>Line-height:</strong> 1
+                    </div>
+                    <div class="property-item">
+                        <strong>Text-decoration:</strong> none
+                    </div>
+                    <div class="property-item">
+                        <strong>Border-radius:</strong> 0 (no rounding)
+                    </div>
+                    <div class="property-item">
+                        <strong>Transition:</strong> All changes smooth with CSS transitions
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-specs-demo">
+                <h4 class="demo-title">Theme-Specific Specifications</h4>
+                <div class="specs-grid">
+                    <div class="spec-group">
+                        <h5>Terminal Mode (Dark Theme)</h5>
+                        <div class="spec-details">
+                            <p><strong>Standard:</strong></p>
+                            <ul>
+                                <li>Background: #090e00 (very dark green)</li>
+                                <li>Border: 1px solid #00ff41 (bright green)</li>
+                                <li>Text: #00ff41 (bright green)</li>
+                            </ul>
+                            <p><strong>Hover:</strong></p>
+                            <ul>
+                                <li>Background: rgba(0, 255, 65, 0.38) (38% opacity green)</li>
+                                <li>Border: 1px solid #00ff41 (bright green)</li>
+                                <li>Text: #000000 (black) - flips for contrast</li>
+                                <li>SVG Icons: Fill and stroke also flip to black</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="spec-group">
+                        <h5>Clean Mode (Light Theme)</h5>
+                        <div class="spec-details">
+                            <p><strong>Standard:</strong></p>
+                            <ul>
+                                <li>Background: #FEF8ED (white old lace)</li>
+                                <li>Border: 1px solid #000000 (black)</li>
+                                <li>Text: #000000 (black)</li>
+                            </ul>
+                            <p><strong>Hover:</strong></p>
+                            <ul>
+                                <li>Background: #F7F2E3 (lighter cream)</li>
+                                <li>Border: 1px solid #000000 (black)</li>
+                                <li>Text: #000000 (black) - maintains contrast</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Input Elements</h3>
+            <div class="component-preview">
+                <input type="text" class="glossary-input" placeholder="Search terms..." style="max-width: 300px; margin-right: var(--space-md);">
+                <input type="search" class="search-input" placeholder="Filter results..." style="max-width: 300px;">
+            </div>
+
+            <h3 class="subsection-title">Layout Examples</h3>
+            <div class="component-preview">
+                <div class="container" style="padding: var(--space-md);">
+                    <div style="font-size: var(--fs-body-small); opacity: 0.8;">Container (max-width: var(--container-max))</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSS Variables Reference -->
+        <div class="style-section" id="variables">
+            <h2>⚙️ Complete CSS Variables Reference</h2>
+
+            <h3 class="subsection-title">Color Variables - Terminal Mode</h3>
+            <div class="code-snippet">
+                <strong>Primary Colors:</strong>
+                <pre>--bg: #000000                    /* Primary background */
+--bg-secondary: rgba(0, 255, 65, 0.05)  /* Secondary background */
+--fg: #00ff41                    /* Primary text */
+--fg-dim: rgba(0, 255, 65, 0.7)  /* Dimmed text */
+--border: #00ff41                /* Borders */
+--accent: #00ff41                /* Accents */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Specialized Backgrounds:</strong>
+                <pre>--bg-solid: #000d04              /* Solid backgrounds */
+--bg-button: #090e00             /* Button backgrounds */
+--bg-matrix: #000011             /* Matrix theme */
+--bg-mobile-menu: rgba(0, 0, 0, 0.95)  /* Mobile menu */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Alpha Variations:</strong>
+                <pre>--fg-alpha-05: rgba(0, 255, 65, 0.05)  /* 5% opacity */
+--fg-alpha-10: rgba(0, 255, 65, 0.1)   /* 10% opacity */
+--fg-alpha-14: rgba(0, 255, 65, 0.14)  /* 14% opacity */
+--fg-alpha-30: rgba(0, 255, 65, 0.3)   /* 30% opacity */
+--fg-alpha-60: rgba(0, 255, 65, 0.6)   /* 60% opacity */
+--fg-alpha-80: rgba(0, 255, 65, 0.8)   /* 80% opacity */
+--fg-alpha-90: rgba(0, 255, 65, 0.9)   /* 90% opacity */</pre>
+            </div>
+
+            <h3 class="subsection-title">Color Variables - Clean Mode</h3>
+            <div class="code-snippet">
+                <strong>Clean Theme Colors:</strong>
+                <pre>--clean-bg: #FEF8ED              /* Clean background */
+--clean-bg-secondary: rgba(0, 0, 0, 0.05)  /* Clean secondary BG */
+--clean-fg: #000000              /* Clean text */
+--clean-border: #000000          /* Clean borders */
+--clean-fg-secondary: rgba(0, 0, 0, 0.6)  /* Clean secondary text */
+--clean-accent: #000000          /* Clean accent */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Clean Theme Variants:</strong>
+                <pre>--white-old-lace: #FEF8ED        /* Light background variant */
+--white-old-lace-hover: #F7F2E3  /* Hover background */
+--white-old-lace-dark: #F3EBD3   /* Dark variant */</pre>
+            </div>
+
+            <h3 class="subsection-title">Typography Variables</h3>
+            <div class="code-snippet">
+                <strong>Font System:</strong>
+                <pre>--font: 'Courier New', Courier, monospace  /* Primary font family */
+--line: 1.4                          /* Default line height */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Heading Sizes:</strong>
+                <pre>--fs-h1: 2.5rem          /* 40px - Main page titles */
+--fs-h2: 2rem            /* 32px - Section headers */
+--fs-h3: 1.5rem          /* 24px - Subsection headers */
+--fs-h4: 1.25rem         /* 20px - Component titles */
+--fs-h5: 1.125rem        /* 18px - Small headers */
+--fs-h6: 1rem            /* 16px - Smallest headers */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Body Text Sizes:</strong>
+                <pre>--fs-body: 0.9rem        /* 14.4px - Default body text */
+--fs-body-large: 1rem    /* 16px - Large body text */
+--fs-body-small: 0.8rem  /* 12.8px - Small body text */
+--fs-caption: 0.75rem    /* 12px - Captions, labels */
+--fs-tiny: 0.7rem        /* 11.2px - Very small text */
+--fs-micro: 0.625rem     /* 10px - Micro text */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Display Sizes:</strong>
+                <pre>--fs-hero: 2.5rem        /* 40px - Hero sections */
+--fs-display: 3rem       /* 48px - Large display text */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Line Height Variables:</strong>
+                <pre>--lh-tight: 1.2          /* Tight line height */
+--lh-normal: 1.4         /* Normal line height */
+--lh-relaxed: 1.6        /* Relaxed line height */
+--lh-loose: 1.8          /* Loose line height */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Font Weight Variables:</strong>
+                <pre>--fw-light: 300          /* Light weight */
+--fw-normal: 400         /* Normal weight */
+--fw-medium: 500         /* Medium weight */
+--fw-semibold: 600       /* Semibold weight */
+--fw-bold: 700           /* Bold weight */
+--fw-extrabold: 800      /* Extra bold weight */</pre>
+            </div>
+
+            <h3 class="subsection-title">Spacing Variables</h3>
+            <div class="code-snippet">
+                <strong>Base Spacing Scale:</strong>
+                <pre>--space-xs: 0.5rem       /* 8px - Extra small */
+--space-sm: 1rem         /* 16px - Small */
+--space-md: 1.2rem       /* 19.2px - Medium */
+--space-lg: 1.5rem       /* 24px - Large */
+--space-xl: 2rem         /* 32px - Extra large */
+--space-xxl: 3rem        /* 48px - XX large */
+--space-3xl: 4rem        /* 64px - 3X large */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Micro Spacing:</strong>
+                <pre>--space-micro: 0.125rem  /* 2px - Fine details */
+--space-tiny: 0.25rem    /* 4px - Minimal spacing */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Typography Spacing:</strong>
+                <pre>--letter-spacing-tight: 0.5px    /* Tight letter spacing */
+--letter-spacing-normal: 1px      /* Normal letter spacing */
+--letter-spacing-wide: 2px        /* Wide letter spacing */
+--letter-spacing-wider: 3px       /* Wider letter spacing */</pre>
+            </div>
+
+            <h3 class="subsection-title">Layout Variables</h3>
+            <div class="code-snippet">
+                <strong>Layout Dimensions:</strong>
+                <pre>--header-height: 120px           /* Header height */
+--sidebar-width: 250px            /* Sidebar width */
+--container-max: 1400px           /* Maximum container width */
+--radius: 0                       /* Border radius (none) */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Border Variables:</strong>
+                <pre>--border-width-thin: 1px         /* Thin border */
+--border-width-medium: 2px        /* Medium border */
+--border-width-thick: 3px         /* Thick border */
+--border-radius-small: 2px        /* Small border radius */
+--border-radius-none: 0           /* No border radius */</pre>
+            </div>
+
+            <h3 class="subsection-title">Alpha Transparency Variations</h3>
+            <div class="code-snippet">
+                <strong>Terminal Mode Alpha (Green):</strong>
+                <pre>--fg-alpha-05: rgba(0, 255, 65, 0.05)   /* 5% green transparency */
+--fg-alpha-10: rgba(0, 255, 65, 0.1)    /* 10% green transparency */
+--fg-alpha-14: rgba(0, 255, 65, 0.14)   /* 14% green transparency */
+--fg-alpha-30: rgba(0, 255, 65, 0.3)    /* 30% green transparency */
+--fg-alpha-38: rgba(0, 255, 65, 0.38)   /* 38% green transparency */
+--fg-alpha-60: rgba(0, 255, 65, 0.6)    /* 60% green transparency */
+--fg-alpha-80: rgba(0, 255, 65, 0.8)    /* 80% green transparency */
+--fg-alpha-90: rgba(0, 255, 65, 0.9)    /* 90% green transparency */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Clean Mode Alpha (Black):</strong>
+                <pre>--clean-fg-alpha-05: rgba(0, 0, 0, 0.05) /* 5% black transparency */
+--clean-fg-alpha-10: rgba(0, 0, 0, 0.1)  /* 10% black transparency */
+--clean-fg-alpha-14: rgba(0, 0, 0, 0.14) /* 14% black transparency */
+--clean-fg-alpha-30: rgba(0, 0, 0, 0.3)  /* 30% black transparency */
+--clean-fg-alpha-38: rgba(0, 0, 0, 0.38) /* 38% black transparency */
+--clean-fg-alpha-60: rgba(0, 0, 0, 0.6)  /* 60% black transparency */
+--clean-fg-alpha-80: rgba(0, 0, 0, 0.8)  /* 80% black transparency */
+--clean-fg-alpha-90: rgba(0, 0, 0, 0.9)  /* 90% black transparency */</pre>
+            </div>
+
+            <h3 class="subsection-title">Alpha Sample CSS Classes</h3>
+            <div class="code-snippet">
+                <strong>Terminal Mode Alpha Classes:</strong>
+                <pre>.alpha-sample-05 { background: var(--fg-alpha-05); color: var(--fg); }
+.alpha-sample-14 { background: var(--fg-alpha-14); color: var(--fg); }
+.alpha-sample-30 { background: var(--fg-alpha-30); color: var(--bg); }
+.alpha-sample-60 { background: var(--fg-alpha-60); color: var(--bg); }</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Clean Mode Alpha Class Overrides:</strong>
+                <pre>.clean-view .alpha-sample-05 { background: var(--clean-fg-alpha-05); color: var(--clean-fg); }
+.clean-view .alpha-sample-14 { background: var(--clean-fg-alpha-14); color: var(--clean-fg); }
+.clean-view .alpha-sample-30 { background: var(--clean-fg-alpha-30); color: var(--clean-bg); }
+.clean-view .alpha-sample-60 { background: var(--clean-fg-alpha-60); color: var(--clean-bg); }</pre>
+            </div>
+
+            <div class="alpha-demo">
+                <h5>Alpha Transparency Examples</h5>
+                <div class="alpha-samples">
+                    <div class="alpha-sample alpha-05">5% Alpha</div>
+                    <div class="alpha-sample alpha-10">10% Alpha</div>
+                    <div class="alpha-sample alpha-14">14% Alpha</div>
+                    <div class="alpha-sample alpha-30">30% Alpha</div>
+                    <div class="alpha-sample alpha-60">60% Alpha</div>
+                    <div class="alpha-sample alpha-90">90% Alpha</div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Warning & Status Colors</h3>
+            <div class="code-snippet">
+                <strong>Warning System:</strong>
+                <pre>--warning: #ff0040               /* Warning color */
+--warning-bg: rgba(255, 0, 64, 0.1)      /* Warning background */
+--warning-glow-30: rgba(255, 0, 64, 0.3) /* Warning glow 30% */
+--warning-glow-60: rgba(255, 0, 64, 0.6) /* Warning glow 60% */</pre>
+            </div>
+
+            <h3 class="subsection-title">Mobile Responsive Variables</h3>
+            <div class="code-snippet">
+                <strong>Mobile Typography:</strong>
+                <pre>--fs-mobile-h1: 2rem             /* Mobile H1 */
+--fs-mobile-h2: 1.75rem           /* Mobile H2 */
+--fs-mobile-h3: 1.375rem          /* Mobile H3 */
+--fs-mobile-body: 0.875rem        /* Mobile body text */
+--fs-mobile-hero: 2rem            /* Mobile hero text */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Mobile Spacing:</strong>
+                <pre>--space-mobile-xs: 0.25rem       /* Mobile extra small */
+--space-mobile-sm: 0.75rem        /* Mobile small */
+--space-mobile-md: 1rem           /* Mobile medium */
+--space-mobile-lg: 1.25rem        /* Mobile large */</pre>
+            </div>
+
+            <div class="code-snippet">
+                <strong>Responsive Typography (clamp):</strong>
+                <pre>--fs-responsive-h1: clamp(var(--fs-mobile-h1), 4vw, var(--fs-h1))
+--fs-responsive-h2: clamp(var(--fs-mobile-h2), 3.5vw, var(--fs-h2))
+--fs-responsive-h3: clamp(var(--fs-mobile-h3), 3vw, var(--fs-h3))
+--fs-responsive-hero: clamp(var(--fs-mobile-hero), 5vw, var(--fs-hero))
+--fs-responsive-display: clamp(var(--fs-mobile-display), 6vw, var(--fs-display))</pre>
+            </div>
+
+            <h3 class="subsection-title">Usage Examples</h3>
+            <div class="code-snippet">
+                <strong>How to Use Variables:</strong>
+                <pre>/* Basic usage */
+.my-element {
+    background: var(--bg);
+    color: var(--fg);
+    padding: var(--space-lg);
+    font-size: var(--fs-body);
+}
+
+/* Clean mode overrides */
+body.clean-view .my-element {
+    background: var(--clean-bg);
+    color: var(--clean-fg);
+}
+
+/* Responsive typography */
+.heading {
+    font-size: var(--fs-responsive-h2);
+    line-height: var(--lh-normal);
+    letter-spacing: var(--letter-spacing-wide);
+}</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>SCIENTOLOGY DATABASE - DESIGN SYSTEM REFERENCE</p>
+            <p>Complete CSS Variables & Component Guide • Terminal & Clean Themes</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="shared/js/theme-manager.js"></script>
+    <script src="shared/js/navigation-component.js"></script>
+    
+    <!-- Navigation Configuration -->
+    <script>
+        // Define navigation configuration for this page
+        window.navigationConfig = {
+            navLinks: [
+                { key: 'home', label: 'HOME', href: './index.html' },
+                { key: 'search', label: 'SEARCH', href: './search_results.html' },
+                { key: 'glossary', label: 'GLOSSARY', href: './glossary.html' }
+            ],
+            currentPage: 'style-guide'
+        };
+        
+        // Initialize navigation with configuration
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                window.initializeNavigation(window.navigationConfig);
+            });
+        } else {
+            window.initializeNavigation(window.navigationConfig);
+        }
+    </script>
+
+    <script>
+        // Update theme indicator
+        function updateThemeIndicator() {
+            const indicator = document.getElementById('theme-indicator');
+            const currentMode = localStorage.getItem('viewMode') || 'clean';
+            indicator.textContent = currentMode.toUpperCase() + ' MODE';
+        }
+
+        // Update indicator on theme change
+        window.addEventListener('themeChanged', updateThemeIndicator);
+
+        // Initial update
+        updateThemeIndicator();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCIENTOLOGY DATABASE - TERMINAL ACCESS</title>
+
+    <!-- CRITICAL: Apply theme immediately before stylesheets load -->
+    <script>
+        // Inline theme application to prevent FOUC
+        (function() {
+            const savedMode = localStorage.getItem('viewMode') || 'clean';
+            console.log('Immediate theme application:', savedMode);
+
+            if (savedMode === 'clean') {
+                document.documentElement.classList.add('clean-view-loading');
+                document.documentElement.style.background = '#ffffff';
+            } else {
+                document.documentElement.style.background = '#000000';
+            }
+        })();
+    </script>
+
+    <!-- Unified CSS System -->
+    <link rel="stylesheet" href="shared/css/base.css" />
+    <link rel="stylesheet" href="shared/css/layout.css" />
+    <link rel="stylesheet" href="shared/css/components.css" />
+    <link rel="stylesheet" href="shared/css/effects.css" />
+    <link rel="stylesheet" href="shared/css/responsive.css" />
+    <link rel="stylesheet" href="shared/css/themes.css" />
+    <link rel="stylesheet" href="shared/css/homepage.css" />
+
+    <!-- Homepage-specific effects -->
+    <style>
+        /* Remove any internal padding from view toggle button */
+        #btn-view-toggle {
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+            box-sizing: border-box !important;
+        }
+
+        #btn-view-toggle::before,
+        #btn-view-toggle::after {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    </style>
+</head>
+<body class="homepage">
+    <div class="scan-line"></div>
+
+    <!-- Navigation will be dynamically injected by navigation-component.js -->
+
+    <!-- Hero Section with ASCII Art -->
+    <section class="hero">
+        <div class="container">
+            <div class="ascii-art">███████╗ ██████╗██╗███████╗███╗   ██╗████████╗ ██████╗ ██╗      ██████╗  ██████╗██╗   ██╗
+██╔════╝██╔════╝██║██╔════╝████╗  ██║╚══██╔══╝██╔═══██╗██║     ██╔═══██╗██╔════╝╚██╗ ██╔╝
+███████╗██║     ██║█████╗  ██╔██╗ ██║   ██║   ██║   ██║██║     ██║   ██║██║  ███╗╚████╔╝ 
+╚════██║██║     ██║██╔══╝  ██║╚██╗██║   ██║   ██║   ██║██║     ██║   ██║██║   ██║ ╚██╔╝  
+███████║╚██████╗██║███████╗██║ ╚████║   ██║   ╚██████╔╝███████╗╚██████╔╝╚██████╔╝  ██║   
+╚══════╝ ╚═════╝╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚══════╝ ╚═════╝  ╚═════╝   ╚═╝   
+                                                                                         
+██████╗  █████╗ ████████╗ █████╗ ██████╗  █████╗ ███████╗███████╗
+██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝
+██║  ██║███████║   ██║   ███████║██████╔╝███████║███████╗█████╗  
+██║  ██║██╔══██║   ██║   ██╔══██║██╔══██╗██╔══██║╚════██║██╔══╝  
+██████╔╝██║  ██║   ██║   ██║  ██║██████╔╝██║  ██║███████║███████╗
+╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝</div>
+            
+            <div class="classified-banner">⚠️ RESTRICTED ACCESS TERMINAL ⚠️ LEAKED DOCUMENTS ARCHIVE ⚠️ CLASSIFIED MATERIALS ⚠️</div>
+        </div>
+    </section>
+
+    <!-- Full-width homepage content -->
+    <div class="container">
+        <!-- System Status Info -->
+        <div class="system-info" style="flex-direction: row !important; gap: var(--space-lg) !important; justify-content: space-between !important;">
+            <div class="info-item">
+                <span>SYSTEM STATUS:</span>
+                <span class="status">ONLINE</span>
+            </div>
+            <div class="info-item">
+                <span>TOTAL DOCUMENTS:</span>
+                <span>2,847</span>
+            </div>
+            <div class="info-item">
+                <span>LAST UPDATE:</span>
+                <span>2006.09.01</span>
+            </div>
+            <div class="info-item">
+                <span>MIRROR SITES:</span>
+                <span class="status">47 ACTIVE</span>
+            </div>
+        </div>
+
+        <!-- Main Document Sections Grid -->
+        <div class="main-menu">
+            <div class="menu-section" data-section="osa-orders">
+                <pre class="section-icon">+---+
+|===|
+|###|
++---+</pre>
+                <div class="section-title">OSA Network Orders</div>
+                <div class="section-stats">
+                    Documents: 149 | Pages: 500+ | Years: 1975-2006
+                </div>
+                <div class="section-description">
+                    Office of Special Affairs operational directives and intelligence orders. Contains strategic documents outlining Scientology's defensive and offensive operations against perceived enemies.
+                </div>
+            </div>
+
+            <div class="menu-section" data-section="osa-files">
+                <pre class="section-icon">+---+
+|ABC|
+|xyz|
++---+</pre>
+                <div class="section-title">Complete Scientology Dictionary</div>
+                <div class="section-stats">
+                    <span id="glossary-term-count">Terms: Loading...</span> | Definitions | Technical Terms | Abbreviations
+                </div>
+                <div class="section-description">
+                    Comprehensive dictionary of Scientology terminology, technical definitions, organizational abbreviations, and operational codes. Includes OSA terms, Sea Org vocabulary, audit terminology, and administrative jargon essential for understanding internal documents.
+                </div>
+            </div>
+
+            <div class="menu-section" data-section="ot-levels">
+                <pre class="section-icon">+-------+
+|   *   |
+|  /_\  |
++-------+</pre>
+                <div class="section-title">OT Level Materials</div>
+                <div class="section-stats">
+                    Levels: I-VIII | Format: PDF/TEXT | Access: RESTRICTED
+                </div>
+                <div class="section-description">
+                    Operating Thetan course materials and advanced spiritual technology documents. Previously classified upper-level Scientology training materials.
+                </div>
+            </div>
+
+            <div class="menu-section" data-section="legal-docs">
+                <pre class="section-icon">+---+
+| S |
+|###|
++---+</pre>
+                <div class="section-title">Legal Documents</div>
+                <div class="section-stats">
+                    Cases: 200+ | Courts: Worldwide | Period: 1970-Present
+                </div>
+                <div class="section-description">
+                    Court filings, depositions, settlement agreements, and legal correspondence related to Scientology litigation and government investigations.
+                </div>
+            </div>
+
+            <div class="menu-section" data-section="intelligence">
+                <pre class="section-icon">+---+
+| O |
+|<->|
++---+</pre>
+                <div class="section-title">Intelligence Reports</div>
+                <div class="section-stats">
+                    Reports: 156 | Targets: Various | Classification: TOP SECRET
+                </div>
+                <div class="section-description">
+                    Internal intelligence gathering reports, surveillance documentation, and operational assessments of individuals and organizations.
+                </div>
+            </div>
+
+            <div class="menu-section" data-section="sea-org">
+                <pre class="section-icon">+---+
+| ^ |
+|###|
++---+</pre>
+                <div class="section-title">Sea Organization</div>
+                <div class="section-stats">
+                    Documents: 423 | Personnel: 5,000+ | Vessels: Multiple
+                </div>
+                <div class="section-description">
+                    Sea Org policies, personnel records, ship operations, and internal communications from Scientology's elite religious order.
+                </div>
+            </div>
+
+            <div class="menu-section" data-section="hubbard-comm">
+                <pre class="section-icon"> LRH
++---+
+| @ |
++---+</pre>
+                <div class="section-title">Hubbard Communications</div>
+                <div class="section-stats">
+                    Messages: 1,200+ | Period: 1950-1986 | Author: L. Ron Hubbard
+                </div>
+                <div class="section-description">
+                    Direct communications from L. Ron Hubbard including policy letters, executive directives, and personal correspondence.
+                </div>
+            </div>
+
+            <div class="menu-section" data-section="fair-game">
+                <pre class="section-icon">+---+
+| X |
+|!!!|
++---+</pre>
+                <div class="section-title">Fair Game Documentation</div>
+                <div class="section-stats">
+                    Targets: Classified | Operations: Active | Status: ONGOING
+                </div>
+                <div class="section-description">
+                    Documents detailing Fair Game policies and their implementation against former members, critics, and perceived enemies of Scientology.
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal Command Line -->
+        <div class="command-line">
+            <div class="command-prompt">
+                <span class="prompt">database@scientology:~$</span>
+                <span id="typing-command">SELECT * FROM documents WHERE classification='LEAKED'</span>
+                <span class="cursor">█</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unified Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>DATABASE VERSION 3.7.2 | LAST COMPILE: 2006.12.09 | MIRROR SITES: 47 ACTIVE</p>
+            <p>DISTRIBUTED UNDER FREEDOM OF INFORMATION PROTOCOLS</p>
+        </div>
+    </footer>
+
+    <!-- Unified JavaScript System -->
+    <script src="shared/js/theme-manager.js"></script>
+    <script src="shared/js/navigation-component.js"></script>
+    <script src="shared/js/app.js" defer></script>
+
+    <!-- Debug script to test Matrix rain -->
+    <script>
+        // Debug function to manually test Matrix rain
+        window.testMatrixRain = function() {
+            console.log('=== MATRIX RAIN DEBUG ===');
+            console.log('Body classes:', document.body.className);
+            console.log('Has terminal-mode:', document.body.classList.contains('terminal-mode'));
+            console.log('Has clean-view:', document.body.classList.contains('clean-view'));
+
+            const canvas = document.getElementById('matrix-canvas');
+            console.log('Canvas exists:', !!canvas);
+
+            if (canvas) {
+                console.log('Canvas styles:', canvas.style.cssText);
+                console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
+            } else {
+                console.log('Canvas not found - trying to create manually...');
+                if (typeof createMatrixRain === 'function') {
+                    createMatrixRain();
+                } else {
+                    console.log('createMatrixRain function not available');
+                }
+            }
+        };
+
+        // Auto-run debug after page loads
+        setTimeout(() => {
+            console.log('Page loaded - running Matrix rain test...');
+            window.testMatrixRain();
+        }, 2000);
+    </script>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        // Section access functionality
+        function accessSection(section) {
+            console.log('Accessing section:', section);
+
+            // URL mappings for each section
+            const urlMap = {
+                'osa-orders': 'osa-network-orders/index.html',
+                'osa-files': 'scientology-dictionary/index.html',
+                'ot-levels': '#',
+                'legal-docs': '#',
+                'intelligence': '#',
+                'sea-org': '#',
+                'hubbard-comm': '#',
+                'fair-game': '#'
+            };
+
+            const targetUrl = urlMap[section];
+            if (targetUrl && targetUrl !== '#') {
+                window.location.href = targetUrl;
+            } else {
+                alert('Accessing ' + section.toUpperCase().replace('-', ' ') + ' section...\n\nConnection encrypted. Proceed with caution.');
+            }
+        }
+
+        // Terminal typing effect
+        const commands = [
+            'SELECT * FROM documents WHERE classification="LEAKED"',
+            'SHOW TABLES osa_orders, ot_levels, legal_docs',
+            'ACCESS LEVEL: ADMINISTRATOR OVERRIDE',
+            'DECRYPT fairgame_operations.encrypted',
+            'MIRROR DATABASE STATUS: 47 NODES ACTIVE'
+        ];
+
+        let currentCommand = 0;
+
+        function typeCommand() {
+            const commandElement = document.getElementById('typing-command');
+            const command = commands[currentCommand];
+            let i = 0;
+
+            commandElement.textContent = '';
+
+            const typing = setInterval(() => {
+                if (i < command.length) {
+                    commandElement.textContent += command.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                    currentCommand = (currentCommand + 1) % commands.length;
+                    setTimeout(typeCommand, 3000);
+                }
+            }, 100);
+        }
+
+        // Fetch glossary term count from Google Sheets
+        async function fetchGlossaryTermCount() {
+            const SHEET_ID = '16_ms7rLmEPtdU0vhkhiHSu62Htjzguls64MP_6KxPPs';
+            const SHEET_NAME = 'Sheet1';
+            const countElement = document.getElementById('glossary-term-count');
+
+            try {
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&tq=SELECT%20A,B&sheet=${SHEET_NAME}`;
+
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    cache: 'no-cache'
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const text = await response.text();
+                const jsonText = text.replace(/\/\*O_o\*\//g, '').replace(/google\.visualization\.Query\.setResponse\((.*)\);/, '$1');
+                const data = JSON.parse(jsonText);
+
+                if (!data.table || !data.table.rows) {
+                    throw new Error('Invalid data format received from Google Sheets');
+                }
+
+                // Count valid entries (filter out empty rows)
+                const validEntries = data.table.rows
+                    .filter(row => row.c && row.c[0] && row.c[1])
+                    .filter(row => {
+                        const term = row.c[0].v?.toString().trim();
+                        const definition = row.c[1].v?.toString().trim();
+                        return term && definition;
+                    });
+
+                const count = validEntries.length;
+                const formattedCount = count >= 1000 ? `${(count / 1000).toFixed(1)}K+` : `${count}+`;
+
+                if (countElement) {
+                    countElement.textContent = `Terms: ${formattedCount}`;
+                }
+
+                console.log(`Loaded ${count} glossary terms from Google Sheets`);
+
+            } catch (error) {
+                console.error('Failed to fetch glossary term count:', error);
+                if (countElement) {
+                    countElement.textContent = 'Terms: 2,400+';
+                }
+            }
+        }
+
+        // Initialize page functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start typing effect
+            setTimeout(typeCommand, 2000);
+            
+            // Load glossary term count
+            fetchGlossaryTermCount();
+
+            // Bind section clicks using event delegation
+            document.addEventListener('click', function(event) {
+                const menuSection = event.target.closest('.menu-section');
+                if (menuSection) {
+                    const section = menuSection.getAttribute('data-section');
+                    if (section) {
+                        // Visual feedback
+                        menuSection.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            menuSection.style.transform = 'scale(1)';
+                        }, 100);
+                        
+                        accessSection(section);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

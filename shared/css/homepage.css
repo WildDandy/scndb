@@ -1,0 +1,518 @@
+/* ========================================
+   HOMEPAGE.CSS - LANDING PAGE SPECIFIC
+   Unique components only used on the main index page
+   ======================================== */
+
+/* ASCII Art Optimization Options - Uncomment one approach: */
+
+/* OPTION 1: Hide ASCII art on very small screens to prevent overflow */
+/* @media (max-width: 480px) {
+    .ascii-art {
+        display: none;
+    }
+} */
+
+/* OPTION 2: Make ASCII art scrollable if it overflows */
+/* .ascii-art {
+    max-height: 40vh; /* Limit to 40% of viewport height
+    overflow-y: auto;
+} */
+
+
+
+/* Viewport overflow control for mobile */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+    }
+
+    /* Prevent container from exceeding viewport width */
+    .container {
+        overflow-x: hidden;
+    }
+
+
+}
+
+/* Fine-tune for common phone widths */
+@media (max-width: 414px) {
+    .hero .ascii-art { font-size: clamp(6px, 1.7vw, 8px); }
+}
+
+@media (max-width: 390px) {
+    .hero .ascii-art { font-size: clamp(5.8px, 1.65vw, 7.5px); }
+}
+
+@media (max-width: 360px) {
+    .hero .ascii-art { font-size: clamp(5.5px, 1.55vw, 7px); }
+}
+
+/* ========================================
+   CLASSIFIED BANNER STYLES
+   ======================================== */
+
+.classified-banner {
+    padding: var(--space-xs);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-sm);
+    border: none;
+    font-size: var(--fs-small);
+    text-align: center;
+}
+
+/* DARK MODE: Green background with black text */
+body:not(.clean-view) .classified-banner {
+    background: #00ff41 !important;
+    color: #000000 !important;
+}
+
+/* LIGHT MODE: Black background with white-lace text */
+body.clean-view .classified-banner {
+    background: #000000 !important;
+    color: #F7F2E3 !important;
+}
+
+/* Light mode styling handled above */
+
+/* ========================================
+   ASCII ART DISPLAY (Hero-scoped)
+   ======================================== */
+
+/* Scope hero ASCII styles so header icons using .ascii-art aren't affected */
+.hero .ascii-art {
+    /* Solid base size for readability on desktops */
+    font-size: 1.5rem;
+    line-height: 1;
+    white-space: pre;
+    color: var(--fg);
+    text-align: center;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    font-family: var(--font);
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    z-index: 10;
+    display: block !important; /* Override any inline display:none */
+    overflow: visible; /* Allow natural overflow without scrollbar */
+}
+
+/* Mobile: show ASCII art (scaled) */
+@media (max-width: 768px) {
+    .hero .ascii-art {
+        display: block !important;
+    }
+}
+
+body.clean-view .hero .ascii-art {
+    color: var(--clean-fg);
+}
+
+/* Light mode overflow guard to prevent inner vertical scrollbars on homepage */
+body.clean-view .hero,
+body.clean-view .hero .container,
+body.clean-view .hero .ascii-art {
+    overflow-y: hidden;
+}
+
+/* ========================================
+   ASCII ART RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+/* Common desktop breakpoints to prevent clipping while keeping it readable */
+@media (max-width: 1440px) {
+    .hero .ascii-art { font-size: 1.35rem; }
+}
+
+@media (max-width: 1366px) {
+    .hero .ascii-art { font-size: 1.25rem; }
+}
+
+@media (max-width: 1280px) {
+    .hero .ascii-art { font-size: 1.15rem; }
+}
+
+/* Matches your observed ~1173px threshold */
+@media (max-width: 1180px) {
+    .hero .ascii-art { font-size: 1.05rem; }
+}
+
+@media (max-width: 1024px) {
+    .hero .ascii-art { font-size: 0.95rem; }
+}
+
+/* Mobile: keep alignment; scale down */
+@media (max-width: 768px) {
+    .hero .ascii-art {
+        white-space: pre;
+        word-break: normal;
+        overflow-x: hidden;
+        font-size: clamp(0.55rem, 1.6vw, 0.8rem);
+        line-height: 0.95;
+        margin-top: var(--space-md);
+        margin-bottom: var(--space-sm);
+    }
+}
+
+/* Small mobile: fine-tune size for 360–414 widths */
+@media (max-width: 480px) {
+    .hero .ascii-art {
+        white-space: pre;
+        word-break: normal;
+        overflow-x: hidden;
+        font-size: clamp(5px, 1.6vw, 8px);
+        margin-bottom: var(--space-sm);
+    }
+
+    .classified-banner {
+        font-size: var(--fs-tiny);
+        padding: var(--space-xs) var(--space-sm);
+        /* Allow banner to wrap on small screens */
+        white-space: normal;
+        line-height: 1.2;
+    }
+}
+
+/* Keep terminal toggle icon small regardless of ascii-art size changes */
+.ascii-art.terminal-toggle-icon {
+    font-size: var(--fs-small) !important;
+}
+
+/* ========================================
+   SYSTEM STATUS INFO GRID
+   ======================================== */
+
+.system-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+}
+
+/* Hide system-info completely on mobile */
+@media (max-width: 768px) {
+    .system-info {
+        display: none !important;
+    }
+}
+
+/* System-info is now hidden on mobile (see rule above) */
+
+/* Desktop: Better horizontal layout */
+@media (min-width: 769px) {
+    .system-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large desktop: 4 columns */
+@media (min-width: 1200px) {
+    .system-info {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+
+
+
+
+
+
+
+/* ========================================
+   DATABASE MAIN MENU GRID
+   ======================================== */
+
+.main-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Force 3 equal columns */
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-y: hidden; /* Prevent vertical scroll bar on homepage menu */
+}
+
+/* Desktop: Force 3 columns on large screens */
+@media (min-width: 1200px) {
+    .main-menu {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* For smaller screens */
+@media (max-width: 1200px) {
+    .main-menu {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-menu {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+}
+
+
+
+.section-title {
+    font-size: var(--fs-responsive-display);
+    margin-bottom: var(--space-sm);
+    color: var(--fg);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+body.clean-view .section-title {
+    color: var(--clean-fg);
+}
+
+.section-stats {
+    margin: var(--space-sm) 0;
+    font-size: var(--fs-small);
+    opacity: 0.8;
+    color: var(--fg);
+}
+
+body.clean-view .section-stats {
+    color: var(--clean-fg);
+}
+
+.section-description {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    margin-top: var(--space-sm);
+    color: var(--fg);
+}
+
+body.clean-view .section-description {
+    color: var(--clean-fg);
+}
+
+/* ========================================
+   TERMINAL COMMAND LINE
+   ======================================== */
+
+.command-line {
+    margin-top: var(--space-xl);
+    padding: var(--space-md);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    transition: all 0.3s ease;
+}
+
+body.clean-view .command-line {
+    border-color: var(--clean-border);
+    background: var(--clean-bg);
+}
+
+.command-prompt {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-family: var(--font);
+}
+
+.prompt {
+    color: var(--fg);
+}
+
+body.clean-view .prompt {
+    color: var(--clean-fg);
+}
+
+.cursor {
+    background: var(--fg);
+    color: var(--bg);
+    padding: 0 0.2rem;
+    animation: blink 1s infinite;
+}
+
+body.clean-view .cursor {
+    background: var(--clean-fg);
+    color: var(--clean-bg);
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Disable cursor animation in clean view */
+body.clean-view .cursor {
+    animation: none;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+/* Hero section responsive */
+.hero {
+    padding: var(--space-lg) 0;
+}
+
+.hero h1 {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    margin-bottom: var(--space-sm);
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: clamp(0.875rem, 2vw, 1.25rem);
+    margin-bottom: var(--space-lg);
+}
+
+    /* Container responsive spacing */
+.container {
+    padding: 0 var(--space-md);
+}
+
+/* Menu section responsive improvements */
+.menu-section {
+    transition: all 0.3s ease;
+}
+
+/* Better mobile layout for menu sections */
+@media (max-width: 768px) {
+    /* Prevent horizontal overflow only */
+    body {
+        overflow-x: hidden;
+    }
+
+    /* Make hero section more compact */
+    .hero {
+        padding: var(--space-xs) 0 !important;
+        margin-top: var(--first-section-offset); /* Account for fixed header */
+    }
+
+    /* Reduce ASCII art margins in hero */
+    .hero .ascii-art {
+        margin-top: var(--space-xs) !important;
+        margin-bottom: var(--space-xs) !important;
+    }
+
+    /* Make warning tape more compact */
+    .warning-tape-confidential {
+        padding: 1rem 0 !important; /* 1rem top and bottom padding as requested */
+        font-size: var(--fs-tiny) !important;
+        flex-direction: column !important; /* Stack content vertically on mobile */
+        align-content: center !important; /* Center content alignment */
+        text-align: center !important; /* Ensure text is centered on mobile */
+    }
+
+    /* Make main menu more content-adjustable */
+    .main-menu {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm) !important;
+        overflow: visible !important; /* Allow content to expand */
+        max-height: none !important; /* Remove height constraint */
+        margin: var(--space-sm) 0 !important;
+    }
+
+    .menu-section {
+        padding: var(--space-sm) !important;
+        min-height: 120px !important; /* Minimum height instead of max */
+        max-height: none !important; /* Allow content to expand */
+        overflow: visible !important; /* Show all content */
+        height: auto !important; /* Auto-adjust to content */
+    }
+
+    /* Improve menu ASCII art readability */
+    .menu-section .ascii-art {
+        font-size: max(0.8rem, 12px) !important; /* More readable size */
+        max-height: none !important; /* Remove height constraint */
+        line-height: 1 !important; /* Better line height */
+        margin-bottom: var(--space-sm) !important;
+    }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 var(--space-xs);
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* Even more compact hero */
+    .hero {
+        padding: var(--space-xs) 0 !important;
+    }
+
+    .hero .ascii-art {
+        margin-top: 0 !important;
+        margin-bottom: var(--space-xs) !important;
+    }
+
+    .ascii-art {
+        margin-bottom: var(--space-xs);
+    }
+
+    /* Make menu more content-adjustable for tiny screens */
+    .main-menu {
+        max-height: none !important; /* Remove height constraint */
+        margin: var(--space-xs) 0 !important;
+        gap: var(--space-xs) !important;
+        overflow: visible !important; /* Allow content to expand */
+    }
+
+    .menu-section {
+        padding: var(--space-xs) !important;
+        min-height: 100px !important; /* Minimum height instead of max */
+        max-height: none !important; /* Allow content to expand */
+        height: auto !important; /* Auto-adjust to content */
+        overflow: visible !important; /* Show all content */
+    }
+
+    .menu-section .ascii-art {
+        font-size: max(0.7rem, 10px) !important; /* More readable size for small screens */
+        max-height: none !important; /* Remove height constraint */
+        line-height: 1 !important; /* Better line height */
+        margin-bottom: var(--space-xs) !important;
+    }
+
+    .section-title {
+        font-size: var(--fs-small);
+        margin-bottom: 2px;
+    }
+
+    .section-stats,
+    .section-description {
+        font-size: var(--fs-tiny);
+        display: block; /* Show on mobile but smaller */
+        line-height: 1.3;
+    }
+}
+
+/* Fix for laptop viewport vertical scrollbar */
+@media (min-width: 769px) and (max-width: 1199px) {
+    /* Force 2-column layout on laptops */
+    .main-menu {
+        grid-template-columns: repeat(2, 1fr) !important;
+        max-height: none !important; /* Remove height constraint */
+        overflow: visible !important; /* Allow content to expand */
+    }
+
+    /* Reasonable ASCII art size on laptops */
+    .ascii-art {
+        font-size: clamp(0.8rem, 1.8vw, 1.2rem);
+    }
+
+    /* Allow menu sections to expand to content */
+    .menu-section {
+        max-height: none !important; /* Remove height constraint */
+        overflow: visible !important; /* Show all content */
+        min-height: 200px; /* Minimum height for consistency */
+    }
+}

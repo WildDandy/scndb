@@ -1,0 +1,182 @@
+[
+  {
+    "order_key": "42",
+    "order_number_display": "NW ORDER 42",
+    "title": "Collection of Data",
+    "excerpt": "Gathering intelligence systematically for OSA use"
+  },
+  {
+    "order_key": "42-1",
+    "order_number_display": "NW ORDER 42-1",
+    "title": "Order 42-1",
+    "excerpt": "Open the document"
+  },
+  {
+    "order_key": "43",
+    "order_number_display": "NW ORDER 43",
+    "title": "Data Storage",
+    "excerpt": "Maintaining organized files of intelligence material"
+  },
+  {
+    "order_key": "45",
+    "order_number_display": "NW ORDER 45",
+    "title": "Enemy Tactics",
+    "excerpt": "Identifying and analyzing hostile strategies against Scientology"
+  },
+  {
+    "order_key": "46",
+    "order_number_display": "NW ORDER 46",
+    "title": "Prediction by Statistics",
+    "excerpt": "Using statistical trends to predict opposition actions"
+  },
+  {
+    "order_key": "47",
+    "order_number_display": "NW ORDER 47",
+    "title": "Investigation Targets",
+    "excerpt": "Selecting individuals or groups for surveillance and investigation"
+  },
+  {
+    "order_key": "48",
+    "order_number_display": "NW ORDER 48",
+    "title": "Covert Data Collection",
+    "excerpt": "Secretly acquiring intelligence without exposure"
+  },
+  {
+    "order_key": "49",
+    "order_number_display": "NW ORDER 49",
+    "title": "Information Networks",
+    "excerpt": "Establishing communication channels for intelligence sharing"
+  },
+  {
+    "order_key": "50",
+    "order_number_display": "NW ORDER 50",
+    "title": "Surveillance",
+    "excerpt": "Methods for monitoring persons and organizations"
+  },
+  {
+    "order_key": "51",
+    "order_number_display": "NW ORDER 51",
+    "title": "Security of Data",
+    "excerpt": "Protecting sensitive information from leaks or discovery"
+  },
+  {
+    "order_key": "52",
+    "order_number_display": "NW ORDER 52",
+    "title": "Infiltration",
+    "excerpt": "Placing agents within hostile or government groups"
+  },
+  {
+    "order_key": "53",
+    "order_number_display": "NW ORDER 53",
+    "title": "Exploiting Weaknesses",
+    "excerpt": "Using personal or organizational vulnerabilities against enemies"
+  },
+  {
+    "order_key": "54",
+    "order_number_display": "NW ORDER 54",
+    "title": "Data Cross-Checking",
+    "excerpt": "Verifying intelligence by multiple independent sources"
+  },
+  {
+    "order_key": "55",
+    "order_number_display": "NW ORDER 55",
+    "title": "Investigation Procedures",
+    "excerpt": "Step-by-step process for running investigations"
+  },
+  {
+    "order_key": "56",
+    "order_number_display": "NW ORDER 56",
+    "title": "Files System",
+    "excerpt": "Detailed system for organizing OSA intelligence files"
+  },
+  {
+    "order_key": "59",
+    "order_number_display": "NW ORDER 59",
+    "title": "Enemy Profiles",
+    "excerpt": "Compiling dossiers on critics and opponents"
+  },
+  {
+    "order_key": "60",
+    "order_number_display": "NW ORDER 60",
+    "title": "Internal Security",
+    "excerpt": "Monitoring Scientologists to prevent infiltration or disloyalty"
+  },
+  {
+    "order_key": "61",
+    "order_number_display": "NW ORDER 61",
+    "title": "Use of Front Groups",
+    "excerpt": "Operating through cover organizations to gather intelligence"
+  },
+  {
+    "order_key": "62",
+    "order_number_display": "NW ORDER 62",
+    "title": "Confidential Sources",
+    "excerpt": "Recruiting and protecting informants"
+  },
+  {
+    "order_key": "64",
+    "order_number_display": "NW ORDER 64",
+    "title": "Financial Investigations",
+    "excerpt": "Tracking financial activities of opponents"
+  },
+  {
+    "order_key": "65",
+    "order_number_display": "NW ORDER 65",
+    "title": "Media Monitoring",
+    "excerpt": "Keeping watch on press coverage and journalist activity"
+  },
+  {
+    "order_key": "66",
+    "order_number_display": "NW ORDER 66",
+    "title": "Law Enforcement Contacts",
+    "excerpt": "Gathering data from or about police and agencies"
+  },
+  {
+    "order_key": "67",
+    "order_number_display": "NW ORDER 67",
+    "title": "Political Contacts",
+    "excerpt": "Tracking and influencing politicians hostile to Scientology"
+  },
+  {
+    "order_key": "68",
+    "order_number_display": "NW ORDER 68",
+    "title": "International Intelligence",
+    "excerpt": "Handling data collection outside the United States"
+  },
+  {
+    "order_key": "69",
+    "order_number_display": "NW ORDER 69",
+    "title": "Disruption",
+    "excerpt": "Tactics to interfere with enemy organizations’ operations"
+  },
+  {
+    "order_key": "70",
+    "order_number_display": "NW ORDER 70",
+    "title": "Rumor Campaigns",
+    "excerpt": "Using planted rumors as a form of intelligence warfare"
+  },
+  {
+    "order_key": "71",
+    "order_number_display": "NW ORDER 71",
+    "title": "Electronic Data Collection",
+    "excerpt": "Using technology for surveillance and monitoring"
+  },
+  {
+    "order_key": "72",
+    "order_number_display": "NW ORDER 72",
+    "title": "Safehouses",
+    "excerpt": "Maintaining secure locations for intelligence operations"
+  },
+  {
+    "order_key": "73",
+    "order_number_display": "NW ORDER 73",
+    "title": "Agent Handling",
+    "excerpt": "Managing operatives and covert contacts"
+  },
+  {
+    "order_key": "74",
+    "order_number_display": "NW ORDER 74",
+    "title": "Special Operations",
+    "excerpt": "Carrying out high-level covert projects against opponents"
+  }
+]

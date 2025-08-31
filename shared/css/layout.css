@@ -1,0 +1,657 @@
+/* ========================================
+   UNIFIED LAYOUT CSS - PAGE STRUCTURE
+   Master layout system for all sites
+   ======================================== */
+
+/* ========================================
+   LAYOUT DIMENSIONS - AS PER STYLE GUIDE
+   ======================================== */
+
+/* Layout Dimensions */
+:root {
+    /* Removed --header-height override - use base.css value (120px) */
+    --sidebar-width: 250px;            /* Sidebar width */
+    /* Removed --container-max override - use base.css value (1600px) */
+    --radius: 0;                       /* Border radius (none) */
+}
+
+/* ========================================
+   BORDER VARIABLES - AS PER STYLE GUIDE
+   ======================================== */
+
+:root {
+    --border-width-thin: 1px;         /* Thin border */
+    --border-width-medium: 2px;        /* Medium border */
+    --border-width-thick: 3px;         /* Thick border */
+    --border-radius-small: 2px;        /* Small border radius */
+    --border-radius-none: 0;           /* No border radius */
+}
+
+/* ========================================
+   LAYOUT VARIANTS - FLEXIBLE SIDEBAR SYSTEM
+   ======================================== */
+
+/* ========================================
+   1. WITH SIDEBAR (Default) - Two-column layout
+   ======================================== */
+/* Use for: Index pages, individual documents, search results with filters
+   HTML: <div class="main-content"><aside class="sidebar">...</aside><main class="content-area">...</main></div>
+*/
+.main-content {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
+    min-height: calc(100vh - var(--first-section-offset));
+}
+
+/* ========================================
+   2. WIDE SIDEBAR - For more sidebar space
+   ======================================== */
+/* Use for: Pages needing more sidebar content or wider navigation
+   HTML: <div class="main-content wide">...
+*/
+.main-content.wide {
+    grid-template-columns: 300px 1fr;
+}
+
+/* ========================================
+   3. NO SIDEBAR (Full Width) - Optional sidebar system
+   ======================================== */
+/* Use for: Glossary pages, simple content pages, when sidebar not needed
+   HTML: <div class="container"><section class="glossary-page">...</section></div>
+*/
+.main-content.full-width,
+.full-width-layout {
+    grid-template-columns: 1fr;
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+/* Fallback for containers that are first content after header */
+body > .container:first-of-type,
+body > .content-wrapper > .container:first-of-type {
+    margin-top: var(--first-section-offset) !important;
+}
+
+/* ========================================
+   SEARCH RESULTS LAYOUT - Specialized grid
+   ======================================== */
+/* For search results pages with filters - uses flexbox for better control
+   Moved core functionality to components.css for better organization
+*/
+.results-layout {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-lg);
+    align-items: flex-start;
+}
+
+.results-grid-layout {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-lg);
+    align-items: flex-start;
+}
+
+/* ========================================
+   HEADER LAYOUT
+   ======================================== */
+
+.master-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    background: var(--bg);
+    color: var(--fg);
+}
+
+body.clean-view .master-header {
+    background: var(--clean-bg);
+    color: var(--clean-fg);
+}
+
+.master-header .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Full-width header variant - custom content wrapper */
+.header-full-width {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    height: var(--header-height);
+    min-height: var(--header-height);
+    display: flex;
+    align-items: center;
+    overflow: visible;
+}
+
+.header-full-width .header-content {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-sm) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.terminal-line {
+    margin-bottom: var(--space-xs);
+    color: var(--fg);
+    font-family: var(--font);
+    font-size: var(--fs-small);
+}
+
+body.clean-view .terminal-line {
+    color: var(--clean-fg);
+}
+
+.master-nav {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    width: 100%;
+}
+
+/* ========================================
+   SIDEBAR TYPOGRAPHY SPECIFICATIONS
+   ======================================== */
+
+/* Main sidebar titles (e.g., "Filter Results", "Document Sections") */
+.sidebar h3,
+.sidebar-title {
+    font-size: var(--fs-body-large);
+    font-weight: bold;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--fg);
+}
+
+body.clean-view .sidebar h3,
+body.clean-view .sidebar-title {
+    color: var(--clean-fg);
+}
+
+/* Filter group section first child title */
+.filter-group-section:first-child h3,
+.filter-group-section:first-child .filter-section-heading {
+    font-size: var(--fs-body-large);
+    font-weight: bold;
+    margin-bottom: var(--space-md);
+}
+
+/* Section titles within sidebar (e.g., "By Section", "Order Range") */
+.sidebar-section h3,
+.sidebar-section .sidebar-title,
+.filter-group-section h3,
+.filter-section-heading {
+    font-size: var(--fs-body-small);
+    font-weight: bold;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--fg);
+}
+
+body.clean-view .sidebar-section h3,
+body.clean-view .sidebar-section .sidebar-title,
+body.clean-view .filter-group-section h3,
+body.clean-view .filter-section-heading {
+    color: var(--clean-fg);
+}
+
+/* Filter option items */
+.filter-option-item,
+.filter-list li {
+    font-size: var(--fs-body-small);
+    padding: 0.25rem 0;
+    margin-bottom: var(--space-xs);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--fg);
+    border-bottom: 1px solid transparent;
+}
+
+body.clean-view .filter-option-item,
+body.clean-view .filter-list li {
+    color: var(--clean-fg);
+}
+
+/* Filter option hover states */
+.filter-option-item:hover,
+.filter-list li:hover {
+    opacity: 0.7;
+    border-bottom-color: var(--accent);
+}
+
+body.clean-view .filter-option-item:hover,
+body.clean-view .filter-list li:hover {
+    border-bottom-color: var(--clean-accent);
+}
+
+/* Filter count styling */
+.filter-count {
+    opacity: 0.6;
+    margin-left: var(--space-xs);
+    font-size: 0.9em;
+}
+
+/* ========================================
+   SIDEBAR COMPONENT TYPES
+   ======================================== */
+
+/* Navigation Sidebar (for index pages) */
+.sidebar .file-tree {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--fs-body-small);
+}
+
+.sidebar .file-tree li {
+    margin-bottom: var(--space-xs);
+    padding: var(--space-xs) 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding-left: var(--space-sm);
+    position: relative;
+    color: var(--fg);
+}
+
+.sidebar .file-tree li:before {
+    content: "├─";
+    position: absolute;
+    left: 0;
+    color: var(--fg);
+}
+
+.sidebar .file-tree li:hover {
+    background: rgba(0, 255, 65, 0.05);
+    color: var(--fg);
+}
+
+body.clean-view .sidebar .file-tree li:before {
+    color: var(--clean-fg);
+}
+
+body.clean-view .sidebar .file-tree li:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--clean-fg);
+}
+
+/* Quick stats in navigation sidebar */
+.sidebar-quick-stats {
+    font-size: var(--fs-tiny);
+    line-height: 1.4;
+    margin-top: var(--space-xs);
+}
+
+.sidebar-quick-stats div {
+    margin-bottom: var(--space-xs);
+    color: var(--fg);
+}
+
+body.clean-view .sidebar-quick-stats div {
+    color: var(--clean-fg);
+}
+
+.quick-stats-title {
+    font-size: var(--fs-body-large);
+    font-weight: bold;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--fg);
+}
+
+body.clean-view .quick-stats-title {
+    color: var(--clean-fg);
+}
+
+/* Filter Sidebar (for search results) */
+.results-sidebar {
+    background: var(--bg);
+    padding: var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    height: fit-content;
+    max-height: calc(100vh - var(--first-section-offset) - var(--space-lg));
+    overflow-y: auto;
+    position: sticky;
+    top: calc(var(--first-section-offset) + var(--space-lg));
+    z-index: 10;
+}
+
+body.clean-view .results-sidebar {
+    background: var(--clean-bg);
+    border-color: var(--clean-border);
+}
+
+/* Sidebar sections */
+.sidebar-section,
+.filter-group-section {
+    margin-bottom: var(--space-xl);
+}
+
+.sidebar-section:last-child,
+.filter-group-section:last-child {
+    margin-bottom: 0;
+}
+
+/* ========================================
+   CONTENT AREAS
+   ======================================== */
+
+.content-wrapper {
+    margin-top: var(--first-section-offset);
+    min-height: calc(100vh - var(--first-section-offset));
+}
+
+/* Sidebar component - optional */
+.sidebar {
+    background: var(--bg);
+    padding: var(--space-md);
+    border: 1px solid var(--border);
+    height: fit-content;
+    overflow-y: auto;
+    z-index: 10; /* was 10000; keep below header (1000) in all themes */
+    position: relative;
+}
+
+body.clean-view .sidebar {
+    background: var(--clean-bg);
+    border-color: var(--clean-border);
+}
+
+/* Content area - adapts to layout */
+.content-area {
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+body.clean-view .content-area {
+    background: var(--clean-bg);
+    border-color: var(--clean-border);
+}
+
+/* Full width content (no sidebar) */
+.content-area.full-width {
+    border: none;
+    background: transparent;
+}
+
+body.clean-view .content-area.full-width {
+    background: transparent;
+}
+
+.document-content {
+    flex: 1;
+    padding: var(--space-lg);
+}
+
+/* Full width document content */
+.document-content.full-width {
+    padding: var(--space-lg) 0;
+}
+
+/* ========================================
+   HERO SECTIONS
+   ======================================== */
+
+.hero {
+    width: 100%;
+    padding: var(--section-header-padding-y) 0;
+    margin-top: var(--first-section-offset);
+}
+
+.search-header {
+    width: 100%;
+    padding: var(--section-header-padding-y) 0;
+    margin-top: var(--first-section-offset) !important;
+    border-bottom: 1px solid var(--border);
+}
+
+body.clean-view .search-header {
+    border-bottom-color: var(--clean-border);
+}
+
+.glossary-header {
+    width: 100%;
+    padding: var(--section-header-padding-y) 0;
+    margin-top: var(--first-section-offset) !important;
+    border-bottom: 1px solid var(--border);
+}
+
+body.clean-view .glossary-header {
+    border-bottom-color: var(--clean-border);
+}
+
+.search-title-section,
+.glossary-title-section {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.search-title,
+.glossary-title {
+    font-size: var(--fs-title);
+    color: var(--fg);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+    margin-bottom: var(--space-xs);
+    font-weight: bold;
+}
+
+body.clean-view .search-title,
+body.clean-view .glossary-title {
+    color: var(--clean-fg);
+}
+
+.search-subtitle,
+.glossary-subtitle {
+    font-size: var(--fs-subtitle);
+    opacity: 0.8;
+    margin-bottom: 0;
+}
+
+/* ========================================
+   MOBILE BEHAVIOR - RESPONSIVE SIDEBAR SYSTEM
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* ========================================
+       ALL LAYOUTS BECOME SINGLE COLUMN ON MOBILE
+       ======================================== */
+    /* Sidebar automatically moves below main content */
+
+    /* Full-width header responsive adjustments */
+    .header-full-width .header-content {
+        padding: 0 var(--space-sm);
+    }
+
+    /* Mobile: All layouts become single column */
+    .main-content,
+    .main-content.wide,
+    .main-content.full-width,
+    .results-section,
+    .results-layout,
+    .results-grid-layout {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    /* ========================================
+       SIDEBAR MOBILE BEHAVIOR
+       ======================================== */
+    /* Sidebar moves below main content automatically */
+    .sidebar,
+    .results-sidebar {
+        position: static;
+        order: 2; /* Show sidebar after main content on mobile */
+        max-height: none;
+        margin-bottom: var(--space-sm); /* Consistent bottom margin */
+        /* No extra CSS needed - responsive grid handles the rest */
+    }
+
+    /* ========================================
+       CONTENT AREA MOBILE BEHAVIOR
+       ======================================== */
+    .content-area,
+    .results-main {
+        order: 1; /* Main content shows first on mobile */
+    }
+
+    /* ========================================
+       HERO/HEADER MOBILE ADJUSTMENTS
+       ======================================== */
+    .hero,
+    .search-header,
+    .glossary-header {
+        padding: var(--section-header-padding-y) 0;
+    }
+
+    /* ========================================
+       SIDEBAR TYPOGRAPHY MOBILE ADJUSTMENTS
+       ======================================== */
+    .sidebar {
+        padding: var(--space-sm);
+    }
+
+    .sidebar h3,
+    .sidebar-title {
+        font-size: var(--fs-body);
+        margin-bottom: var(--space-sm);
+    }
+
+    .filter-option-item,
+    .filter-list li {
+        padding: var(--space-xs) 0;
+    }
+
+    /* ========================================
+       NAVIGATION SIDEBAR MOBILE ADJUSTMENTS
+       ======================================== */
+    .sidebar .file-tree li {
+        padding-left: var(--space-md);
+    }
+
+    .sidebar .file-tree li:before {
+        left: var(--space-xs);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero,
+    .search-header,
+    .glossary-header {
+        padding: var(--section-header-padding-y) 0;
+    }
+
+    .header-full-width .header-content {
+        padding: 0 var(--space-sm);
+    }
+
+    .container {
+        padding: 0 var(--space-sm);
+    }
+    
+    .main-content,
+    .results-section {
+        padding: var(--space-sm) 0;
+    }
+}
+
+/* ========================================
+   SIDEBAR UTILITY CLASSES
+   ======================================== */
+
+/* Hide sidebar completely when needed */
+.sidebar-hidden {
+    display: none !important;
+}
+
+/* Full-width content when sidebar is hidden */
+.content-full-width {
+    grid-column: 1 / -1;
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+/* ========================================
+   IMPLEMENTATION EXAMPLES - CSS CLASSES
+   ======================================== */
+
+/* For pages with sidebar navigation (index pages) */
+.page-with-nav-sidebar .main-content {
+    /* Uses default .main-content styles */
+}
+
+/* For pages with filter sidebar (search results) */
+.page-with-filter-sidebar .results-layout {
+    /* Uses .results-layout styles */
+}
+
+/* For full-width pages (glossary, simple pages) */
+.page-full-width .container > *:not(.master-header) {
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+/* ========================================
+   WHEN TO USE EACH LAYOUT TYPE
+   ======================================== */
+
+/*
+   MAIN/INDEX PAGES → .main-content (with sidebar)
+   - Document sections, stats
+   - Navigation sidebar type
+
+   SEARCH RESULTS → .results-layout (with filters)
+   - Search filters, categories
+   - Filter sidebar type
+
+   INDIVIDUAL DOCUMENTS → .main-content (with sidebar)
+   - Related docs, TOC
+   - Navigation sidebar type
+
+   GLOSSARY → No sidebar wrapper
+   - Full width for alphabet/terms
+   - No sidebar needed
+
+   SIMPLE PAGES → No sidebar wrapper
+   - About, contact, etc.
+   - No sidebar needed
+*/
+
+/* ========================================
+   ORDERS CSS
+   ======================================== */
+
+.content-header {
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-lg);
+}
+
+body.clean-view .content-header {
+    border-bottom-color: var(--clean-border);
+}

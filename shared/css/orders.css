@@ -1,0 +1,55 @@
+/* Document-specific customizations only */
+.doc-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    flex-direction: row;
+}
+
+.meta-item {
+    flex: 1;
+    border: 1px solid var(--border);
+    padding: var(--space-sm) var(--space-md);
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-sm);
+}
+
+.content-title {
+    font-weight: normal;
+}
+
+.original-header h1 {
+    font-size: 1.5rem;
+}
+
+.document-text {
+    line-height: 1.4;
+}
+
+.document-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.document-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Document-specific customizations only */
+.doc-meta .meta-item {
+    flex: 1;
+}
+
+.original-header h1 {
+    font-size: 1.5rem;
+}
+
+.document-text {
+    line-height: 1.4;
+}

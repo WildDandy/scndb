@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSA Network Order 25 - MEDICINE</title>
+
+    <!-- CRITICAL: Apply theme immediately before stylesheets load -->
+    <script>
+        // Inline theme application to prevent FOUC
+        (function() {
+            const savedMode = localStorage.getItem('viewMode') || 'clean';
+            console.log('Immediate theme application:', savedMode);
+
+            if (savedMode === 'clean') {
+                document.documentElement.classList.add('clean-view-loading');
+                document.documentElement.style.background = 'var(--clean-bg)';
+            } else {
+                document.documentElement.style.background = '#000000';
+            }
+        })();
+    </script>
+
+    <!-- Unified CSS System -->
+    <link rel="stylesheet" href="../../shared/css/base.css" />
+    <link rel="stylesheet" href="../../shared/css/layout.css" />
+    <link rel="stylesheet" href="../../shared/css/components.css" />
+    <link rel="stylesheet" href="../../shared/css/effects.css" />
+    <link rel="stylesheet" href="../../shared/css/responsive.css" />
+    <link rel="stylesheet" href="../../shared/css/themes.css" />
+    <link rel="stylesheet" href="../../shared/css/orders.css" />
+
+    <!-- JavaScript Files -->
+    <script src="../../shared/js/theme-manager.js" defer></script>
+    <script src="../../shared/js/navigation-component.js"></script>
+    
+    <!-- Manual Navigation Configuration -->
+    <script>
+        // Define manual navigation links for this page
+        window.navigationConfig = {
+            navLinks: [
+                { key: 'home', label: 'HOME NW', href: '../index.html' },
+                { key: 'search', label: 'SEARCH', href: '../search_results.html' },
+                { key: 'glossary', label: 'GLOSSARY', href: '../glossary.html' }
+            ],
+            currentPage: 'order'
+        };
+        
+        // Initialize navigation with manual configuration
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                window.initializeNavigation(window.navigationConfig);
+            });
+        } else {
+            window.initializeNavigation(window.navigationConfig);
+        }
+    </script>
+    
+    <script src="../../shared/js/app.js" defer></script>
+</head>
+<body>
+    <!-- Navigation will be dynamically injected by navigation-component.js -->
+    <header class="master-header header-full-width">
+        <!-- Navigation component will be injected here -->
+    </header>
+
+    <section class="document-header" style="margin-top: var(--first-section-offset);">
+        <div class="container">
+            <div class="doc-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Issue Date:</div>
+                    <div>14 July 1988</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Author:</div>
+                    <div>L. RON HUBBARD</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Recipients:</div>
+                    <div>OSA NW<br>All Execs & Staff</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>Contents</h3>
+                    <ul class="sidebar-list">
+                        <li class="active">Document Text</li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>Navigation</h3>
+                    <ul class="sidebar-list">
+                        <li onclick="location.href='nw_order_26.html'">Next: NW Order 26</li>
+                        <li onclick="location.href='../index.html'">Back to Index</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main class="content-area">
+                <div class="content-header">
+                    <div class="content-title">OSA Network Order No. 25</div>
+                    <div class="content-subtitle">(Originally an LRH OODs item of 21 October 1970.)</div>
+                </div>
+
+                <div class="document-content">
+                    <div class="original-header">
+                        <div class="order-num">OSA NETWORK ORDER NO. 25</div>
+                        <div class="meta-info">OSA NW<br>All Execs & Staff</div>
+                        
+                        
+                        
+                        <h1>MEDICINE</h1>
+                        <div class="meta-info meta-author">(Originally an LRH OODs item of 21 October 1970.)</div>
+                    </div>
+
+                    <div class="document-text">
+                        <p>We are tracing the money required to finance attacks on Scientology.</p>
+
+<p>Apparently it comes through medical and psychiatric channels from drug firms.<br>These drug firms are now getting into trouble. The US Justice Department is making<br>a bid to regulate them instead of the Food and Drug Administration.</p>
+
+<p>It has been discovered that these big drug firms are the actual wholesale pushers<br>and that doctors and psychiatrists act as their retail pushers.</p>
+
+<p>This is why the Pope suddenly opened up on medical doctors in yesterday's news.</p>
+
+<p>It is very satisfying to see the enemy getting more and more trouble from more<br>and more people.</p>
+
+<p>Medicine came into existence in the mid-1400s as Satan worshippers. And look<br>at the number of people who have died since then!</p>
+                    </div>
+
+                    <div class="signature">
+                        L. RON HUBBARD<br><span class="signature_role">Founder</span>
+                    </div>
+                </div>
+
+                <div class="navigation-footer">
+                    <div>
+                        <a href="nw_order_24.html" class="nav-btn">← NW Order 24</a>
+                    </div>
+                    <div>
+                        <a href="../index.html" class="nav-btn">INDEX</a>
+                    </div>
+                    <div>
+                        <a href="nw_order_26.html" class="nav-btn">NW Order 26 →</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>These documents are presented for research and educational purposes.<br>
+            Original source: Leaked internal Scientology documents.</p>
+        </div>
+    </footer>
+</body>
+</html>

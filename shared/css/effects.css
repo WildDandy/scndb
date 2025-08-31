@@ -1,0 +1,164 @@
+/* ========================================
+   EFFECTS CSS - TERMINAL MODE ANIMATIONS ONLY
+   As per style guide: Clean mode should not have animations
+   ======================================== */
+
+/* ========================================
+   TERMINAL MODE ANIMATIONS - ONLY IN TERMINAL THEME
+   ======================================== */
+
+/* Scan line animation - Terminal mode only */
+body:not(.clean-view) .scan-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ff41, transparent);
+    animation: scan 12s linear infinite;
+    opacity: 0.4;
+    z-index: 1000;
+    pointer-events: none;
+    display: block;
+}
+
+@keyframes scan {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+}
+
+/* Background flicker animation for terminal mode */
+body:not(.clean-view) {
+    animation: flicker 0.15s linear infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.98; }
+    100% { opacity: 1; }
+}
+
+/* Warning glow animation - Terminal mode only */
+body:not(.clean-view) .classified-banner,
+body:not(.clean-view) .warning-tape,
+body:not(.clean-view) .warning-tape-confidential {
+    animation: warning-glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes warning-glow {
+    from { box-shadow: 0 0 10px var(--warning-glow-30); }
+    to { box-shadow: 0 0 20px var(--warning-glow-60); }
+}
+
+/* Matrix background effect - Terminal mode only */
+body:not(.clean-view) {
+    position: relative;
+    overflow-x: hidden;
+    background: var(--bg-matrix);
+    background-image:
+        radial-gradient(circle at 25% 25%, var(--bg-matrix-gradient) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, var(--bg-matrix-gradient) 0%, transparent 50%);
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Matrix canvas - Terminal mode only */
+body:not(.clean-view) #matrix-canvas {
+    opacity: 0.08;
+}
+
+/* Matrix rain drops - Terminal mode only */
+body:not(.clean-view) .matrix-drop {
+    position: fixed;
+    color: var(--fg-alpha-10);
+    font-family: monospace;
+    font-size: var(--fs-body);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ========================================
+   DISABLE ANIMATIONS IN CLEAN MODE
+   ======================================== */
+
+/* Disable all animations in clean view */
+body.clean-view *,
+body.clean-view *::before,
+body.clean-view *::after {
+    animation: none !important;
+    transform: none !important;
+}
+
+/* Disable matrix canvas in clean view */
+body.clean-view #matrix-canvas {
+    display: none !important;
+}
+
+/* Disable scan line in clean view */
+body.clean-view .scan-line {
+    display: none !important;
+}
+
+/* Disable typewriter effects in clean view */
+body.clean-view .typewriter {
+    animation: none !important;
+    border-right: none !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    width: auto !important;
+}
+
+/* ========================================
+   GENERAL TRANSITIONS - BOTH MODES
+   ======================================== */
+
+/* Smooth transitions for interactive elements */
+.nav-menu a,
+.order-card,
+.sidebar-list li,
+.file-tree li,
+.search-input,
+.quick-tag,
+.glossary-input {
+    transition: all 0.3s ease;
+}
+
+/* ========================================
+   FOCUS EFFECTS - TERMINAL MODE
+   ======================================== */
+
+/* Terminal mode focus effects */
+body:not(.clean-view) .search-input:focus,
+body:not(.clean-view) .glossary-input:focus {
+    box-shadow: 0 0 20px var(--fg-alpha-30);
+}
+
+/* Clean mode focus effects */
+body.clean-view .search-input:focus,
+body.clean-view .glossary-input:focus {
+    box-shadow: 0 0 20px var(--clean-fg-alpha-30);
+}
+
+/* ========================================
+   TYPEWRITER AND CURSOR ANIMATIONS
+   ======================================== */
+
+/* Typewriter cursor animation - Terminal mode only */
+body:not(.clean-view) .typewriter {
+    border-right: 2px solid var(--fg);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { border-color: var(--fg); }
+    51%, 100% { border-color: transparent; }
+}
+
+/* ========================================
+   LEGACY ANIMATIONS - KEPT FOR COMPATIBILITY
+   ======================================== */
+
+/* Legacy blink animation for warning tape */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.5; }
+}

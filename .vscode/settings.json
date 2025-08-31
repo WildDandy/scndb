@@ -1,0 +1,21 @@
+{
+  "openai.mcpServers": {
+    "playwright": {
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/@playwright/mcp/cli.js",
+        "--headless"
+      ]
+    }
+  },
+  "openai.experimental.mcpServers": {
+    "playwright": {
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/@playwright/mcp/cli.js",
+        "--headless"
+      ]
+    }
+  }
+}
+

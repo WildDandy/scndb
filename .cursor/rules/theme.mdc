@@ -1,0 +1,9 @@
+---
+name: Theme Rules
+---
+
+- Default theme: Clean.
+- Prevent FOUC: load theme-manager.js in <head>.
+- .clean-view applied for clean theme.
+- .toggle-text displays current mode.
+- **MANDATORY: Never use green colors in clean/light mode** - Clean mode must only use black, white, and cream colors. Green is exclusively for terminal mode.

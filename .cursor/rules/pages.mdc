@@ -1,0 +1,8 @@
+---
+name: Page Rules
+---
+
+- Index: Use master-layout.html template. Hero inside .hero. Stats in .stats-bar.
+- Glossary: Use master-layout.html template. Classes: .glossary-page, .glossary-controls, .alpha-bar, .glossary-grid, .glossary-item, .glossary-term, .glossary-def, .glossary-count.
+- Search Results: Use master-layout.html template. Classes: .results-section, .results-layout, .results-sidebar, .results-main, .results-header, .results-count, .sort-controls, .sort-select, .result-item, .result-title, .result-snippet, .result-meta, .highlight.
+- Orders: Use master-layout.html template with ../../shared/ paths. Content inside .document-content.

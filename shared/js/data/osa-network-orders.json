@@ -1,0 +1,62 @@
+[
+    {
+        "order_key": "11",
+        "order_number_display": "NW ORDER 11",
+        "title": "Infiltration Tactics",
+        "excerpt": "Methods for placing operatives in target organizations"
+    },
+    {
+        "order_key": "12",
+        "order_number_display": "NW ORDER 12",
+        "title": "Information Networks",
+        "excerpt": "Establishing intelligence gathering networks"
+    },
+    {
+        "order_key": "13",
+        "order_number_display": "NW ORDER 13",
+        "title": "Media Contacts",
+        "excerpt": "Building relationships with media personnel"
+    },
+    {
+        "order_key": "14",
+        "order_number_display": "NW ORDER 14",
+        "title": "Government Liaison",
+        "excerpt": "Protocols for government agency interaction"
+    },
+    {
+        "order_key": "15",
+        "order_number_display": "NW ORDER 15",
+        "title": "Legal Network",
+        "excerpt": "Coordinating legal professionals and strategies"
+    },
+    {
+        "order_key": "16",
+        "order_number_display": "NW ORDER 16",
+        "title": "Academic Infiltration",
+        "excerpt": "Placing operatives in educational institutions"
+    },
+    {
+        "order_key": "17",
+        "order_number_display": "NW ORDER 17",
+        "title": "Professional Networks",
+        "excerpt": "Building influence in professional associations"
+    },
+    {
+        "order_key": "18",
+        "order_number_display": "NW ORDER 18",
+        "title": "International Operations",
+        "excerpt": "Coordinating global network activities"
+    },
+    {
+        "order_key": "19",
+        "order_number_display": "NW ORDER 19",
+        "title": "Communication Security",
+        "excerpt": "Securing network communications and operations"
+    },
+    {
+        "order_key": "20",
+        "order_number_display": "NW ORDER 20",
+        "title": "Network Maintenance",
+        "excerpt": "Maintaining and expanding operational networks"
+    }
+]
