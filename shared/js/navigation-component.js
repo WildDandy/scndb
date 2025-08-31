@@ -50,9 +50,13 @@ class NavigationComponent {
 
     getLogoPath() {
         // Logo always redirects to the root index.html regardless of page location
-        // For GitHub Pages deployment, use absolute path to scndb root
-        if (window.location.hostname === 'wilddandy.github.io') {
-            return '/scndb/';
+        // For GitHub Pages deployment, detect automatically and use repository path
+        if (window.location.hostname.includes('github.io')) {
+            const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
+            if (pathSegments.length > 0) {
+                // Use the repository name (first path segment) for GitHub Pages
+                return `/${pathSegments[0]}/`;
+            }
         }
         
         // For local development, use relative paths
@@ -65,13 +69,27 @@ class NavigationComponent {
     getMenuPaths() {
         let basePath;
 
-        if (this.pageContext === 'deep') {
-            // For deep pages like osa-network-orders/orders/nw_order_001.html
-            // Need to go up two levels to reach osa-network-orders/
-            basePath = '../../';
+        // Handle GitHub Pages deployment
+        if (window.location.hostname.includes('github.io')) {
+            const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
+            if (pathSegments.length > 0) {
+                const repoName = pathSegments[0];
+                if (this.pageContext === 'deep') {
+                    basePath = `/${repoName}/osa-network-orders/`;
+                } else {
+                    basePath = `/${repoName}/osa-network-orders/`;
+                }
+            }
         } else {
-            // For minisite pages like osa-network-orders/index.html, glossary.html, etc.
-            basePath = './';
+            // For local development
+            if (this.pageContext === 'deep') {
+                // For deep pages like osa-network-orders/orders/nw_order_001.html
+                // Need to go up two levels to reach osa-network-orders/
+                basePath = '../../';
+            } else {
+                // For minisite pages like osa-network-orders/index.html, glossary.html, etc.
+                basePath = './';
+            }
         }
 
         const paths = {
