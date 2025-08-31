@@ -67,11 +67,11 @@ class OrdersIndex {
 
                 // Fallback: Try to load from JSON files using XMLHttpRequest (works with file:// protocol)
                 const sections = [
-                    { key: 'general', file: './data/osa_general_orders_1-41.json', range: '1-41' },
-                    { key: 'intelligence', file: './data/osa_intelligence_orders_42-74.json', range: '42-74' },
-                    { key: 'pr', file: './data/osa_public_relations_orders_75-102.json', range: '75-102' },
-                    { key: 'legal', file: './data/osa_legal_orders_103-136.json', range: '103-136' },
-                    { key: 'social', file: './data/osa_social_reform_orders_137-149.json', range: '137-149' }
+                    { key: 'general', file: '../data/osa_general_orders_1-41.json', range: '1-41' },
+                    { key: 'intelligence', file: '../data/osa_intelligence_orders_42-74.json', range: '42-74' },
+                    { key: 'pr', file: '../data/osa_public_relations_orders_75-102.json', range: '75-102' },
+                    { key: 'legal', file: '../data/osa_legal_orders_103-136.json', range: '103-136' },
+                    { key: 'social', file: '../data/osa_social_reform_orders_137-149.json', range: '137-149' }
                 ];
 
                 for (const section of sections) {
