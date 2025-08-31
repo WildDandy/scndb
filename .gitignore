@@ -4,7 +4,7 @@
 .playwright-mcp/
 
 # Data folders (large files)
-osa-network-orders/data/
+# osa-network-orders/data/  # Commented out to include search data files
 
 # Dependencies
 node_modules/
