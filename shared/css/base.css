@@ -23,6 +23,33 @@ body {
 }
 
 /* ========================================
+   FONT FACE DECLARATIONS
+   ======================================== */
+@font-face {
+    font-family: 'Fira Mono';
+    src: url('../fonts/FiraMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fira Mono';
+    src: url('../fonts/FiraMono-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fira Mono';
+    src: url('../fonts/FiraMono-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ========================================
    CSS CUSTOM PROPERTIES - DESIGN TOKENS
    ======================================== */
 :root {
@@ -110,7 +137,7 @@ body {
        ======================================== */
 
     /* Font Configuration */
-    --font: 'Courier New', Courier, monospace;  /* Primary font family */
+    --font: 'Fira Mono', 'Courier New', Courier, monospace;  /* Primary font family */
     --line: 1.4;                         /* Default line height */
 
     /* ========================================

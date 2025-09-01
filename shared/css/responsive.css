@@ -541,6 +541,13 @@
         gap: var(--space-sm);
     }
 
+    /* Order card mobile - vertical flex layout */
+    .order-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
     /* Glossary adjustments */
     .glossary-grid {
         grid-template-columns: 1fr;

@@ -694,6 +694,27 @@ body.clean-view .error-state p {
         min-width: 40px;
         text-align: center;
     }
+
+    /* Center align order card text on mobile */
+    .order-title,
+    .order-excerpt {
+        text-align: center !important;
+    }
+
+    /* Reduce content-area padding on mobile */
+    .content-area {
+        padding: var(--space-xs) !important;
+    }
+
+    /* Reduce section-content padding and center align text on mobile */
+    .section-content {
+        padding: var(--space-sm) !important;
+        text-align: center !important;
+    }
+
+    .section-content.active {
+        text-align: center !important;
+    }
 }
 
 @media (max-width: 480px) {

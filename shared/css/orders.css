@@ -6,6 +6,27 @@
     flex-direction: row;
 }
 
+/* Mobile responsive override for doc-meta */
+@media (max-width: 768px) {
+    .doc-meta {
+        flex-direction: column !important;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .meta-item {
+        width: 100% !important;
+        max-width: none !important;
+        flex: none !important;
+    }
+
+    /* Center align content titles and subtitles on mobile */
+    .content-title,
+    .content-subtitle {
+        text-align: center !important;
+    }
+}
+
 .meta-item {
     flex: 1;
     border: 1px solid var(--border);

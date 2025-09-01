@@ -284,34 +284,13 @@ let osaNetworkOrdersData = [];
 
 // Load data from external JSON files
 async function loadOrdersData() {
+    // Deprecated: orders are now handled by orders-index.js (embedded data or its own fetches)
+    // No-op to avoid unnecessary network requests during page load
     try {
-        // Check if we're on a page that needs orders data (homepage/index pages)
-        const currentPath = window.location.pathname;
-        const needsOrdersData = (currentPath.includes('index.html') || 
-                               currentPath.endsWith('/') ||
-                               (!currentPath.includes('/orders/') && !currentPath.includes('nw_order_'))) &&
-                               !currentPath.includes('scientology-dictionary');
-        
-        // Current path and data requirements
-        
-        if (!needsOrdersData) {
-            // Skipping orders data loading for individual order page
-            return;
-        }
-
-        const [generalResponse, socialReformResponse, networkResponse] = await Promise.all([
-            fetch('../shared/js/data/osa-general-orders.json'),
-            fetch('../shared/js/data/osa-social-reform-orders.json'),
-            fetch('../shared/js/data/osa-network-orders.json')
-        ]);
-
-        osaGeneralOrdersData = await generalResponse.json();
-        osaSocialReformOrdersData = await socialReformResponse.json();
-        osaNetworkOrdersData = await networkResponse.json();
-
-        // Orders data loaded successfully
-    } catch (error) {
-        console.error('Error loading orders data:', error);
+        // Intentionally do nothing
+        return;
+    } catch (_) {
+        return;
     }
 }
 
@@ -471,52 +450,24 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 // Load OSA Intelligence Orders from external JSON file
 async function loadOSAIntelligenceOrders() {
-    try {
-        const response = await fetch('../shared/js/data/osa-intelligence-orders.json');
-        const data = await response.json();
-        // Successfully loaded Intelligence orders from external file
-        return data;
-    } catch (error) {
-        console.error('Error loading OSA Intelligence Orders:', error);
-        return [];
-    }
+    // Deprecated helper – data now managed elsewhere
+    return [];
 }
 
 // OSA Public Relations Orders data (loaded externally to avoid CORS issues)
 async function loadOSAPublicRelationsOrders() {
-    try {
-        const response = await fetch('../shared/js/data/osa-public-relations-orders.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        // Loaded OSA Public Relations Orders
-        return data;
-    } catch (error) {
-        console.error('Error loading OSA Public Relations Orders:', error);
-        return [];
-    }
+    // Deprecated helper – data now managed elsewhere
+    return [];
 }
 
 // OSA Legal Orders data (loaded externally to avoid CORS issues)
 async function loadOSALegalOrders() {
-    try {
-        const response = await fetch('../shared/js/data/osa-legal-orders.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        // Loaded OSA Legal Orders
-        return data;
-    } catch (error) {
-        console.error('Error loading OSA Legal Orders:', error);
-        return [];
-    }
+    // Deprecated helper – data now managed elsewhere
+    return [];
 }
 
-// OSA Social Reform Orders data now loaded from external JSON file
-// (Data externalized to shared/js/data/osa-social-reform-orders.json)
-// Note: Social reform data is now loaded in loadOrdersData() function above
+// OSA Social Reform Orders data handling is deprecated here; see orders-index.js
+// Note: Social reform data is now loaded in orders-index.js using embedded data or section JSON files
 
 // Generate HTML for order cards
 function generateOrderCards(orders) {
@@ -531,99 +482,37 @@ function generateOrderCards(orders) {
 
 // Populate OSA General Orders section
 async function populateOSAGeneralOrders() {
-    console.log('populateOSAGeneralOrders called');
-    const container = document.querySelector('#general .order-grid');
-    console.log('Container found:', container);
-    if (!container) {
-        console.warn('OSA General Orders container not found');
-        return;
-    }
-
-    // Use data loaded from loadOrdersData()
-    const orders = osaGeneralOrdersData;
-    console.log('Orders loaded:', orders.length);
-    if (orders.length > 0) {
-        const cardsHTML = generateOrderCards(orders);
-        console.log('Generated HTML length:', cardsHTML.length);
-        container.innerHTML = cardsHTML;
-        console.log(`Loaded ${orders.length} OSA General Orders`);
-    } else {
-        console.warn('No OSA General Orders data loaded');
-    }
+    // Deprecated populate – rendering handled by orders-index.js
+    console.debug('populateOSAGeneralOrders is deprecated and is now a no-op');
+    return;
 }
 
 // Populate OSA Intelligence Orders section
 async function populateOSAIntelligenceOrders() {
-    const container = document.querySelector('#intelligence .order-grid');
-    if (!container) {
-        console.warn('OSA Intelligence Orders container not found');
-        return;
-    }
-
-    const orders = await loadOSAIntelligenceOrders();
-    if (orders.length > 0) {
-        container.innerHTML = generateOrderCards(orders);
-        console.log(`Loaded ${orders.length} OSA Intelligence Orders`);
-    } else {
-        console.warn('No OSA Intelligence Orders data loaded');
-    }
+    // Deprecated populate – rendering handled by orders-index.js
+    console.debug('populateOSAIntelligenceOrders is deprecated and is now a no-op');
+    return;
 }
 
 // Populate OSA Public Relations Orders section
 async function populateOSAPublicRelationsOrders() {
-    console.log('populateOSAPublicRelationsOrders called');
-    const container = document.querySelector('#pr .order-grid');
-    console.log('Container found:', container);
-    if (!container) {
-        console.warn('OSA Public Relations Orders container not found');
-        return;
-    }
-
-    const orders = await loadOSAPublicRelationsOrders();
-    console.log('Orders loaded:', orders.length);
-    if (orders.length > 0) {
-        const cardsHTML = generateOrderCards(orders);
-        console.log('Generated HTML length:', cardsHTML.length);
-        container.innerHTML = cardsHTML;
-        console.log(`Loaded ${orders.length} OSA Public Relations Orders`);
-    } else {
-        console.warn('No OSA Public Relations Orders data loaded');
-    }
+    // Deprecated populate – rendering handled by orders-index.js
+    console.debug('populateOSAPublicRelationsOrders is deprecated and is now a no-op');
+    return;
 }
 
 // Populate OSA Legal Orders section
 async function populateOSALegalOrders() {
-    const container = document.querySelector('#legal .order-grid');
-    if (!container) {
-        console.warn('OSA Legal Orders container not found');
-        return;
-    }
-
-    const orders = await loadOSALegalOrders();
-    if (orders.length > 0) {
-        container.innerHTML = generateOrderCards(orders);
-        console.log(`Loaded ${orders.length} OSA Legal Orders`);
-    } else {
-        console.warn('No OSA Legal Orders data loaded');
-    }
+    // Deprecated populate – rendering handled by orders-index.js
+    console.debug('populateOSALegalOrders is deprecated and is now a no-op');
+    return;
 }
 
 // Populate OSA Social Reform Orders section
 async function populateOSASocialReformOrders() {
-    const container = document.querySelector('#social .order-grid');
-    if (!container) {
-        console.warn('OSA Social Reform Orders container not found');
-        return;
-    }
-
-    // Use data loaded from loadOrdersData()
-    const orders = osaSocialReformOrdersData;
-    if (orders.length > 0) {
-        container.innerHTML = generateOrderCards(orders);
-        console.log(`Loaded ${orders.length} OSA Social Reform Orders`);
-    } else {
-        console.warn('No OSA Social Reform Orders data loaded');
-    }
+    // Deprecated populate – rendering handled by orders-index.js
+    console.debug('populateOSASocialReformOrders is deprecated and is now a no-op');
+    return;
 }
 
 // ========================================
